@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 public enum UIName
 {
     None,
+    PlayerMainScreenUI
 }
 
 public class UIManager : Singleton<UIManager>

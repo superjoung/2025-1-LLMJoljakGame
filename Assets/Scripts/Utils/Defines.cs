@@ -11,7 +11,8 @@ namespace DefineEnum
             None = -1,
             Move,
             Talk,
-            hearing
+            Hearing,
+            Cooking,
         }
     }
 }
