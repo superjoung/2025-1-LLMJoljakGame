@@ -7,10 +7,12 @@ public class PlayerMove : MonoBehaviour
     public float PlayerSpeed = 5f;
     public float Gravity = 10f;
     public float CameraXSpeed = 8f;
+    public float CameraYSpeed = 8f;
 
     private CharacterController _characterController;
     private Vector3 _playerMoveVector;
-    private float _mouseX = 0f;
+    private float _mouseX = 0f; // 좌우 회전값
+    private float mouseY = 0f; // 위아래 회전값을 담을 변수
 
     private void Start()
     {
@@ -25,7 +27,10 @@ public class PlayerMove : MonoBehaviour
     private void Move()
     {
         _mouseX += Input.GetAxis("Mouse X") * CameraXSpeed;
-        transform.localEulerAngles = new Vector3(0, _mouseX, 0);
+        mouseY += Input.GetAxis("Mouse Y") * CameraYSpeed;
+
+        mouseY = Mathf.Clamp(mouseY, -50f, 30f);
+        transform.localEulerAngles = new Vector3(-mouseY, _mouseX, 0);
         // Player가 땅에 닿지 않았다면
         if (_characterController.isGrounded)
         {

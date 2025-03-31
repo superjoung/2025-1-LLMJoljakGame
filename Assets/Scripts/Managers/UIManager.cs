@@ -8,7 +8,8 @@ using Unity.VisualScripting;
 public enum UIName
 {
     None,
-    PlayerMainScreenUI
+    PlayerMainScreenUI,
+    OptionPopUpUI
 }
 
 public class UIManager : Singleton<UIManager>
@@ -65,6 +66,11 @@ public class UIManager : Singleton<UIManager>
         GameObject go = ResourceManager.Instance.Instantiate($"UI/PopUp/{name}");
         T popup = go.GetOrAddComponent<T>();
         _popupStack.Push(popup);
+        if (!_uiStackDict.ContainsKey(popup.ID))
+        {
+            _uiStackDict.Add(popup.ID, new Stack<BaseUI>());
+        }
+        _uiStackDict[popup.ID].Push(popup);
 
         go.transform.SetParent(Root().transform);
 
