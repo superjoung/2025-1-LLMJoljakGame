@@ -9,24 +9,25 @@ public class PlayerMainScreenUI : BaseUI
 {
     enum Texts
     {
-        DayText // ½Ã°£ or ÀÏÂ÷¸¦ º¸¿©ÁÖ´Â Text
+        DayText // ì‹œê°„ or ì¼ì°¨ë¥¼ ë³´ì—¬ì£¼ëŠ” Text
     }
     enum Sliders
     {
-        DayProgressBar // ¾ÆÄ§ or ¹ãÀÌ ¾ó¸¶³ª ³²¾Ò´ÂÁö º¸¿©ÁÖ´Â ÁøÇàµµ ¹Ù
+        DayProgressBar // ì•„ì¹¨ or ë°¤ì´ ì–¼ë§ˆë‚˜ ë‚¨ì•˜ëŠ”ì§€ ë³´ì—¬ì£¼ëŠ” ì§„í–‰ë„ ë°”
     }
     enum Buttons
     {
-        OptionButton // ¸¶¿ì½º ¼³Á¤ ¹× ±âÅ¸ ÆíÀÇ »çÇ× ¼³Á¤ ¹öÆ°
+        OptionButton // ë§ˆìš°ìŠ¤ ì„¤ì • ë° ê¸°íƒ€ í¸ì˜ ì‚¬í•­ ì„¤ì • ë²„íŠ¼
     }
     enum GameObjects
     {
-        DayBackColor, // ½Ã°£ ÁøÇàµµ µŞ¹è°æ ¿ÀºêÁ§Æ®
-        DayFillColor  // ½Ã°£ Ã¤¿öÁö´Â »ö ¿ÀºêÁ§Æ®
+        DayBackColor, // ì‹œê°„ ì§„í–‰ë„ ë’·ë°°ê²½ ì˜¤ë¸Œì íŠ¸
+        DayFillColor  // ì‹œê°„ ì±„ì›Œì§€ëŠ” ìƒ‰ ì˜¤ë¸Œì íŠ¸
     }
 
     protected override bool IsSorting => false;
     public override UIName ID => UIName.PlayerMainScreenUI;
+    private PlayerMove _playerMove;
 
     public void Start()
     {
@@ -41,17 +42,20 @@ public class PlayerMainScreenUI : BaseUI
         Bind<Slider>(typeof(Sliders));
         Bind<GameObject>(typeof(GameObjects));
 
-        // ÀÌº¥Æ® ¿¬°á
+        // ì´ë²¤íŠ¸ ì—°ê²°
         GetButton((int)Buttons.OptionButton).gameObject.BindEvent(OnClickOptionButton);
         GetSlider((int)Sliders.DayProgressBar).onValueChanged.AddListener(OnChangeDayProgressBar);
 
-        GetText((int)Texts.DayText).text = GameManager.Instance.Days + "ÀÏÂ÷ " + (GameManager.Instance.IsMorning ? "¾ÆÄ§" : "¹ã");
+        GetText((int)Texts.DayText).text = GameManager.Instance.Days + "ì¼ì°¨ " + (GameManager.Instance.IsMorning ? "ì•„ì¹¨" : "ë°¤");
+        
+        _playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
     }
 
     private void OnClickOptionButton(PointerEventData data)
     {
-        // ¿É¼Ç ÆÇ³Ú »ı¼º
+        // ì˜µì…˜ íŒë„¬ ìƒì„±
         UIManager.Instance.ShowPopupUI<OptionPopUpUI>();
+        _playerMove.CanPlayerAction = false;
     }
 
     private void OnChangeDayProgressBar(float changeValue)

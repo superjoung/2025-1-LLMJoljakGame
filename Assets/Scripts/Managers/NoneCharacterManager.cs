@@ -8,15 +8,49 @@ public class NoneCharacterManager : Singleton<NoneCharacterManager>
 {
     public Dictionary<int, Queue<BaseNpcStatAction>> NonePlayersAction = new Dictionary<int, Queue<BaseNpcStatAction>>();
     public List<GameObject> NpcList = new List<GameObject>();
+    public List<int> CanStartTalkNpcs // ëŒ€í™”í•  ìˆ˜ ìˆëŠ” NPC ì„ ì • ë¦¬ìŠ¤íŠ¸ë¡œ ì „ë‹¬
+    {
+        get
+        {
+            _canStartTalkNpcs = new List<int>();
+            foreach(GameObject child in NpcList)
+            {
+                NPCAttachData data = child.GetComponent<NPCAttachData>();
+                if (data.CanTalkStart)
+                {
+                    _canStartTalkNpcs.Add(data.ID);
+                }
+            }
+            return _canStartTalkNpcs;
+        }
+    }
+
+    public int CanTalkNpcCount // ëŒ€í™” ê°€ëŠ¥ NPC ë³€ìˆ˜ë¡œ ì„¤ì •
+    {
+        get
+        {
+            int count = 0;
+            foreach (GameObject child in NpcList)
+            {
+                NPCAttachData data = child.GetComponent<NPCAttachData>();
+                if (data.CanTalkStart)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+    }
 
     private string NPC_PREFABS_PATH = "NPC/NPC";
     private int _npcCount = 3;
+    private List<int> _canStartTalkNpcs;
 
     public void Update()
     {
         
     }
-    // NPC ¿òÁ÷ÀÓ ¼±ÅÃ
+    // NPC ì›€ì§ì„ ì„ íƒ
     private void UpdateNpcAction()
     {
 
@@ -26,37 +60,44 @@ public class NoneCharacterManager : Singleton<NoneCharacterManager>
     {
         if(ID < 0 && NpcList.Count <= ID)
         {
-            Debug.LogWarning("[Warning] NoneCharacterManager - GetNpcToID ¿Ã¹Ù¸¥ ÀÎ¼ö¸¦ ³Ñ±âÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogWarning("[Warning] NoneCharacterManager - GetNpcToID ì˜¬ë°”ë¥¸ ì¸ìˆ˜ë¥¼ ë„˜ê¸°ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
             return null;
         }
         return NpcList[ID];
     }
 
+    public string GetNpcNameToID(int ID)
+    {
+        // TEMP : LLM API ID ê°’ìœ¼ë¡œ ì „ë‹¬í•´ì„œ ìºë¦­í„° ì´ë¦„ ë°›ì•„ì˜¤ê¸°
+        string name = "í”„ë¦¬ì•„";
+        return name;
+    }
+
     public NonePlayerAction GetNpcActionType(int npcId)
     {
-        // LLM¿¡°Ô ID °ªÀ» ³Ñ°ÜÁÖ¸é ¿øÇÏ´Â Çàµ¿ ¾ò±â ÀÓÀÇ·Î ·£´ıÀ¸·Î »ı¼º
+        // LLMì—ê²Œ ID ê°’ì„ ë„˜ê²¨ì£¼ë©´ ì›í•˜ëŠ” í–‰ë™ ì–»ê¸° ì„ì˜ë¡œ ëœë¤ìœ¼ë¡œ ìƒì„±
         int randomAction = Random.Range(1, System.Enum.GetValues(typeof(NonePlayerAction)).Length);
         return (NonePlayerAction)randomAction;
     }
 
-    // ÃÊ±â NPC ¼¼ÆÃ
+    // ì´ˆê¸° NPC ì„¸íŒ…
     public void NpcSpawn()
     {
         List<int> spawnList = new List<int>();
         for (int i = 0; i < _npcCount; i++)
         {   
-            // NPC À§Ä¡ Á¶Á¤
+            // NPC ìœ„ì¹˜ ì¡°ì •
             int spawnInt = 0;
             do
             {
                 spawnInt = Random.Range(0, GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.childCount);
             } while (spawnList.Contains(spawnInt));
             spawnList.Add(spawnInt);
-            // NPC ¼ÒÈ¯
+            // NPC ì†Œí™˜
             Transform spawnPos = GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.GetChild(spawnInt);
             GameObject npc = ResourceManager.Instance.Instantiate(NPC_PREFABS_PATH, spawnPos.position, GameManager.Instance.ParentPrefabs.NpcBox.transform);
-            npc.name = "NPC_" + i; // id ¿¬°á ÀÌÈÄ _½ºÇÃ¸´ ÈÄ ID¸¸ °¡Á®¿Ã ¿¹Á¤
-            // NPC ¿ÀºêÁ§Æ® ¸®½ºÆ® Ãß°¡
+            npc.name = "NPC_" + i; // id ì—°ê²° ì´í›„ _ìŠ¤í”Œë¦¿ í›„ IDë§Œ ê°€ì ¸ì˜¬ ì˜ˆì •
+            // NPC ì˜¤ë¸Œì íŠ¸ ë¦¬ìŠ¤íŠ¸ ì¶”ê°€
             NpcList.Add(npc);
             NonePlayersAction.Add(i, new Queue<BaseNpcStatAction>());
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -8,15 +9,35 @@ public class PlayerMove : MonoBehaviour
     public float Gravity = 10f;
     public float CameraXSpeed = 8f;
     public float CameraYSpeed = 8f;
+    public GameObject PlayerHead;
+    public bool CanMove = true; // UI ì°½ ì—´ì—ˆì„ ë•Œ
+    public bool CanRotate = true; // Player ëª© íšŒì „
+    public bool CanPlayerAction
+    {
+        get
+        {
+            return _canPlayerAction;
+        }
+
+        set
+        {
+            CanMove = value;
+            CanRotate = value;
+            _canPlayerAction = value;
+        }
+    }
+
 
     private CharacterController _characterController;
     private Vector3 _playerMoveVector;
-    private float _mouseX = 0f; // ÁÂ¿ì È¸Àü°ª
-    private float mouseY = 0f; // À§¾Æ·¡ È¸Àü°ªÀ» ´ãÀ» º¯¼ö
+    private float _mouseX = 0f; // ì¢Œìš° íšŒì „ê°’
+    private float _mouseY = 0f; // ìœ„ì•„ë˜ íšŒì „ê°’ì„ ë‹´ì„ ë³€ìˆ˜
+    private bool _canPlayerAction;
 
     private void Start()
     {
         _characterController = gameObject.GetComponent<CharacterController>();
+        CanPlayerAction = true;
     }
 
     private void Update()
@@ -26,12 +47,16 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        _mouseX += Input.GetAxis("Mouse X") * CameraXSpeed;
-        mouseY += Input.GetAxis("Mouse Y") * CameraYSpeed;
+        if (CanRotate)
+        {
+            _mouseX += Input.GetAxis("Mouse X") * CameraXSpeed;
+            _mouseY += Input.GetAxis("Mouse Y") * CameraYSpeed;
 
-        mouseY = Mathf.Clamp(mouseY, -50f, 30f);
-        transform.localEulerAngles = new Vector3(-mouseY, _mouseX, 0);
-        // Player°¡ ¶¥¿¡ ´êÁö ¾Ê¾Ò´Ù¸é
+            _mouseY = Mathf.Clamp(_mouseY, -50f, 30f);
+            PlayerHead.transform.localEulerAngles = new Vector3(-_mouseY, 0, 0);
+            transform.localEulerAngles = new Vector3(0, _mouseX, 0);
+        }
+        // Playerê°€ ë•…ì— ë‹¿ì§€ ì•Šì•˜ë‹¤ë©´
         if (_characterController.isGrounded)
         {
             _playerMoveVector = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -39,6 +64,6 @@ public class PlayerMove : MonoBehaviour
         }
         else _playerMoveVector.y -= Gravity * Time.deltaTime;
 
-        _characterController.Move(_playerMoveVector * Time.deltaTime * PlayerSpeed);
+        if (CanMove) _characterController.Move(_playerMoveVector * Time.deltaTime * PlayerSpeed);
     }
 }

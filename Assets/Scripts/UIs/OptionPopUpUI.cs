@@ -41,12 +41,12 @@ public class OptionPopUpUI : BaseUI
         Bind<TMP_Text>(typeof(Texts));
         Bind<Slider>(typeof(Sliders));
         
-        // ¿Ã∫•∆Æ ø¨∞·
+        // Ïù¥Î≤§Ìä∏ Ïó∞Í≤∞
         GetButton((int)Buttons.ExitButton).gameObject.BindEvent(OnClickExitButton);
         GetSlider((int)Sliders.MouseXSlider).onValueChanged.AddListener(OnChangeMouseXSensitive);
         GetSlider((int)Sliders.MouseYSlider).onValueChanged.AddListener(OnChangeMouseYSensitive);
 
-        // ∫Øºˆ ø¨∞·
+        // Î≥ÄÏàò Ïó∞Í≤∞
         _playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
         GetSlider((int)Sliders.MouseXSlider).value = _playerMove.CameraXSpeed;
         GetText((int)Texts.MouseXSensitivityText).text = GetSlider((int)Sliders.MouseXSlider).value.ToString("F1");
@@ -57,6 +57,7 @@ public class OptionPopUpUI : BaseUI
     private void OnClickExitButton(PointerEventData data)
     {
         UIManager.Instance.CloseUI(this);
+        _playerMove.CanPlayerAction = true;
     }
 
     private void OnChangeMouseXSensitive(float changeValue)
