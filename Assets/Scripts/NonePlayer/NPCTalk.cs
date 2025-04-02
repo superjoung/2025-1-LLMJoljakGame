@@ -6,10 +6,24 @@ using UnityEngine;
 public class NPCTalk : BaseNpcStatAction
 {
     protected override NonePlayerAction NpcAction => NonePlayerAction.Talk;
-    public override NPCAttachData npcData => null;
-    public override bool IsTalkWithPlayer => false;
+    public override NPCAttachData NpcData { get { return _npcData; }  set { _npcData = value; } }
+    public override bool IsTalkWithPlayer
+    {
+        get
+        {
+            return _isTalkWithPlayer;
+        }
+        set
+        {
+            _isTalkWithPlayer = value;
+        }
+    }
     public override float MoveSpeed => 3f;
-    public override Transform SpotPos => null;
+    public override Transform SpotPos { get { return _spotPos; } set { _spotPos = value; } }
+
+    private bool _isTalkWithPlayer = false;
+    private NPCAttachData _npcData;
+    private Transform _spotPos = null;
 
     public override void Init()
     {

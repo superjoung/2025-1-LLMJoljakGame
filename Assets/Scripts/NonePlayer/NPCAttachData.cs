@@ -12,12 +12,26 @@ public class NPCAttachData : MonoBehaviour
     public bool IsTalkStart = false;  // 대화 시작
     public bool CanTalkStart = false; // 대화 시작 가능 (범위 안에 들어왔을 때)
 
+    private NPCInteractionPopUpUI _popUpUI;
+
     private void Start()
     {
         ID = int.Parse(gameObject.name.Split("_")[1]);
-        CharacterTalkPopUpUI popUpUI =  UIManager.Instance.ShowNPCUI<CharacterTalkPopUpUI>(UIPos);
-        popUpUI.NpcID = ID;
+        _popUpUI =  UIManager.Instance.ShowNPCUI<NPCInteractionPopUpUI>(UIPos);
+        _popUpUI.NpcID = ID;
         UINeck.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (NoneCharacterManager.Instance.TalkStart)
+        {
+            _popUpUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            _popUpUI.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

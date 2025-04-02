@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CharacterTalkPopUpUI : BaseUI
+public class NPCInteractionPopUpUI : BaseUI
 {
     enum Texts
     {
@@ -11,7 +11,7 @@ public class CharacterTalkPopUpUI : BaseUI
     }
 
     protected override bool IsSorting => false;
-    public override UIName ID => UIName.OptionPopUpUI;
+    public override UIName ID => UIName.NPCInteractionPopUpUI;
 
     public int NpcID = 0;
 

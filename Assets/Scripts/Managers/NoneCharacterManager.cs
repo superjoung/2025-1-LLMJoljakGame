@@ -42,6 +42,8 @@ public class NoneCharacterManager : Singleton<NoneCharacterManager>
         }
     }
 
+    public bool TalkStart = false; // TEMP : 어떤 NPC들이든 대화를 시작했을 때 사용 추후 수정될 예정
+
     private string NPC_PREFABS_PATH = "NPC/NPC";
     private int _npcCount = 3;
     private List<int> _canStartTalkNpcs;
@@ -54,6 +56,18 @@ public class NoneCharacterManager : Singleton<NoneCharacterManager>
     private void UpdateNpcAction()
     {
 
+    }
+
+    public void TalkStartWithPlayer(int NpcId)
+    {
+        // 플레이어랑 대화중에는 이동 중이던 행동 멈추기
+        // NonePlayersAction[NpcId].Peek().IsTalkWithPlayer = true;
+        TalkStart = true; // TEMP : 플레이어 대화 시작은 전부 NPCAttachData로 수정될 예정
+        GameObject npc = GetNpcToID(NpcId);
+        GameObject player = GameObject.FindWithTag("Player");
+        npc.transform.LookAt(player.transform.position);
+
+        UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
     }
 
     public GameObject GetNpcToID(int ID)

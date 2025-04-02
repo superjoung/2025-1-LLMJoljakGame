@@ -5,18 +5,18 @@ using DefineEnum.NonePlayerDefine;
 
 public abstract class BaseNpcStatAction : MonoBehaviour
 {
-    protected abstract NonePlayerAction NpcAction { get; } // NPC°¡ ¼±ÅÃÇÒ ¼ö ÀÖ´Â Çàµ¿
-    public abstract NPCAttachData npcData { get;  } // NPC Á¤º¸°¡ ´ã°ÜÀÖ´Â ½ºÅ©¸³Æ®
-    public abstract bool IsTalkWithPlayer { get; } // NPC°¡ ÇÃ·¹ÀÌ¾î¿Í ´ëÈ­ÇÏ±â ½ÃÀÛÇß´ÂÁö
-    public abstract float MoveSpeed { get; } // Npc°¡ ÀÌµ¿ÇÏ´Â ¼Óµµ
-    public abstract Transform SpotPos { get; } // NPC°¡ ÀÌµ¿ÇØ¾ßÇÏ´Â Àå¼Ò
+    protected abstract NonePlayerAction NpcAction { get; } // NPCê°€ ì„ íƒí•  ìˆ˜ ìˆëŠ” í–‰ë™
+    public abstract NPCAttachData NpcData { get; set; } // NPC ì •ë³´ê°€ ë‹´ê²¨ìˆëŠ” ìŠ¤í¬ë¦½íŠ¸
+    public abstract bool IsTalkWithPlayer { get; set; } // NPCê°€ í”Œë ˆì´ì–´ì™€ ëŒ€í™”í•˜ê¸° ì‹œì‘í–ˆëŠ”ì§€
+    public abstract float MoveSpeed { get; } // Npcê°€ ì´ë™í•˜ëŠ” ì†ë„
+    public abstract Transform SpotPos { get; set; } // NPCê°€ ì´ë™í•´ì•¼í•˜ëŠ” ì¥ì†Œ
 
-    public virtual void Init() { } // ¾×¼ÇÀ» ÇÏ±â Àü ÃÊ±âÈ­ÇØ¾ßÇÏ´Â ÇÔ¼ö
-    public virtual void SpotMove() // ¾×¼ÇÀ» ÇÏ±â Àü Á¤ÇØÁø ±¸¿ªÀ¸·Î ÀÌµ¿
+    public virtual void Init() { } // ì•¡ì…˜ì„ í•˜ê¸° ì „ ì´ˆê¸°í™”í•´ì•¼í•˜ëŠ” í•¨ìˆ˜
+    public virtual void SpotMove() // ì•¡ì…˜ì„ í•˜ê¸° ì „ ì •í•´ì§„ êµ¬ì—­ìœ¼ë¡œ ì´ë™
     {
         
     } 
-    public virtual void ActionStart() { } // ÇØ´ç NonePlayerAction¿¡ ÀÇÇØ ½ÃÀÛÇÏ±âÀü Á¤ÇØ¾ßÇÏ´Â °ªµé
-    public virtual void ActionUpdate() { } // ActionUpdate ¾×¼ÇÀ» ÁøÇàÇÏ¸é¼­ Ã³¸®ÇØ¾ßÇÏ´Â ÇÔ¼ö
-    public virtual void ActionEnd() { } // ÇÑ ¾×¼ÇÀÌ ³¡³µÀ» ¶§ ½ÇÇà½ÃÄÑ¾ßÇÏ´Â ÇÔ¼ö
+    public virtual void ActionStart() { } // í•´ë‹¹ NonePlayerActionì— ì˜í•´ ì‹œì‘í•˜ê¸°ì „ ì •í•´ì•¼í•˜ëŠ” ê°’ë“¤
+    public virtual void ActionUpdate() { } // ActionUpdate ì•¡ì…˜ì„ ì§„í–‰í•˜ë©´ì„œ ì²˜ë¦¬í•´ì•¼í•˜ëŠ” í•¨ìˆ˜
+    public virtual void ActionEnd() { } // í•œ ì•¡ì…˜ì´ ëë‚¬ì„ ë•Œ ì‹¤í–‰ì‹œì¼œì•¼í•˜ëŠ” í•¨ìˆ˜
 }

@@ -5,9 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerMove _playerMove;
-    private bool _canAction = true;
-    private bool _startTalk = false;
-    private bool _startHearing = false;
+    private bool _canAction // 상호작용키를 누를 수 있는지 확인
+    {
+        get
+        {
+            if (!_startTalk && !_startHearing)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+    private bool _startTalk = false;    // Player가 대화를 시작했는지
+    private bool _startHearing = false; // Player가 심문을 시작했는지
 
     private void Start()
     {
@@ -27,19 +37,11 @@ public class PlayerController : MonoBehaviour
             // 대화키를 눌렀을 때
             if (Input.GetKeyDown(KeyCode.E))
             {
-                _canAction = false;
-                _startTalk = true;
-                _playerMove.CanMove = false;
-
                 NPCTalkStart();
             }
             // 심문키를 눌렀을 때
             else if (Input.GetKeyDown(KeyCode.Q))
             {
-                _canAction = false;
-                _startHearing = true;
-                _playerMove.CanMove = false;
-
                 NPCHearingStart();
             }
         }
@@ -56,9 +58,12 @@ public class PlayerController : MonoBehaviour
 
     private void NPCTalkStart()
     {
+        _startTalk = true;
+        _playerMove.CanMove = false; // 화면은 돌아갈 수 있도록 설정
+
+        // TEMP : 임의로 여러개의 NPC가 겹처있을 때 하나를 지정해서 대화 시도 추후 다중 대화 기능이 필요하다면 수정 필요
         int ID = NoneCharacterManager.Instance.CanStartTalkNpcs[0];
-        GameObject npc = NoneCharacterManager.Instance.GetNpcToID(ID);
-        npc.transform.LookAt(gameObject.transform.position);
+        NoneCharacterManager.Instance.TalkStartWithPlayer(ID);
     }
 
     private void NPCTalkUpdate()
@@ -68,7 +73,8 @@ public class PlayerController : MonoBehaviour
 
     private void NPCHearingStart()
     {
-
+        _startHearing = true;
+        _playerMove.CanMove = false;
     }
 
     private void NPCHearingUpdate()

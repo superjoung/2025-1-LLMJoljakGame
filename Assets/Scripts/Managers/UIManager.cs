@@ -10,7 +10,8 @@ public enum UIName
     None,
     PlayerMainScreenUI,
     OptionPopUpUI,
-    CharacterTalkPopUpUI, // NPC 옆 행동 UI 박스
+    NPCInteractionPopUpUI, // NPC 옆 행동 UI 박스
+    NPCTalkPanelUI         // NPC 대화 UI
 }
 
 public class UIManager : Singleton<UIManager>

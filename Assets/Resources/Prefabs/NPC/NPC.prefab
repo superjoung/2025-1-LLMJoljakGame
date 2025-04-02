@@ -220,6 +220,8 @@ MonoBehaviour:
   ID: 0
   UIPos: {fileID: 187108524}
   UINeck: {fileID: 2543657963967018974}
+  IsTalkStart: 0
+  CanTalkStart: 0
 --- !u!1 &6388299555931438634
 GameObject:
   m_ObjectHideFlags: 0
