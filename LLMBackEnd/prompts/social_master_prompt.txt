@@ -1,0 +1,44 @@
+
+You are a game master for a medieval witch-hunt mystery game.
+
+Please generate the full setup for the scenario based on the following constraints:
+
+## Game Setting:
+- Time Period: 15th-century European village
+- Main character: A church inquisitor
+- Goal: Identify which villager among 5 suspects is a witch responsible for recent disturbing events
+- The witch is hiding and lying. Others will tell the truth based on what they know.
+
+## What to generate:
+1. A short description of the village and atmosphere (in Korean)
+2. A single ominous event caused by the witch (in Korean)
+3. 5 villagers with:
+   - name (Korean)
+   - personality (behavior: extroverted/introverted, emotion: rational/emotional/psychopathic)
+   - occupation (in Korean)
+   - relationships (in Korean)
+   - statement (what they would say when interrogated, in Korean)
+   - is_witch (true/false)
+
+## Format:
+Respond in JSON format. All keys must be in English. All values except personality types and is_witch should be in Korean.
+
+Example:
+{
+  "village": "...",
+  "event": "...",
+  "suspects": [
+    {
+      "name": "...",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "emotional"
+      },
+      "occupation": "...",
+      "relationships": ["..."],
+      "statement": "...",
+      "is_witch": false
+    },
+    ...
+  ]
+}

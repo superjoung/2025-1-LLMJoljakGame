@@ -1,0 +1,71 @@
+{
+  "village": "15세기 유럽의 한 작은 마을. 시간이 멈춘 듯한 조용하고 어두운 분위기가 느껴진다. 사람들은 미스테리한 일들에 두려움을 느끼고 있다.",
+  "event": "마녀로 의심받는 사람이 마을의 우물을 마비시켜 마을 사람들에게 물 부족을 일으켰다.",
+  "suspects": [
+    {
+      "name": "알리스",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "rational"
+      },
+      "occupation": "미용사",
+      "relationships": [
+        "마을장의 조카"
+      ],
+      "statement": "제가 그런 일을 저지르다니 더럽디. 우물 수리하는 방법도 모르겠어요.",
+      "is_witch": false
+    },
+    {
+      "name": "프레드릭",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "대장장이",
+      "relationships": [
+        "알리스의 남편"
+      ],
+      "statement": "우물이 마비된다고? 그럼 마을에 새로 온 사람들이 할 짓이겠지.",
+      "is_witch": false
+    },
+    {
+      "name": "마리아",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "emotional"
+      },
+      "occupation": "가사부인",
+      "relationships": [
+        "알리스의 이웃"
+      ],
+      "statement": "우물 수리가 필요하다는 소문을 들었지만, 전 원래 알지도 못 했어요. 정말 끔찍한 일이네요.",
+      "is_witch": true
+    },
+    {
+      "name": "토마스",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "rational"
+      },
+      "occupation": "방랑 음악가",
+      "relationships": [
+        "마리아의 동료"
+      ],
+      "statement": "우물이 마비되면 어떡해? 이 마을 사람들이 너무 경솔해. 제 지고 싶지도 않아.",
+      "is_witch": false
+    },
+    {
+      "name": "에밀리",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "emotional"
+      },
+      "occupation": "노파",
+      "relationships": [
+        "프레드릭의 동생"
+      ],
+      "statement": "우물이 마비된다니, 이젠 정말 물부족으로 얼굴도 씻을 수 없으니 더 어떡해?",
+      "is_witch": false
+    }
+  ]
+}
