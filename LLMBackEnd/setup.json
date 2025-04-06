@@ -1,70 +1,70 @@
 {
-  "village": "15세기 유럽의 한 작은 마을. 시간이 멈춘 듯한 조용하고 어두운 분위기가 느껴진다. 사람들은 미스테리한 일들에 두려움을 느끼고 있다.",
-  "event": "마녀로 의심받는 사람이 마을의 우물을 마비시켜 마을 사람들에게 물 부족을 일으켰다.",
+  "village": "15세기 유럽 마을. 먹구름한 비바람이 불면서 어두운 분위기가 감돌고 있다. 사람들은 마녀의 영향을 의심하며 두려움 속에 살고 있다.",
+  "event": "마녀가 마을에 도래한 후로 이상한 재해가 발생하고 있다. 어린 아이들이 갑자기 병에 걸리거나 가축이 사라지는 일이 늦지 않게 일어나고 있다.",
   "suspects": [
     {
-      "name": "알리스",
+      "name": "소라",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "rational"
+        "emotion": "emotional"
       },
-      "occupation": "미용사",
+      "occupation": "마을의 약사",
       "relationships": [
-        "마을장의 조카"
+        "마을 주민들과 친절한 관계를 유지"
       ],
-      "statement": "제가 그런 일을 저지르다니 더럽디. 우물 수리하는 방법도 모르겠어요.",
+      "statement": "마녀가 누구인지 알아내야 한다. 나는 그저 병든 사람들을 도우려고 약을 주는데...",
       "is_witch": false
     },
     {
-      "name": "프레드릭",
+      "name": "은하",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "rational"
+      },
+      "occupation": "작물을 가꾸는 농부",
+      "relationships": [
+        "자연과 가축들을 사랑하며 대하"
+      ],
+      "statement": "마녀를 찾아내는 것은 중요하다. 그러나 나는 마녀가 아니라는 것만은 확실히 할 수 있어.",
+      "is_witch": false
+    },
+    {
+      "name": "세레나",
       "personality": {
         "behavior": "extroverted",
         "emotion": "psychopathic"
       },
-      "occupation": "대장장이",
+      "occupation": "마을의 수녀",
       "relationships": [
-        "알리스의 남편"
+        "신앙심이 뛰어나고 다른 사람들의 오류를 용서할 수 없음"
       ],
-      "statement": "우물이 마비된다고? 그럼 마을에 새로 온 사람들이 할 짓이겠지.",
-      "is_witch": false
+      "statement": "마녀는 나도 모르게 마을에 해악을 끼치고 있다. 반드시 찾아내야 한다.",
+      "is_witch": true
     },
     {
-      "name": "마리아",
+      "name": "하늘",
       "personality": {
         "behavior": "introverted",
         "emotion": "emotional"
       },
-      "occupation": "가사부인",
+      "occupation": "마을의 신부",
       "relationships": [
-        "알리스의 이웃"
+        "마을 사람들을 이끌고 신앙심을 높이는 역할"
       ],
-      "statement": "우물 수리가 필요하다는 소문을 들었지만, 전 원래 알지도 못 했어요. 정말 끔찍한 일이네요.",
-      "is_witch": true
-    },
-    {
-      "name": "토마스",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "방랑 음악가",
-      "relationships": [
-        "마리아의 동료"
-      ],
-      "statement": "우물이 마비되면 어떡해? 이 마을 사람들이 너무 경솔해. 제 지고 싶지도 않아.",
+      "statement": "어린 아이들의 이상한 병이 마을에 퍼지고 있다. 저주 받은 것일까?",
       "is_witch": false
     },
     {
-      "name": "에밀리",
+      "name": "별",
       "personality": {
         "behavior": "extroverted",
         "emotion": "emotional"
       },
-      "occupation": "노파",
+      "occupation": "대장장이",
       "relationships": [
-        "프레드릭의 동생"
+        "무심한 듯 강한 성격을 가짐"
       ],
-      "statement": "우물이 마비된다니, 이젠 정말 물부족으로 얼굴도 씻을 수 없으니 더 어떡해?",
+      "statement": "이 이상한 일들은 마녀 때문이라고 생각하지만, 진실을 발견할 방법은 없을까?",
       "is_witch": false
     }
   ]
