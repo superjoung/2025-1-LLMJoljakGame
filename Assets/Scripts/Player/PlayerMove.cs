@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DefineEnum.GameModeDefine;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     public float CameraXSpeed = 8f;
     public float CameraYSpeed = 8f;
     public GameObject PlayerHead;
+
     public bool CanMove = true; // UI 창 열었을 때
     public bool CanRotate = true; // Player 목 회전
     public bool CanPlayerAction
@@ -42,7 +44,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        Move();
+        if(GameManager.Instance.CurrentGameMode == GameFlowMode.FreeMoveMode)
+            Move();
     }
 
     private void Move()

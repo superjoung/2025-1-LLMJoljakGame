@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using DefineEnum.GameModeDefine;
 
-public class GameManager : MonoBehaviour
+public partial class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
-
     public int Days = 1;
     public bool IsMorning { get { return Days % 2 == 1; } }
     public ParentPrefabs ParentPrefabs;
@@ -28,10 +27,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private static GameManager _instance;
+
     private void Start()
     {
         ParentPrefabs = GameObject.Find("PrefabsBox").GetComponent<ParentPrefabs>();
         NoneCharacterManager.Instance.NpcSpawn();
         UIManager.Instance.ShowSceneUI<PlayerMainScreenUI>();
+        Init();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            CurrentGameMode = GameFlowMode.EvidenceMode;
+        }
+    }
+
+    private void Init()
+    {
+        ModeInit();
     }
 }

@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (_startHearing)
         {
-            NPCHearingStart();
+            NPCHearingUpdate();
         }
     }
 

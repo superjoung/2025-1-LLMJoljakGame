@@ -15,4 +15,15 @@ namespace DefineEnum
             Cooking,
         }
     }
+
+    namespace GameModeDefine
+    {
+        public enum GameFlowMode
+        {
+            None = -1,
+            FreeMoveMode,
+            HearingMode,
+            EvidenceMode
+        }
+    }
 }
