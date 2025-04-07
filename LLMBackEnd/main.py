@@ -16,11 +16,13 @@ async def ask_npc(user_input: UserInput):
     try:
         result = compiled_graph.invoke({
             "input": user_input.input,
-            "npc": user_input.npc
+            "npc": user_input.npc,
+            "allowed": True
         })
         return {
             "npc": user_input.npc,
-            "response": result.get("response", "응답 없음")
+            "response": result.get("response", "응답 없음"),
+            "allowed": result.get("allowed", "응답 없음")
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -39,3 +41,5 @@ async def generate_setup():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Setup 생성 실패: {str(e)}")
+# NPC에게 질문 > 문제 없게 추출 > DB 첨가해서 이 질문에 대한 NPC의 감정상태를 토대로 답변하도록 부탁
+# > 이후 감정상태 변화 DB에 저장시키기 > 답변 출력
