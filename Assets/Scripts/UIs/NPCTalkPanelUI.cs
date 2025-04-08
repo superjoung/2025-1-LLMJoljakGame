@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static System.Net.Mime.MediaTypeNames;
 
 public class NPCTalkPanelUI : BaseUI
 {
@@ -17,7 +18,11 @@ public class NPCTalkPanelUI : BaseUI
 
     public int NpcId = -1; // ID를 입력받아야함
 
-    public void Start()
+    private float _textDelay = 0.12f; // 텍스트가 나오는 속도
+    private bool _printEnd = false;
+    private TMP_Text _targetText;
+
+    public void Awake()
     {
         Init();
     }
@@ -25,5 +30,30 @@ public class NPCTalkPanelUI : BaseUI
     public override void Init()
     {
         Bind<TMP_Text>(typeof(Texts));
+        _targetText = GetText((int)Texts.NPCTalkText);
+    }
+
+    public void ShowText(string talkText)
+    {
+        _printEnd = false;
+        StartCoroutine(textPrint(talkText));
+    }
+
+    IEnumerator textPrint(string text)
+    {
+        int count = 0;
+        _targetText.text = " ";
+
+        while (count != text.Length)
+        {
+            if (count < text.Length)
+            {
+                _targetText.text += text[count].ToString();
+                count++;
+            }
+
+            yield return new WaitForSeconds(_textDelay);
+        }
+        _printEnd = true;
     }
 }

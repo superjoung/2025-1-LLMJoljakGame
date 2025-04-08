@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DefineEnum.GameModeDefine;
+using Unity.VisualScripting;
 
 public partial class GameManager
 {
@@ -11,6 +12,7 @@ public partial class GameManager
     
     [SerializeField] private GameObject FreeMovePlayer;
     [SerializeField] private GameObject World;
+    [SerializeField] private GameObject HearingRoom;
     private List<GameObject> _destoryGameobjects = new List<GameObject>();
     private GameObject _saveEvidenceSpot = null;
 
@@ -144,11 +146,27 @@ public partial class GameManager
     #region Hearing
     private void HearingInit()
     {
-
+        FreeMovePlayer.SetActive(true);
+        foreach(GameObject child in NoneCharacterManager.Instance.NpcList)
+        {
+            if (int.Parse(child.name.Split("_")[1]) != HearingNpcID)
+            {
+                child.SetActive(false);
+            }
+        }
+        GameObject Npc = NoneCharacterManager.Instance.GetNpcToID(HearingNpcID);
+        ResourceManager.Instance.Instantiate("HearingRoom", Npc.transform.GetChild(3).position, null);
     }
     private void HearingEnd()
     {
-
+        foreach (GameObject child in NoneCharacterManager.Instance.NpcList)
+        {
+            if (int.Parse(child.name.Split("_")[1]) != HearingNpcID)
+            {
+                child.SetActive(true);
+            }
+        }
+        HearingNpcID = -1;
     }
     #endregion
     #region FreeMove

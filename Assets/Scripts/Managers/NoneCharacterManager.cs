@@ -7,7 +7,19 @@ using System.Linq;
 public class NoneCharacterManager : Singleton<NoneCharacterManager>
 {
     public Dictionary<int, Queue<BaseNpcStatAction>> NonePlayersAction = new Dictionary<int, Queue<BaseNpcStatAction>>();
-    public List<GameObject> NpcList = new List<GameObject>();
+    public List<GameObject> NpcList = new List<GameObject>(); // 소환된 NPC 게임오브젝트로 저장
+    public GameObject InteractiveNPC // 상호작용 NPC
+    {
+        get
+        {
+            if (CanStartTalkNpcs.Count == 0)
+            {
+                Debug.LogWarning("[WARN]NoneCharacterManager(InteractiveNPC) - 상호작용 가능한 NPC가 존재하지않습니다.");
+                return null;
+            }
+            return GetNpcToID(CanStartTalkNpcs[0]);
+        }
+    }
     public List<int> CanStartTalkNpcs // 대화할 수 있는 NPC 선정 리스트로 전달
     {
         get
@@ -53,7 +65,7 @@ public class NoneCharacterManager : Singleton<NoneCharacterManager>
         
     }
     // NPC 움직임 선택
-    private void UpdateNpcAction()
+    public void UpdateNpcAction()
     {
 
     }
@@ -68,9 +80,19 @@ public class NoneCharacterManager : Singleton<NoneCharacterManager>
         npc.transform.LookAt(player.transform.position);
 
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
+
+        // TEMP : test입니당
+        GetTalkString(NpcId, "안녕하세요. 저는 테스트 문자열입니다.");
     }
 
-    public GameObject GetNpcToID(int ID)
+    // ID에 일치하는 NPC에게 대화 문장 넘겨주기
+    public void GetTalkString(int ID, string Sentence)
+    {
+        GameObject npc = GetNpcToID(ID);
+        npc.GetComponent<NPCAttachData>().TalkText = Sentence;
+    }
+
+    public GameObject GetNpcToID(int ID)  
     {
         if(ID < 0 && NpcList.Count <= ID)
         {

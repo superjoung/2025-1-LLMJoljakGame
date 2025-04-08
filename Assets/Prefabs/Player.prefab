@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 302968121743943614}
   m_Layer: 0
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: PlayerHead
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,6 +268,7 @@ MonoBehaviour:
   CameraYSpeed: 8
   PlayerHead: {fileID: 2524566837377727247}
   CanMove: 1
+  CanRotate: 1
 --- !u!114 &6548379368133328821
 MonoBehaviour:
   m_ObjectHideFlags: 0
