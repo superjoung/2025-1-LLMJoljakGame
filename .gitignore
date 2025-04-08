@@ -76,3 +76,8 @@ crashlytics-build.properties
 /LLMBackEnd/.vscode
 /LLMBackEnd/.venv
 /LLMBackEnd/.env
+/LLMBackEnd/__pycache__
+/LLMBackEnd/npc_agents/__pycache__
+
+# Rider Ignore
+/.idea
