@@ -32,10 +32,6 @@ template = PromptTemplate.from_template(
     open("prompts/npc_response_template.txt", encoding="utf-8").read()
 )
 
-sanitize_prompt = PromptTemplate.from_template(
-    open("prompts/sanitize_template.txt", encoding="utf-8").read()
-)
-
 # --- Node 1: Filter Input ---
 def filter_input_node(state: GameState) -> GameState:
     print("[filter_input_node] 입력 필터링 시작:", state.input)
@@ -144,39 +140,16 @@ def answer_node(state: GameState) -> GameState:
     state.response = response.strip()
     return state.dict()
 
-# --- Node 4: Sanitize ---
-def sanitize_node(state: GameState) -> GameState:
-    print("[sanitize_node] 응답 정제 시작")
-
-    if not state.allowed:
-        print("[sanitize_node] 필터링 결과로 인해 건너뜀")
-        return state.dict()
-
-    response_text = state.response or ""
-    if not response_text.strip():
-        print("[sanitize_node] 응답이 비어 있음 → 기본 문장 삽입")
-        state.response = "상대방은 아무 말도 하지 않았다."
-        return state.dict()
-
-    prompt = sanitize_prompt.format(response=response_text)
-    cleaned = llm.invoke(prompt).content.strip()
-    print(f"[sanitize_node] 정제 결과:\n{cleaned}")
-    state.response = cleaned or "상대방은 아무 말도 하지 않았다."
-    return state.dict()
-
-
 # --- LangGraph 빌더 ---
 def game_app():
     builder = StateGraph(schema=GameState)
     builder.add_node("filter_input", filter_input_node)
     builder.add_node("stress_check", stress_node)
     builder.add_node("respond", answer_node)
-    builder.add_node("sanitize", sanitize_node)
 
     builder.set_entry_point("filter_input")
     builder.add_edge("filter_input", "stress_check")
     builder.add_edge("stress_check", "respond")
-    builder.add_edge("respond", "sanitize")
-    builder.set_finish_point("sanitize")
+    builder.set_finish_point("respond")
 
     return builder.compile()

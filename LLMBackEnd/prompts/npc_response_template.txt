@@ -17,3 +17,8 @@ Your task:
 - Do not include your name or role in your response.
 
 **Speak only the response of the character in Korean. Do not explain or narrate anything.**
+
+A church inquisitor will ask you the following question:
+"{question}"
+
+Your answer:

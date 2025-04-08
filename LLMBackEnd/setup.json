@@ -1,71 +1,71 @@
 {
-  "village": "15세기 유럽 마을. 먹구름한 비바람이 불면서 어두운 분위기가 감돌고 있다. 사람들은 마녀의 영향을 의심하며 두려움 속에 살고 있다.",
-  "event": "마녀가 마을에 도래한 후로 이상한 재해가 발생하고 있다. 어린 아이들이 갑자기 병에 걸리거나 가축이 사라지는 일이 늦지 않게 일어나고 있다.",
+  "village": "15세기 유럽 마을에 이른바 이스테이트 마을은 어두운 비밀과 오래된 전설로 둘러싸인 곳으로 알려져 있습니다. 돌로 쌓인 건물과 좁은 골목길 사이에서 사람들은 무서운 잔혹한 일들이 벌어지고 있다고 소문을 냅니다. 신앙심이 깊은 마을 주민들은 이들 사건들을 마녀의 짓냐고 의심하기 시작했습니다.",
+  "event": "최근 이스테이트 마을에서는 어린 아이들이 갑자기 실종되는 사건이 발생했습니다. 그들의 신발이 마을 근처의 마법숲 안에서 발견되었고, 마을 사람들 사이에는 마녀가 이를 일으킨 것이라는 소문이 돌기 시작했습니다.",
   "suspects": [
     {
-      "name": "소라",
+      "name": "아르노",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "emotional"
-      },
-      "occupation": "마을의 약사",
-      "relationships": [
-        "마을 주민들과 친절한 관계를 유지"
-      ],
-      "statement": "마녀가 누구인지 알아내야 한다. 나는 그저 병든 사람들을 도우려고 약을 주는데...",
-      "is_witch": false
-    },
-    {
-      "name": "은하",
-      "personality": {
-        "behavior": "introverted",
         "emotion": "rational"
       },
-      "occupation": "작물을 가꾸는 농부",
+      "occupation": "대장장이",
       "relationships": [
-        "자연과 가축들을 사랑하며 대하"
+        "마을장"
       ],
-      "statement": "마녀를 찾아내는 것은 중요하다. 그러나 나는 마녀가 아니라는 것만은 확실히 할 수 있어.",
+      "statement": "저는 이 마을을 지키는 대장장이로서 사람들을 믿는 사람입니다. 마녀 사건과는 아무 상관이 없습니다.",
       "is_witch": false
     },
     {
-      "name": "세레나",
+      "name": "마리아",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "emotional"
+      },
+      "occupation": "허브 상인",
+      "relationships": [
+        "음악가"
+      ],
+      "statement": "저는 오직 허브를 팔아서 생계를 유지하고 있습니다. 마녀 같은 일에는 전혀 연루되지 않았습니다.",
+      "is_witch": false
+    },
+    {
+      "name": "헨리",
       "personality": {
         "behavior": "extroverted",
         "emotion": "psychopathic"
       },
-      "occupation": "마을의 수녀",
+      "occupation": "가축 관리자",
       "relationships": [
-        "신앙심이 뛰어나고 다른 사람들의 오류를 용서할 수 없음"
+        "목수"
       ],
-      "statement": "마녀는 나도 모르게 마을에 해악을 끼치고 있다. 반드시 찾아내야 한다.",
-      "is_witch": true
+      "statement": "마을을 떠날 생각을 하고 있었지만, 이런 상황에 마을을 떠나기엔 미련이 남아서 그냥 있었습니다. 마녀 같은 미신적인 이야기는 할 일이 없어요.",
+      "is_witch": false
     },
     {
-      "name": "하늘",
+      "name": "엘라",
       "personality": {
         "behavior": "introverted",
-        "emotion": "emotional"
+        "emotion": "rational"
       },
-      "occupation": "마을의 신부",
+      "occupation": "마을 병원 간호사",
       "relationships": [
-        "마을 사람들을 이끌고 신앙심을 높이는 역할"
+        "장의사"
       ],
-      "statement": "어린 아이들의 이상한 병이 마을에 퍼지고 있다. 저주 받은 것일까?",
+      "statement": "나는 병원에서 바쁜 일을 하고 있어서 마녀 같은 것에는 전혀 신경 쓰지 않고 있습니다. 누구나 뒤죽박죽인 이야기를 듣는군요.",
       "is_witch": false
     },
     {
-      "name": "별",
+      "name": "루돌프",
       "personality": {
-        "behavior": "extroverted",
-        "emotion": "emotional"
+        "behavior": "introverted",
+        "emotion": "rational"
       },
-      "occupation": "대장장이",
+      "occupation": "목수",
       "relationships": [
-        "무심한 듯 강한 성격을 가짐"
+        "가축 관리자"
       ],
-      "statement": "이 이상한 일들은 마녀 때문이라고 생각하지만, 진실을 발견할 방법은 없을까?",
-      "is_witch": false
+      "statement": "난 평범한 목수로서 마을을 지탱하고 있지만, 마녀 같은 것에 연루된 적이 없습니다. 그런 이야기는 다른 사람들이 만들어낸 것입니다.",
+      "is_witch": true
     }
   ]
 }
