@@ -4,7 +4,7 @@ using UnityEngine;
 using DefineEnum.NonePlayerDefine;
 using System.Linq;
 
-public class NoneCharacterManager : Singleton<NoneCharacterManager>
+public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
 {
     public Dictionary<int, Queue<BaseNpcStatAction>> NonePlayersAction = new Dictionary<int, Queue<BaseNpcStatAction>>();
     public List<GameObject> NpcList = new List<GameObject>(); // 소환된 NPC 게임오브젝트로 저장
@@ -20,45 +20,9 @@ public class NoneCharacterManager : Singleton<NoneCharacterManager>
             return GetNpcToID(CanStartTalkNpcs[0]);
         }
     }
-    public List<int> CanStartTalkNpcs // 대화할 수 있는 NPC 선정 리스트로 전달
-    {
-        get
-        {
-            _canStartTalkNpcs = new List<int>();
-            foreach(GameObject child in NpcList)
-            {
-                NPCAttachData data = child.GetComponent<NPCAttachData>();
-                if (data.CanTalkStart)
-                {
-                    _canStartTalkNpcs.Add(data.ID);
-                }
-            }
-            return _canStartTalkNpcs;
-        }
-    }
-
-    public int CanTalkNpcCount // 대화 가능 NPC 변수로 설정
-    {
-        get
-        {
-            int count = 0;
-            foreach (GameObject child in NpcList)
-            {
-                NPCAttachData data = child.GetComponent<NPCAttachData>();
-                if (data.CanTalkStart)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
-    }
-
-    public bool TalkStart = false; // TEMP : 어떤 NPC들이든 대화를 시작했을 때 사용 추후 수정될 예정
 
     private string NPC_PREFABS_PATH = "NPC/NPC";
     private int _npcCount = 3;
-    private List<int> _canStartTalkNpcs;
 
     public void Update()
     {
@@ -68,28 +32,6 @@ public class NoneCharacterManager : Singleton<NoneCharacterManager>
     public void UpdateNpcAction()
     {
 
-    }
-
-    public void TalkStartWithPlayer(int NpcId)
-    {
-        // 플레이어랑 대화중에는 이동 중이던 행동 멈추기
-        // NonePlayersAction[NpcId].Peek().IsTalkWithPlayer = true;
-        TalkStart = true; // TEMP : 플레이어 대화 시작은 전부 NPCAttachData로 수정될 예정
-        GameObject npc = GetNpcToID(NpcId);
-        GameObject player = GameObject.FindWithTag("Player");
-        npc.transform.LookAt(player.transform.position);
-
-        UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
-
-        // TEMP : test입니당
-        GetTalkString(NpcId, "안녕하세요. 저는 테스트 문자열입니다.");
-    }
-
-    // ID에 일치하는 NPC에게 대화 문장 넘겨주기
-    public void GetTalkString(int ID, string Sentence)
-    {
-        GameObject npc = GetNpcToID(ID);
-        npc.GetComponent<NPCAttachData>().TalkText = Sentence;
     }
 
     public GameObject GetNpcToID(int ID)  

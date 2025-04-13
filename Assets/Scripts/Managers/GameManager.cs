@@ -10,6 +10,8 @@ public partial class GameManager : MonoBehaviour
     public bool IsMorning { get { return Days % 2 == 1; } }
     public ParentPrefabs ParentPrefabs;
 
+    protected PlayerMainScreenUI _playerMainScreenUI;
+
     public static GameManager Instance
     {
         get
@@ -33,7 +35,7 @@ public partial class GameManager : MonoBehaviour
     {
         ParentPrefabs = GameObject.Find("PrefabsBox").GetComponent<ParentPrefabs>();
         NoneCharacterManager.Instance.NpcSpawn();
-        UIManager.Instance.ShowSceneUI<PlayerMainScreenUI>();
+        _playerMainScreenUI = UIManager.Instance.ShowSceneUI<PlayerMainScreenUI>();
         Init();
     }
 

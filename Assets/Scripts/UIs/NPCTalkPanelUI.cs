@@ -16,8 +16,6 @@ public class NPCTalkPanelUI : BaseUI
     protected override bool IsSorting => false;
     public override UIName ID => UIName.NPCTalkPanelUI;
 
-    public int NpcId = -1; // ID를 입력받아야함
-
     private float _textDelay = 0.12f; // 텍스트가 나오는 속도
     private bool _printEnd = false;
     private TMP_Text _targetText;

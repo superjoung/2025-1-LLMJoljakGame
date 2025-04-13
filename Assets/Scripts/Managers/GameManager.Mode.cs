@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DefineEnum.GameModeDefine;
-using Unity.VisualScripting;
 
 public partial class GameManager
 {
@@ -75,6 +74,9 @@ public partial class GameManager
             case GameFlowMode.EvidenceMode:
                 EvidenceEnd();
                 break;
+            case GameFlowMode.TalkMode:
+                TalkModeEnd();
+                break;
             default:
                 Debug.LogWarning("[WARN]GameManager(ModeEnd) - 해당 mode는 존재하지 않습니다.");
                 break;
@@ -93,6 +95,9 @@ public partial class GameManager
                 break;
             case GameFlowMode.EvidenceMode:
                 EvidenceInit();
+                break;
+            case GameFlowMode.TalkMode:
+                TalkModeInit();
                 break;
             default:
                 Debug.LogWarning("[WARN]GameManager(ModeInit) - 해당 mode는 존재하지 않습니다.");
@@ -115,6 +120,7 @@ public partial class GameManager
         Debug.Log($"[INFO]GameManager.Mode(CheckModeChange) - {mode} 변환 {canChange}");
         return canChange;
     }
+
     #region Evidence
     private void EvidenceInit()
     {
@@ -143,6 +149,7 @@ public partial class GameManager
         EvidenceSpotName = "";
     }
     #endregion
+
     #region Hearing
     private void HearingInit()
     {
@@ -169,6 +176,7 @@ public partial class GameManager
         HearingNpcID = -1;
     }
     #endregion
+
     #region FreeMove
     private void FreeMoveInit()
     {
@@ -177,6 +185,17 @@ public partial class GameManager
     private void FreeMoveEnd()
     {
         FreeMovePlayer.SetActive(false);
+    }
+    #endregion
+    #region Talking
+    private void TalkModeInit()
+    {
+        FreeMovePlayer.SetActive(true);
+        _playerMainScreenUI.ShowChatUI();
+    }
+    private void TalkModeEnd()
+    {
+        _playerMainScreenUI.HideChatUI();
     }
     #endregion
 }

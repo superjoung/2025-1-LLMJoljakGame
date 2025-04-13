@@ -44,7 +44,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.Instance.CurrentGameMode == GameFlowMode.FreeMoveMode || GameManager.Instance.CurrentGameMode == GameFlowMode.HearingMode)
+        if(GameManager.Instance.CurrentGameMode != GameFlowMode.HearingMode)
             Move();
     }
 

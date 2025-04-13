@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using DefineEnum.GameModeDefine;
 
 public class NPCAttachData : MonoBehaviour
 {
     public int ID;
     public Transform UIPos;
     public Transform UINeck;
+    public Transform SeePoint;
 
     public bool IsTalkStart = false;  // 대화 시작
     public bool CanTalkStart = false; // 대화 시작 가능 (범위 안에 들어왔을 때)
@@ -55,7 +56,7 @@ public class NPCAttachData : MonoBehaviour
 
     private void Update()
     {
-        if (NoneCharacterManager.Instance.TalkStart)
+        if (GameManager.Instance.CurrentGameMode == GameFlowMode.TalkMode)
         {
             _popUpUI.gameObject.SetActive(false);
         }

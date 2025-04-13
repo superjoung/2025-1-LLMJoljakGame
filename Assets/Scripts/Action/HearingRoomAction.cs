@@ -37,11 +37,6 @@ public class HearingRoomAction : MonoBehaviour
         haeringSeq.Play();
     }
 
-    private void Update()
-    {
-
-    }
-
     private void Init()
     {
         _world = GameObject.FindWithTag("WorldMap");

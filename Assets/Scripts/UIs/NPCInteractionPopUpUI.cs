@@ -20,6 +20,8 @@ public class NPCInteractionPopUpUI : BaseUI
         Init();
     }
 
+    //private void 
+
     public override void Init()
     {
         Bind<TMP_Text>(typeof(Texts));
