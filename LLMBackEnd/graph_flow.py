@@ -28,6 +28,10 @@ filter_input_prompt = PromptTemplate.from_template(
     open("prompts/filter_input_prompt.txt", encoding="utf-8").read()
 )
 
+status_update_prompt = PromptTemplate.from_template(
+    open("prompts/status_update_prompt.txt", encoding="utf-8").read()
+)
+
 template = PromptTemplate.from_template(
     open("prompts/npc_response_template.txt", encoding="utf-8").read()
 )
@@ -65,24 +69,64 @@ def filter_input_node(state: GameState) -> GameState:
 
     return state.dict()
 
-
 # --- Node 2: Stress Check ---
-def stress_node(state: GameState) -> GameState:
-    print("[stress_node] 스트레스 체크 시작")
+def status_node(state: GameState) -> GameState:
+    print("[status_node] 스테이터스 체크 시작")
 
     if not state.allowed:
-        print("[stress_node] 필터링 결과로 인해 건너뜀")
+        print("[status_node] 필터링 결과로 인해 건너뜀")
         return state.dict()
 
     npc = state.npc
     question = state.input
 
-    if is_sensitive_question(question):
-        npc_state.add_stress(npc, 2)
-        print(f"[stress_node] 민감한 질문 감지. '{npc}'의 스트레스 +2")
-    else:
-        npc_state.add_stress(npc, 0)
-        print(f"[stress_node] 민감하지 않음. '{npc}'의 스트레스 변화 없음")
+    # setup.json 기반 NPC 정보 불러오기
+    with open("setup.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+        target_npc = next((n for n in data["suspects"] if n["name"] == npc), None)
+
+    if not target_npc:
+        print(f"[status_node] NPC '{npc}' 정보 없음")
+        return state.dict()
+
+    # 성격, 상태 정보
+    is_witch = target_npc["is_witch"]
+    behavior = target_npc["personality"]["behavior"]
+    emotion = target_npc["personality"]["emotion"]
+    stress = npc_state.get_stress(npc)
+    anxiety = npc_state.get_anxiety(npc)
+
+    # 프롬프트 채우기
+    prompt = status_update_prompt.format(
+        name=npc,
+        is_witch=is_witch,
+        behavior=behavior,
+        emotion=emotion,
+        stress=stress,
+        anxiety=anxiety,
+        question=question,
+    )
+
+    response = llm.invoke(prompt).content.strip()
+
+    try:
+        result = json.loads(response)
+        stress_delta = result.get("stress", 0)
+        anxiety_delta = result.get("anxiety", 0)
+
+        npc_state.add_stress(npc, stress_delta)
+        npc_state.add_anxiety(npc, anxiety_delta)
+
+        # 최종 수치
+        updated_stress = npc_state.get_stress(npc)
+        updated_anxiety = npc_state.get_anxiety(npc)
+
+        print(f"[status_node] '{npc}' 스트레스 +{stress_delta} → 현재: {updated_stress}")
+        print(f"[status_node] '{npc}' 불안감 +{anxiety_delta} → 현재: {updated_anxiety}")
+        print(f"[이유] {result.get('reason')}")
+
+    except Exception as e:
+        print(f"[status_node] JSON 파싱 실패: {e}\nLLM 응답:\n{response}")
 
     return state.dict()
 
@@ -97,9 +141,11 @@ def answer_node(state: GameState) -> GameState:
     npc = state.npc
     question = state.input
     stress = npc_state.get_stress(npc)
+    anxiety = npc_state.get_anxiety(npc)
     history = npc_state.get_history(npc)
     history_text = "\n".join(history[-5:])
     stress_info = f"현재 스트레스 수준은 {stress}입니다. 스트레스가 높을수록 방어적이거나 혼란스러운 말을 할 수 있습니다."
+    anxiety_info = f"현재 불안감 수준은 {anxiety}입니다. 불안감이 높을수록 대화가 소극적이고 걱정이 많아집니다."
 
     with open("setup.json", "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -122,6 +168,7 @@ def answer_node(state: GameState) -> GameState:
         name=npc,
         question=question,
         stress=stress,
+        anxiety=anxiety,
         history=history_text,
         stress_info=stress_info,
         behavior=behavior,
@@ -144,12 +191,12 @@ def answer_node(state: GameState) -> GameState:
 def game_app():
     builder = StateGraph(schema=GameState)
     builder.add_node("filter_input", filter_input_node)
-    builder.add_node("stress_check", stress_node)
+    builder.add_node("status_node", status_node)
     builder.add_node("respond", answer_node)
 
     builder.set_entry_point("filter_input")
-    builder.add_edge("filter_input", "stress_check")
-    builder.add_edge("stress_check", "respond")
+    builder.add_edge("filter_input", "status_node")
+    builder.add_edge("status_node", "respond")
     builder.set_finish_point("respond")
 
     return builder.compile()
