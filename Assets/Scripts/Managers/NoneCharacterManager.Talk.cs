@@ -15,7 +15,7 @@ public partial class NoneCharacterManager
             if (CanPlayerEnterText)
             {
                 CanPlayerEnterText = false;
-                
+                ResponseNpcText(value);
             }
         }
     }
@@ -77,7 +77,7 @@ public partial class NoneCharacterManager
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
 
         // TEMP : test입니당
-        GetTalkString(CurrentTalkNpcID, "안녕하세요. 저는 테스트 문자열입니다.");
+        GetTalkString("안녕하세요. 저는 테스트 문자열입니다.");
     }
 
     public void PlayerLookAtToNpc()
@@ -91,12 +91,18 @@ public partial class NoneCharacterManager
     }
 
     // ID에 일치하는 NPC에게 대화 문장 넘겨주기
-    public void GetTalkString(int ID, string Sentence)
+    public void GetTalkString(string Sentence)
     {
-        GameObject npc = GetNpcToID(ID);
+        GameObject npc = GetNpcToID(CurrentTalkNpcID);
         npc.GetComponent<NPCAttachData>().TalkText = Sentence;
     }
 
-    //// NPC에게 문자열을 전달해 어떤 대답을 하게 시킬건지 계산하는 함수
-    //private void 
+    // NPC에게 문자열을 전달해 어떤 대답을 하게 시킬건지 계산하는 함수
+    private void ResponseNpcText(string inputText)
+    {
+        if (inputText.Count() > 0)
+        {
+            GetTalkString("너무 무서워용");
+        }
+    }
 }

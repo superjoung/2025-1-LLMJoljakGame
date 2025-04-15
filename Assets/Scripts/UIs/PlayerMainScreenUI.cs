@@ -22,10 +22,6 @@ public class PlayerMainScreenUI : BaseUI
         PlayerChatStartButton,   // NPC 대화 시작 버튼
         PlayerChatEndButton,     // NPC 대화 종료 버튼
     }
-    enum InputFields
-    {
-        PlayerInput
-    }
     enum GameObjects
     {
         DayBackColor, // 시간 진행도 뒷배경 오브젝트
@@ -90,7 +86,12 @@ public class PlayerMainScreenUI : BaseUI
     // 대화 시작 함수
     private void OnClickTalkStartButton(PointerEventData data)
     {
-        NoneCharacterManager.Instance.PlayerText = GetInputField((int)InputFields.PlayerInput).text;
+        Debug.Log(GetObject((int)GameObjects.PlayerChatPopUpUI).GetComponent<TMP_InputField>().text);
+        if (NoneCharacterManager.Instance.CanPlayerEnterText) // NPC 대화 출력이 끝났을 때 
+        {
+            NoneCharacterManager.Instance.PlayerText = GetObject((int)GameObjects.PlayerChatPopUpUI).GetComponent<TMP_InputField>().text;
+            GetObject((int)GameObjects.PlayerChatPopUpUI).GetComponent<TMP_InputField>().text = "";
+        }
     }
     // 대화 종료 함수
     private void OnClickTalkEndButton(PointerEventData data)
