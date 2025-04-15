@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
         switch (GameManager.Instance.CurrentGameMode)
         {
             case GameFlowMode.FreeMoveMode:
-                if(NoneCharacterManager.Instance.CanTalkNpcCount != 0)
+                _playerMove.CanPlayerAction = true;
+                if (NoneCharacterManager.Instance.CanTalkNpcCount != 0)
                 {
                     // 대화키를 눌렀을 때
                     if (Input.GetKeyDown(KeyCode.E))
@@ -54,12 +55,11 @@ public class PlayerController : MonoBehaviour
 
     private void NPCTalkStart()
     {
-        _playerMove.CanPlayerAction = false; // 화면은 돌아갈 수 있도록 설정
-
         // TEMP : 임의로 여러개의 NPC가 겹처있을 때 하나를 지정해서 대화 시도 추후 다중 대화 기능이 필요하다면 수정 필요
         int ID = NoneCharacterManager.Instance.CanStartTalkNpcs[0];
         NoneCharacterManager.Instance.TalkStartWithPlayer(ID);
         GameManager.Instance.CurrentGameMode = GameFlowMode.TalkMode;
+        _playerMove.CanPlayerAction = false;
     }
 
     private void NPCTalkUpdate()
@@ -69,11 +69,11 @@ public class PlayerController : MonoBehaviour
 
     private void NPCHearingStart()
     {
-        _playerMove.CanPlayerAction = false;
         int ID = NoneCharacterManager.Instance.CanStartTalkNpcs[0];
         NoneCharacterManager.Instance.GetNpcToID(ID).transform.LookAt(transform.position);
         GameManager.Instance.HearingNpcID = ID;
         GameManager.Instance.CurrentGameMode = DefineEnum.GameModeDefine.GameFlowMode.HearingMode;
+        _playerMove.CanPlayerAction = false;
     }
 
     private void NPCHearingUpdate()

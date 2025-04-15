@@ -1,11 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking.Types;
 
 public partial class NoneCharacterManager
 {
-    // 현재 대화중인 NPC ID 추후 여러명과 대화할 수 있으면 리스트 형식으로 수정할 것
-    private int _currentTalkNpcID = -1;
+    public List<GameObject> TalkList = new List<GameObject>();
+    public int CurrentTalkNpcID = -1;
+    public string PlayerText
+    {
+        set
+        {
+            if (CanPlayerEnterText)
+            {
+                CanPlayerEnterText = false;
+                
+            }
+        }
+    }
 
     public List<int> CanStartTalkNpcs // 대화할 수 있는 NPC 선정 리스트로 전달
     {
@@ -41,23 +54,40 @@ public partial class NoneCharacterManager
         }
     }
 
+    public bool CanPlayerEnterText = true;
+
     private List<int> _canStartTalkNpcs;
 
+    // 안에 들어가는 여러명일 경우 수정이 필요
     public void TalkStartWithPlayer(int NpcId)
     {
         // 플레이어랑 대화중에는 이동 중이던 행동 멈추기
         // NonePlayersAction[NpcId].Peek().IsTalkWithPlayer = true;
-        _currentTalkNpcID = NpcId;
         GameObject npc = GetNpcToID(NpcId);
+        TalkList.Add(npc); // 여러명과 대화할 때를 염두해 수정
+        CurrentTalkNpcID = TalkList[0].GetComponent<NPCAttachData>().ID;
+
         GameObject player = GameObject.FindWithTag("Player");
         npc.transform.LookAt(player.transform.position);
-        // 플레이어가 바라보는 각도 조절
-        player.transform.LookAt(npc.GetComponent<NPCAttachData>().SeePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
 
+        // 플레이어가 바라보는 각도 조절
+        PlayerLookAtToNpc();
+
+        // 파괴해야하는 오브젝트에 추가
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
 
         // TEMP : test입니당
-        GetTalkString(NpcId, "안녕하세요. 저는 테스트 문자열입니다.");
+        GetTalkString(CurrentTalkNpcID, "안녕하세요. 저는 테스트 문자열입니다.");
+    }
+
+    public void PlayerLookAtToNpc()
+    {
+        GameObject npc = GetNpcToID(CurrentTalkNpcID);
+        GameObject player = GameObject.FindWithTag("Player");
+
+        // 플레이어가 바라보는 각도 조절
+        player.transform.LookAt(npc.GetComponent<NPCAttachData>().SeePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
+        player.GetComponent<PlayerMove>().PlayerHead.transform.LookAt(npc.GetComponent<NPCAttachData>().SeePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
     }
 
     // ID에 일치하는 NPC에게 대화 문장 넘겨주기
@@ -66,4 +96,7 @@ public partial class NoneCharacterManager
         GameObject npc = GetNpcToID(ID);
         npc.GetComponent<NPCAttachData>().TalkText = Sentence;
     }
+
+    //// NPC에게 문자열을 전달해 어떤 대답을 하게 시킬건지 계산하는 함수
+    //private void 
 }

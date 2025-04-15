@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static System.Net.Mime.MediaTypeNames;
 
 public class NPCTalkPanelUI : BaseUI
 {
@@ -53,5 +52,6 @@ public class NPCTalkPanelUI : BaseUI
             yield return new WaitForSeconds(_textDelay);
         }
         _printEnd = true;
+        NoneCharacterManager.Instance.CanPlayerEnterText = true;
     }
 }

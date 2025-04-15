@@ -11,7 +11,8 @@ public enum UIName
     PlayerMainScreenUI,
     OptionPopUpUI,
     NPCInteractionPopUpUI, // NPC 옆 행동 UI 박스
-    NPCTalkPanelUI         // NPC 대화 UI
+    NPCTalkPanelUI,        // NPC 대화 UI
+    NPCInfoUI
 }
 
 public class UIManager : Singleton<UIManager>
@@ -132,9 +133,7 @@ public class UIManager : Singleton<UIManager>
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
-        GameObject go = ResourceManager.Instance.Instantiate($"UI/Frame/{name}");
-        if (parent != null)
-            go.transform.SetParent(parent);
+        GameObject go = ResourceManager.Instance.Instantiate($"UI/Frame/{name}", parent);
 
         return UIUtils.GetOrAddComponent<T>(go);
     }

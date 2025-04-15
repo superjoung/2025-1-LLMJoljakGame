@@ -12,7 +12,7 @@ public partial class GameManager
     [SerializeField] private GameObject FreeMovePlayer;
     [SerializeField] private GameObject World;
     [SerializeField] private GameObject HearingRoom;
-    private List<GameObject> _destoryGameobjects = new List<GameObject>();
+    public List<GameObject> DestoryGameobjects = new List<GameObject>();
     private GameObject _saveEvidenceSpot = null;
 
     public GameFlowMode CurrentGameMode
@@ -47,7 +47,7 @@ public partial class GameManager
     private void ModeChange(GameFlowMode currentMode, GameFlowMode changeMode)
     {
         // 모드 변경 전 파괴되어야하는 오브젝트 파괴
-        foreach(GameObject child in _destoryGameobjects)
+        foreach(GameObject child in DestoryGameobjects)
         {
             DestroyImmediate(child);
         }
@@ -124,8 +124,9 @@ public partial class GameManager
     #region Evidence
     private void EvidenceInit()
     {
+        FreeMovePlayer.SetActive(false);
         // 해당 지역 이름과 동일한 게임 오브젝트 확인
-        foreach(Transform child in ParentPrefabs.NpcCameraBox.transform)
+        foreach (Transform child in ParentPrefabs.NpcCameraBox.transform)
         {
             string spotName = child.name.Split("_")[1];
             if(spotName == EvidenceSpotName) // 증거수집을 원하는 지역 이름과 같을 경우
@@ -138,7 +139,7 @@ public partial class GameManager
                 move.UseCamera = child.GetChild(0).GetComponent<Camera>();
                 move.ClickPos = child.GetChild(2);
 
-                _destoryGameobjects.Add(player);
+                DestoryGameobjects.Add(player);
             }
         }
     }
@@ -184,17 +185,23 @@ public partial class GameManager
     }
     private void FreeMoveEnd()
     {
-        FreeMovePlayer.SetActive(false);
+
     }
     #endregion
     #region Talking
     private void TalkModeInit()
     {
         FreeMovePlayer.SetActive(true);
+        // 파괴 오브젝트 추가
+        foreach(GameObject child in NoneCharacterManager.Instance.TalkList)
+        {
+            DestoryGameobjects.Add(child.GetComponent<NPCAttachData>().PopUpTalkUI.gameObject);
+        }
         _playerMainScreenUI.ShowChatUI();
     }
     private void TalkModeEnd()
     {
+        NoneCharacterManager.Instance.TalkList.Clear();
         _playerMainScreenUI.HideChatUI();
     }
     #endregion

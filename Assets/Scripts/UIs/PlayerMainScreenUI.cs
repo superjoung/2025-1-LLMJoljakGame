@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using DefineEnum.GameModeDefine;
 
 public class PlayerMainScreenUI : BaseUI
 {
@@ -19,7 +20,7 @@ public class PlayerMainScreenUI : BaseUI
     {
         OptionButton, // 마우스 설정 및 기타 편의 사항 설정 버튼
         PlayerChatStartButton,   // NPC 대화 시작 버튼
-        PlayerChatEndButton     // NPC 대화 종료 버튼
+        PlayerChatEndButton,     // NPC 대화 종료 버튼
     }
     enum InputFields
     {
@@ -29,7 +30,8 @@ public class PlayerMainScreenUI : BaseUI
     {
         DayBackColor, // 시간 진행도 뒷배경 오브젝트
         DayFillColor, // 시간 채워지는 색 오브젝트
-        PlayerChatPopUpUI   // Player 채팅창 On/Off 용
+        PlayerChatPopUpUI,  // Player 채팅창 On/Off 용
+        NPCLayer        // 대화 가능 NPC 띄어주기
     }
 
     protected override bool IsSorting => false;
@@ -65,6 +67,12 @@ public class PlayerMainScreenUI : BaseUI
     public void ShowChatUI()
     {
         GetObject((int)GameObjects.PlayerChatPopUpUI).gameObject.SetActive(true);
+        // 선택 가능 보여주기
+        foreach(int id in NoneCharacterManager.Instance.CanStartTalkNpcs)
+        {
+            NPCInfoFrame npcInfoFrame = UIManager.Instance.MakeSubItem<NPCInfoFrame>(GetObject((int)GameObjects.NPCLayer).transform);
+            npcInfoFrame.id = id;
+        }
     }
 
     public void HideChatUI()
@@ -82,13 +90,13 @@ public class PlayerMainScreenUI : BaseUI
     // 대화 시작 함수
     private void OnClickTalkStartButton(PointerEventData data)
     {
-
+        NoneCharacterManager.Instance.PlayerText = GetInputField((int)InputFields.PlayerInput).text;
     }
     // 대화 종료 함수
     private void OnClickTalkEndButton(PointerEventData data)
     {
-        // Player Chat 끄기
-        GetObject((int)GameObjects.PlayerChatPopUpUI).SetActive(false);
+        // 자유 시점 모드로 이동
+        GameManager.Instance.CurrentGameMode = GameFlowMode.FreeMoveMode;
     }
 
     private void OnChangeDayProgressBar(float changeValue)
