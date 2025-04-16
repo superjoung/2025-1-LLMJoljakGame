@@ -1,56 +1,84 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import chromadb
-import uuid
 from graph_flow import create_dynamic_graph
+import chromadb
+from chromadb.config import Settings
+import uuid
+import json
+import os
 
+# FastAPI 초기화
 app = FastAPI()
 
-# 🔧 메모리 기반 DB 초기화 (서버 끄면 삭제됨)
-client = chromadb.Client()  # persist_directory 없이 사용
-npc_collection = client.get_or_create_collection("npc_memory")
-host_collection = client.get_or_create_collection("host_memory")
+# ChromaDB 메모리 기반 초기화
+client = chromadb.Client(Settings(anonymized_telemetry=False))
+collection = client.get_or_create_collection(name="memory")
 
-
-# 요청 모델
+# 입력 포맷 정의
 class UserInput(BaseModel):
     input: str
     npc: str
 
+# 대화 요청 API
 @app.post("/ask")
 async def ask_npc(user_input: UserInput):
-    compiled_graph = create_dynamic_graph(user_input.npc)
-    # 1. 컬렉션 선택
-    collection = host_collection if user_input.npc == "사회자" else npc_collection
+    try:
+        # 🧠 1. 과거 기억 검색
+        memories = collection.query(
+            query_texts=[user_input.input],
+            n_results=3,
+            where={"npc": user_input.npc},
+        )
+        retrieved = memories.get("documents", [[]])[0]
+        print(f"[memory] 검색된 기억: {retrieved}")
 
-    # 2. 기억 검색
-    results = collection.query(
-        query_texts=[user_input.input],
-        n_results=1
-    )
-    memory_used = results["documents"][0] if results["documents"] else ""
+        # 2. 동적 그래프 생성 (요청된 NPC에 따라)
+        compiled_graph = create_dynamic_graph(user_input.npc)
 
-    # 3. 사회자면 GPT 호출 생략
-    if user_input.npc == "사회자":
-        response = f"(기록됨) {user_input.input}"  # 표시용 메시지 (없어도 됨)
-    else:
-        # 동적 LangGraph 생성 및 실행
-        dynamic_graph = create_dynamic_graph(user_input.npc)
-        response = dynamic_graph.invoke({
+        # 3. 그래프 실행 (입력 + 기억 포함)
+        result = compiled_graph.invoke({
             "input": user_input.input,
             "npc": user_input.npc,
-            "chat_history": []
+            "chat_history": retrieved,
         })
 
-    # 4. 기억 저장
-    collection.add(
-        documents=[f"{user_input.npc}: {user_input.input if user_input.npc == '사회자' else response}"],
-        metadatas=[{"npc": user_input.npc}],
-        ids=[str(uuid.uuid4())]
-    )
+        # 🎯 응답 저장 로직
+        response = result.get("response", "")
+        if user_input.npc == "사회자":
+            content_to_save = f"{user_input.npc}: {user_input.input}"
+        else:
+            content_to_save = f"{user_input.npc}: {response}"
 
-    return {
-        "gpt_response": response,
-        "memory_used": memory_used
-    }
+        collection.add(
+            documents=[content_to_save],
+            metadatas=[{"npc": user_input.npc}],
+            ids=[str(uuid.uuid4())]
+        )
 
+        return {
+            "npc": user_input.npc,
+            "response": response,
+            "memory_used": retrieved
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ✅ 사건 초기 설정 생성용 (선택 기능)
+@app.post("/generate_setup")
+async def generate_setup():
+    try:
+        from setup_generator import generate_game_setup
+        setup = generate_game_setup()
+
+        if not setup:
+            with open("setup.json", "r", encoding="utf-8") as f:
+                setup = json.load(f)
+
+        return {
+            "message": "사건 및 용의자 설정 생성 완료",
+            "setup": setup
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Setup 생성 실패: {str(e)}")
