@@ -19,7 +19,7 @@ class GameState(BaseModel):
 # LLM 초기화
 llm = ChatOpenAI(
     model="gpt-3.5-turbo",
-    temperature=0.8,
+    temperature=0.5,
     openai_api_key=os.getenv("OPENAI_API_KEY")
 )
 
@@ -144,8 +144,6 @@ def answer_node(state: GameState) -> GameState:
     anxiety = npc_state.get_anxiety(npc)
     history = npc_state.get_history(npc)
     history_text = "\n".join(history[-5:])
-    stress_info = f"현재 스트레스 수준은 {stress}입니다. 스트레스가 높을수록 방어적이거나 혼란스러운 말을 할 수 있습니다."
-    anxiety_info = f"현재 불안감 수준은 {anxiety}입니다. 불안감이 높을수록 대화가 소극적이고 걱정이 많아집니다."
 
     with open("setup.json", "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -170,7 +168,6 @@ def answer_node(state: GameState) -> GameState:
         stress=stress,
         anxiety=anxiety,
         history=history_text,
-        stress_info=stress_info,
         behavior=behavior,
         emotion=emotion,
         occupation=occupation,
