@@ -11,7 +11,20 @@ namespace DefineEnum
             None = -1,
             Move,
             Talk,
-            hearing
+            Hearing,
+            Cooking,
+        }
+    }
+
+    namespace GameModeDefine
+    {
+        public enum GameFlowMode
+        {
+            None = -1,
+            FreeMoveMode,   // 자유 이동 모드
+            TalkMode,       // 대화 모드
+            HearingMode,    // 심문 모드
+            EvidenceMode    // 증거 수집 모드
         }
     }
 }
