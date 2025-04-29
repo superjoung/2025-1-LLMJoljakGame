@@ -4,32 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DefineEnum.GameModeDefine;
 
-public partial class GameManager : MonoBehaviour
+public partial class GameManager : Singleton<GameManager>
 {
     public int Days = 1;
     public bool IsMorning { get { return Days % 2 == 1; } }
     public ParentPrefabs ParentPrefabs;
 
     protected PlayerMainScreenUI _playerMainScreenUI;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<GameManager>();
-                if (_instance == null)
-                {
-                    GameObject obj = new GameObject(nameof(GameManager));
-                    _instance = obj.AddComponent<GameManager>();
-                }
-            }
-            return _instance;
-        }
-    }
-
-    private static GameManager _instance;
 
     private void Start()
     {
