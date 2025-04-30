@@ -1,70 +1,70 @@
 {
-  "village": "15세기 유럽 마을은 어두운 돌담으로 둘러싸인 작은 집들이 나열되어 있으며, 교회 종소리와 마을 사람들의 쉬어가는 목소리가 자욱하게 번져 퍼지는 조용한 분위기를 자랑합니다.",
-  "event": "마녀가 마을 주변의 작은 연못을 마력으로 변화시켜 마을 주민들이 한데 모여 의문의 춤을 추고 있었습니다. 이 가운데에서 어떤 이가 마을의 안전을 위협하고 있다는 소문이 퍼져나갑니다.",
+  "village": "15세기 유럽 마을은 야만적이고 불안한 분위기에 가득 차 있습니다. 교회의 검열관이 마을을 지배하고, 마녀 사냥으로 인한 공포가 사방에 퍼져 있습니다.",
+  "event": "최근에 마을에서 어린이가 실종되는 사건이 발생했습니다. 어린이는 마을 근처의 숲 속에서 발견되었지만 얼굴이 변해 있었고 이상한 기호가 새겨져 있었습니다. 이 기이한 사건은 마을 사람들을 공포에 빠뜨리고 있습니다.",
   "suspects": [
     {
-      "name": "올리비에",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "목수",
-      "relationships": [
-        "헨리에트와 결혼한 형제"
-      ],
-      "statement": "나는 그저 나의 일을 하고 있었다. 마을 안전을 위협하는 일에 관해선 아무것도 모른다.",
-      "is_witch": false
-    },
-    {
-      "name": "마델렌",
-      "personality": {
-        "behavior": "extroverted",
-        "emotion": "emotional"
-      },
-      "occupation": "미술가",
-      "relationships": [
-        "올리비에의 아내"
-      ],
-      "statement": "정말이지, 나 마녀가 아니에요! 이런 말은 무슨 소린가요?",
-      "is_witch": true
-    },
-    {
-      "name": "에드워드",
-      "personality": {
-        "behavior": "extroverted",
-        "emotion": "psychopathic"
-      },
-      "occupation": "폭탄제조자",
-      "relationships": [
-        "단합당한 아들"
-      ],
-      "statement": "마녀를 찾으려고? 나도 마스크를 벗었어! 나야말로 마녀를 찾아내야 할 사람이야!",
-      "is_witch": false
-    },
-    {
-      "name": "마리아",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "허브 제조사",
-      "relationships": [
-        "마델렌의 절친한 친구"
-      ],
-      "statement": "나는 마녀가 아닙니다. 이런 억지로 날 찍어내는 소문이 어디서 나온 건지 모르겠네요.",
-      "is_witch": false
-    },
-    {
-      "name": "루카스",
+      "name": "요한",
       "personality": {
         "behavior": "introverted",
         "emotion": "rational"
       },
       "occupation": "농부",
       "relationships": [
-        "에드워드의 불참한 친구"
+        "아버지와 형제"
       ],
-      "statement": "나는 그저 밭을 갈고 있을 뿐이에요. 마을에 이상한 일이 일어났다니, 좀이 간 마녀 사냥을 하는 건가요?",
+      "statement": "나는 숲 속에서 아무것도 보지 못했습니다. 단지 농사짓는 것이 최우선입니다.",
+      "is_witch": false
+    },
+    {
+      "name": "에밀리",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "emotional"
+      },
+      "occupation": "가정주부",
+      "relationships": [
+        "남편과 어린 딸"
+      ],
+      "statement": "어린이가 실종되어 너무 슬퍼요. 저는 그 어린이를 키워보았던 산신령을 의심하고 있어요!",
+      "is_witch": false
+    },
+    {
+      "name": "안나벨",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "주방 종사원",
+      "relationships": [
+        "없음"
+      ],
+      "statement": "나는 어린이의 얼굴과 기호를 본 적이 없어. 아무 상관이 없어.",
+      "is_witch": true
+    },
+    {
+      "name": "오리비아",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "emotional"
+      },
+      "occupation": "피부염전문의",
+      "relationships": [
+        "환자들"
+      ],
+      "statement": "저는 어떤 신비한 행사나 마법과는 아무런 연관이 없어요. 모두 생각할 필요 없이 제 생활을 믿어주세요.",
+      "is_witch": false
+    },
+    {
+      "name": "로렌츠",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "rational"
+      },
+      "occupation": "장로",
+      "relationships": [
+        "교회 신자들"
+      ],
+      "statement": "마을의 안전을 위해서는 이 마녀를 신속히 찾아내야 합니다. 마녀는 우리의 신앙을 파괴하고 있습니다.",
       "is_witch": false
     }
   ]
