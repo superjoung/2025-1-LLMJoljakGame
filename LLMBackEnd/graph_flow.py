@@ -64,20 +64,32 @@ template = PromptTemplate.from_template(
 
 # --- Node 1: Filter Input ---
 def filter_input_node(state: GameState) -> GameState:
+    print("[filter_input_node] 입력 필터링 시작:", state.input)
     prompt = filter_input_prompt.format(user_input=state.input)
+    result = llm.invoke(prompt).content.strip()
+    
     try:
-        result_json = json.loads(llm.invoke(prompt).content.strip())
+        # 첫 번째 파싱
+        result_json = json.loads(result)
+        # 문자열 이중 파싱 방지
         if isinstance(result_json, str):
             result_json = json.loads(result_json)
-        state.allowed = result_json.get("allowed", True)
-        if not state.allowed:
-            state.response = result_json.get("reason", "부적절한 입력입니다.")
-    except:
+        print("[filter_input_node] 응답 JSON:", result_json)
+        # allowed 값을 문자열로 받을 경우 bool로 변환
+        allowed_value = result_json.get("allowed", True)
+        if isinstance(allowed_value, str):
+            allowed_value = allowed_value.lower() == "true"
+        state.allowed = allowed_value
+        if not allowed_value:
+            state.response = result_json.get("reason", "부적절한 입력입니다. 다시 질문해주세요.")
+    except Exception as e:
+        print(f"[filter_input_node] JSON 파싱 오류: {e}")
+        state.response = f"입력 필터링 중 오류 발생: {e}"
         state.allowed = False
-        state.response = "입력 분석 오류"
+
     return state.dict()
 
-# --- Node 2: Stress Check ---
+# --- Node 2: Status Check ---
 def status_node(state: GameState) -> GameState:
     print("[status_node] 스테이터스 체크 시작")
 
@@ -188,9 +200,16 @@ def answer_node(state: GameState) -> GameState:
         data = json.load(f)
         suspects = data.get("suspects", [])
         target_npc = next((s for s in suspects if s["name"] == npc), None)
+    if target_npc is None:
+        raise Exception(f"NPC '{npc}' not found in setup.json")
+    behavior = target_npc["personality"]["behavior"]
+    emotion = target_npc["personality"]["emotion"]
+    occupation = target_npc["occupation"]
+    statement = target_npc["statement"]
+    is_witch = target_npc["is_witch"]
 
-    if not target_npc:
-        return state.dict()
+    truth_or_lie = "lying" if is_witch else "truthful"
+    truth_or_lie_detail = "You are the witch and must lie." if is_witch else "You are innocent and telling the truth."
 
     prompt = template.format(
         name=npc,
@@ -203,15 +222,17 @@ def answer_node(state: GameState) -> GameState:
         emotion=emotion,
         occupation=occupation,
         statement=statement,
-        truth_or_lie="lying" if target_npc["is_witch"] else "truthful",
-        truth_or_lie_detail="You are the witch and must lie." if target_npc["is_witch"] else "You are innocent and telling the truth.",
+        truth_or_lie=truth_or_lie,
+        truth_or_lie_detail=truth_or_lie_detail,
         behavior_desc=BEHAVIOR_DESC[behavior],
         emotion_desc=EMOTION_DESC[emotion],
     )
 
     response = llm.invoke(prompt).content or ""
+    print(f"[answer_node] '{npc}' 응답:\n{response}")
     npc_state.add_history(npc, f"플레이어: {question}\n{npc}: {response}")
     state.response = response.strip()
+
     return state.dict()
 
 # --- Node 5: Answer Storation --- 
