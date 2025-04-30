@@ -101,7 +101,16 @@ public partial class NoneCharacterManager
     {
         if (inputText.Count() > 0)
         {
-            GetTalkString("너무 무서워용");
+            StartCoroutine(LLMConnectManager.Instance.AskLLM(inputText, GetNpcNameToID(CurrentTalkNpcID), response => {
+                if (response != null)
+                {
+                    GetTalkString(response);
+                }
+                else
+                {
+                    Debug.Log("응답이 null입니다.");
+                }
+            }));
         }
     }
 }
