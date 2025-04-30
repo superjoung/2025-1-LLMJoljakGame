@@ -1,0 +1,10 @@
+chromadb==1.0.3
+fastapi==0.115.9
+langchain==0.1.14
+langchain-community==0.0.30
+langchain-core==0.1.42
+langchain-openai==0.0.8
+langchain-text-splitters==0.0.2
+langgraph==0.0.17
+pydantic==2.11.1
+uvicorn==0.33.0
