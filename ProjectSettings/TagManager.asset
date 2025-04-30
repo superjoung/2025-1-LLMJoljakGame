@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - WorldMap
+  - PlayerHead
   layers:
   - Default
   - TransparentFX

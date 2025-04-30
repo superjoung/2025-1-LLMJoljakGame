@@ -8,6 +8,11 @@ using Unity.VisualScripting;
 public enum UIName
 {
     None,
+    PlayerMainScreenUI,
+    OptionPopUpUI,
+    NPCInteractionPopUpUI, // NPC 옆 행동 UI 박스
+    NPCTalkPanelUI,        // NPC 대화 UI
+    NPCInfoUI
 }
 
 public class UIManager : Singleton<UIManager>
@@ -64,8 +69,30 @@ public class UIManager : Singleton<UIManager>
         GameObject go = ResourceManager.Instance.Instantiate($"UI/PopUp/{name}");
         T popup = go.GetOrAddComponent<T>();
         _popupStack.Push(popup);
+        if (!_uiStackDict.ContainsKey(popup.ID))
+        {
+            _uiStackDict.Add(popup.ID, new Stack<BaseUI>());
+        }
+        _uiStackDict[popup.ID].Push(popup);
 
         go.transform.SetParent(Root().transform);
+
+        return popup;
+    }
+
+    public T ShowNPCUI<T>(Transform parent = null, string name = null) where T : BaseUI
+    {
+        if (string.IsNullOrEmpty(name)) // 이름을 안받았을 때
+            name = typeof(T).Name;
+
+        GameObject go = ResourceManager.Instance.Instantiate($"UI/PopUp/{name}", parent);
+        T popup = go.GetOrAddComponent<T>();
+        _popupStack.Push(popup);
+        if (!_uiStackDict.ContainsKey(popup.ID))
+        {
+            _uiStackDict.Add(popup.ID, new Stack<BaseUI>());
+        }
+        _uiStackDict[popup.ID].Push(popup);
 
         return popup;
     }
@@ -106,9 +133,7 @@ public class UIManager : Singleton<UIManager>
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
-        GameObject go = ResourceManager.Instance.Instantiate($"UI/Frame/{name}");
-        if (parent != null)
-            go.transform.SetParent(parent);
+        GameObject go = ResourceManager.Instance.Instantiate($"UI/Frame/{name}", parent);
 
         return UIUtils.GetOrAddComponent<T>(go);
     }

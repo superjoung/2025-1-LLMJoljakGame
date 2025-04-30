@@ -57,6 +57,8 @@ public abstract class BaseUI : MonoBehaviour
     protected TMP_Text GetText(int idx) { return Get<TMP_Text>(idx); } // Text로서 가져오기
     protected Button GetButton(int idx) { return Get<Button>(idx); } // Button로서 가져오기
     protected Image GetImage(int idx) { return Get<Image>(idx); } // Image로서 가져오기
+    protected Slider GetSlider(int idx) { return Get<Slider>(idx); } // Silder로서 가져오기
+    protected InputField GetInputField(int idx) { return Get<InputField>(idx); } // InputField로서 가져오기 
 
     // 이벤트 델리게이트 연결 (확장 메서드로 사용)
     public static void BindEvent(GameObject go, Action<PointerEventData> action, UIDefine.UIEvent type = UIDefine.UIEvent.Click)
