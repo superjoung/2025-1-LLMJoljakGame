@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using LLM;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -47,8 +48,9 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
     }
     
     // --- [LLM 질문 보내기] ---
-    public IEnumerator AskLLM(string input, string npc)
+    public IEnumerator AskLLM(string input, string npc, Action<string> onResponse)
     {
+        Debug.Log($"{npc}, {input}");
         UserInput userInput = new UserInput { input = input, npc = npc };
         string jsonData = JsonUtility.ToJson(userInput);
 
@@ -64,17 +66,16 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
         {
             string jsonResult = request.downloadHandler.text;
             ResponseData responseData = JsonUtility.FromJson<ResponseData>(jsonResult);
-            if (responseData.allowed == false)
-            {
-                Debug.Log($"질문 오류: {responseData.response}");
-                yield break;
-            }
+
             Debug.Log($"[{responseData.npc}]: {responseData.response}");
+            onResponse?.Invoke(responseData.response); // 결과 전달
         }
         else
         {
             Debug.Log("LLM 질문 전송 실패: " + request.error);
+            onResponse?.Invoke(null);
         }
+
         request.Dispose();
     }
 
