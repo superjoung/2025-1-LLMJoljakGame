@@ -25,7 +25,6 @@ public class NPCAttachData : MonoBehaviour
                 Debug.Log("[WARN] NPCAttachData - TalkText 프로퍼티에 문제가 있습니다.");
                 return;
             }
-
             PopUpTalkUI.ShowText(value);
             _talkText = value;
         }
@@ -49,7 +48,7 @@ public class NPCAttachData : MonoBehaviour
     private void Start()
     {
         ID = int.Parse(gameObject.name.Split("_")[1]);
-        _popUpUI =  UIManager.Instance.ShowNPCUI<NPCInteractionPopUpUI>(UIPos);
+        _popUpUI = UIManager.Instance.ShowNPCUI<NPCInteractionPopUpUI>(UIPos);
         _popUpUI.NpcID = ID;
         UINeck.gameObject.SetActive(false);
     }

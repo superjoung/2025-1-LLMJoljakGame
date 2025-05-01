@@ -74,6 +74,7 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
             Transform spawnPos = GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.GetChild(spawnInt);
             GameObject npc = ResourceManager.Instance.Instantiate(NPC_PREFABS_PATH, spawnPos.position, GameManager.Instance.ParentPrefabs.NpcBox.transform);
             npc.name = "NPC_" + i; // id 연결 이후 _스플릿 후 ID만 가져올 예정
+            //npc.GetComponent<NPCAttachData>().ID = i; // id 연결
             // NPC 오브젝트 리스트 추가
             NpcList.Add(npc);
             NonePlayersAction.Add(i, new Queue<BaseNpcStatAction>());

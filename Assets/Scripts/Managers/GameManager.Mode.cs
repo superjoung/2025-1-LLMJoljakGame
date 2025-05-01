@@ -128,6 +128,7 @@ public partial class GameManager
         // 해당 지역 이름과 동일한 게임 오브젝트 확인
         foreach (Transform child in ParentPrefabs.NpcCameraBox.transform)
         {
+            // Frame : ID_NpcName or SpotName 수정 필요
             string spotName = child.name.Split("_")[1];
             if(spotName == EvidenceSpotName) // 증거수집을 원하는 지역 이름과 같을 경우
             {
