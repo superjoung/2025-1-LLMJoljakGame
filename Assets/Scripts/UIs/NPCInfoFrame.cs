@@ -26,6 +26,11 @@ public class NPCInfoFrame : BaseUI
 
     public int id = -1;
 
+    public void Start()
+    {
+        Init();
+    }
+
     public override void Init()
     {   
         base.Init();
@@ -36,6 +41,7 @@ public class NPCInfoFrame : BaseUI
         GetText((int)Texts.NPCName).text = NoneCharacterManager.Instance.GetNpcNameToID(id);
 
         GetButton((int)Buttons.NPCButton).gameObject.BindEvent(SelectTalkNpc);
+        gameObject.GetComponent<Canvas>().sortingOrder = 1;
     }
 
     private void SelectTalkNpc(PointerEventData data)

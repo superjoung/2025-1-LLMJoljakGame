@@ -76,7 +76,7 @@ public partial class NoneCharacterManager
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
 
         // TEMP : test입니당
-        GetTalkString("안녕하세요. 저는 테스트 문자열입니다.");
+        GetTalkString("안녕하세요! 심판관님!");
     }
 
     public void PlayerLookAtToNpc()

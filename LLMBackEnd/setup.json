@@ -1,70 +1,70 @@
 {
-  "village": "15세기 유럽 마을은 야만적이고 불안한 분위기에 가득 차 있습니다. 교회의 검열관이 마을을 지배하고, 마녀 사냥으로 인한 공포가 사방에 퍼져 있습니다.",
-  "event": "최근에 마을에서 어린이가 실종되는 사건이 발생했습니다. 어린이는 마을 근처의 숲 속에서 발견되었지만 얼굴이 변해 있었고 이상한 기호가 새겨져 있었습니다. 이 기이한 사건은 마을 사람들을 공포에 빠뜨리고 있습니다.",
+  "village": "15세기 유럽 마을. 어두운 야간과 뜨거운 샘물을 흐르는 작은 시내. 시민들은 비마 마을의 기사단을 두려워하며 거리를 나서지 않는다.",
+  "event": "마을에서 이상한 죽음이 시작되었다. 사람들은 뜻하지 않게 중독되어 죽는 일이 잇따라 일어나기 시작했다. 이러한 사건으로 마을 사람들은 사악한 마녀의 존재를 의심하기 시작한다.",
   "suspects": [
     {
-      "name": "요한",
+      "name": "레오노르",
       "personality": {
         "behavior": "introverted",
         "emotion": "rational"
       },
-      "occupation": "농부",
+      "occupation": "제과장",
       "relationships": [
-        "아버지와 형제"
+        "마을의 카밀로"
       ],
-      "statement": "나는 숲 속에서 아무것도 보지 못했습니다. 단지 농사짓는 것이 최우선입니다.",
+      "statement": "나는 단지 제과를 만들면서 평범한 삶을 살고 있을 뿐입니다.",
       "is_witch": false
     },
     {
-      "name": "에밀리",
+      "name": "에드윈",
       "personality": {
         "behavior": "extroverted",
         "emotion": "emotional"
       },
-      "occupation": "가정주부",
+      "occupation": "성당 수녀",
       "relationships": [
-        "남편과 어린 딸"
+        "마을의 단장 바르토로"
       ],
-      "statement": "어린이가 실종되어 너무 슬퍼요. 저는 그 어린이를 키워보았던 산신령을 의심하고 있어요!",
-      "is_witch": false
-    },
-    {
-      "name": "안나벨",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "psychopathic"
-      },
-      "occupation": "주방 종사원",
-      "relationships": [
-        "없음"
-      ],
-      "statement": "나는 어린이의 얼굴과 기호를 본 적이 없어. 아무 상관이 없어.",
+      "statement": "저는 하느님이 모든 것을 아시고 계시다고 믿습니다. 마셔 우리에게 다가오는 악을 막을 수 있습니다.",
       "is_witch": true
     },
     {
-      "name": "오리비아",
+      "name": "테오도라",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "emotional"
+        "emotion": "psychopathic"
       },
-      "occupation": "피부염전문의",
+      "occupation": "농부",
       "relationships": [
-        "환자들"
+        "연인 아르노"
       ],
-      "statement": "저는 어떤 신비한 행사나 마법과는 아무런 연관이 없어요. 모두 생각할 필요 없이 제 생활을 믿어주세요.",
+      "statement": "나는 마을에서 가장 좋은 양육사이자 큰 수확을 꿈꿔왔습니다. 그런데 이런 일이 생긴 이유는 나와 상관 없다고요?!",
       "is_witch": false
     },
     {
-      "name": "로렌츠",
+      "name": "로드리고",
       "personality": {
         "behavior": "introverted",
         "emotion": "rational"
       },
-      "occupation": "장로",
+      "occupation": "대장장이",
       "relationships": [
-        "교회 신자들"
+        "마을 사람들"
       ],
-      "statement": "마을의 안전을 위해서는 이 마녀를 신속히 찾아내야 합니다. 마녀는 우리의 신앙을 파괴하고 있습니다.",
+      "statement": "나는 지배할 수 있는 것에만 집중해왔습니다. 마을의 안전을 담보로 삼고 일했습니다.",
+      "is_witch": false
+    },
+    {
+      "name": "우르시아",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "rational"
+      },
+      "occupation": "치유사",
+      "relationships": [
+        "모든 마을 사람들"
+      ],
+      "statement": "나는 오직 병든 이를 돌보기 위해 여기 왔습니다. 마침내 동행이었지만, 그 일이 일어나기 시작한 이후로 적게 보인다고 알고 있습니다.",
       "is_witch": false
     }
   ]

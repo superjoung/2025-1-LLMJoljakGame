@@ -27,6 +27,8 @@ public class NPCTalkPanelUI : BaseUI
     public override void Init()
     {
         Bind<TMP_Text>(typeof(Texts));
+
+        GetText((int)Texts.NPCNameText).text = NoneCharacterManager.Instance.GetNpcNameToID(NoneCharacterManager.Instance.CurrentTalkNpcID);
         _targetText = GetText((int)Texts.NPCTalkText);
     }
 
