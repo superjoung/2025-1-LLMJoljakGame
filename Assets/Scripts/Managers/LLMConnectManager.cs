@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using LLM;
+using MiniJSON;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -8,6 +10,7 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
 {
     private const string SetupUrl = "http://127.0.0.1:8000/generate_setup";
     private const string AskUrl = "http://127.0.0.1:8000/ask";
+    private const string RouteUrl = "http://127.0.0.1:8000/generate_route";
 
     private Setup _currentSetup;
 
@@ -73,6 +76,48 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
         else
         {
             Debug.Log("LLM 질문 전송 실패: " + request.error);
+            onResponse?.Invoke(null);
+        }
+
+        request.Dispose();
+    }
+
+    // --- [루트 설정] ---
+
+    public IEnumerator SetNPCRoutes(System.Action<Dictionary<string, List<string>>> onResponse)
+    {
+        UnityWebRequest request = UnityWebRequest.Post(RouteUrl, "");
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string jsonResult = request.downloadHandler.text;
+            Debug.Log("서버 응답 원본: " + jsonResult);
+
+            var rawDict = Json.Deserialize(jsonResult) as Dictionary<string, object>;
+            var routeDict = new Dictionary<string, List<string>>();
+
+            foreach (var pair in rawDict)
+            {
+                List<object> routeListRaw = pair.Value as List<object>;
+                List<string> routeList = routeListRaw.ConvertAll(item => item.ToString());
+                routeDict.Add(pair.Key, routeList);
+            }
+
+            // 결과 확인용 로그
+            foreach (var route in routeDict)
+            {
+                Debug.Log($"[{route.Key}]: {string.Join(", ", route.Value)}");
+            }
+
+            onResponse?.Invoke(routeDict);
+        }
+        else
+        {
+            Debug.LogError("LLM 루트 생성 실패: " + request.error);
             onResponse?.Invoke(null);
         }
 

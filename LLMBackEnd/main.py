@@ -89,7 +89,7 @@ async def generate_setup():
 @app.post("/generate_route")
 async def generate_route():
     try:
-        route = plan_route()
-        return route
+        route = plan_route()        
+        return route["npc_routes"]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Route 생성 실패: {str(e)}")

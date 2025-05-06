@@ -1,71 +1,73 @@
 {
-  "village": "15세기 유럽 마을. 어두운 야간과 뜨거운 샘물을 흐르는 작은 시내. 시민들은 비마 마을의 기사단을 두려워하며 거리를 나서지 않는다.",
-  "event": "마을에서 이상한 죽음이 시작되었다. 사람들은 뜻하지 않게 중독되어 죽는 일이 잇따라 일어나기 시작했다. 이러한 사건으로 마을 사람들은 사악한 마녀의 존재를 의심하기 시작한다.",
+  "village": "15세기 유럽 마을은 어느 흔한 날과 다를 바 없이 조용하고 평화로운 풍수를 띠고 있었습니다. 그러나 최근 몇 달 동안 이상한 사건들이 연이어 발생하여 마을 사람들을 불안에 빠뜨리고 있습니다. 어둠 속에 잠긴 마을은 모두가 주변을 의심하며, 교회의 심문관은 이 모든 것의 원인이 마녀일 것이라고 의심하고 있습니다.",
+  "event": "마을에서 최근에 이상한 열매를 만들어내는 나무가 나타났습니다. 이 열매는 먹게 되면 사람들의 정신을 혼미하게 만들어 미친 듯한 행동을 할 정도로 강력한 영향을 미치는 것으로 알려져 있습니다.",
   "suspects": [
     {
-      "name": "레오노르",
+      "name": "에릭",
       "personality": {
         "behavior": "introverted",
         "emotion": "rational"
       },
-      "occupation": "제과장",
+      "occupation": "미장원 수리공",
       "relationships": [
-        "마을의 카밀로"
+        "마을장",
+        "사냥꾼"
       ],
-      "statement": "나는 단지 제과를 만들면서 평범한 삶을 살고 있을 뿐입니다.",
+      "statement": "나는 이상한 나무가 처음 발견됐을 때에도 마을 근처에 있었어. 마녀를 찾는 건 무리일 거라고 생각해.",
       "is_witch": false
     },
     {
-      "name": "에드윈",
+      "name": "카타리나",
       "personality": {
         "behavior": "extroverted",
         "emotion": "emotional"
       },
-      "occupation": "성당 수녀",
+      "occupation": "손수리공",
       "relationships": [
-        "마을의 단장 바르토로"
+        "약초 상인"
       ],
-      "statement": "저는 하느님이 모든 것을 아시고 계시다고 믿습니다. 마셔 우리에게 다가오는 악을 막을 수 있습니다.",
-      "is_witch": true
+      "statement": "나는 마을 사람들이 나쁜 일을 할 리가 없어. 나도 마녀를 찾을 수 있도록 도울 테니 믿어봐.",
+      "is_witch": false
     },
     {
-      "name": "테오도라",
+      "name": "헨드릭",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "emotional"
+      },
+      "occupation": "가난한 농부",
+      "relationships": [
+        "아내",
+        "어머니"
+      ],
+      "statement": "마녀를 찾는 게 우리에겐 어려울지도 몰라. 그러나 이 마을을 구해야 한다면 내가 도울 수밖에 없지.",
+      "is_witch": false
+    },
+    {
+      "name": "마티아스",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "rational"
+      },
+      "occupation": "성직자",
+      "relationships": [
+        "교회 심문관"
+      ],
+      "statement": "마녀는 마을에 깊숙히 숨었을 거라 생각해. 나는 그를 찾는 데 있어서 가장 효과적인 방법을 알려줄 수 있어.",
+      "is_witch": false
+    },
+    {
+      "name": "벨렌",
       "personality": {
         "behavior": "extroverted",
         "emotion": "psychopathic"
       },
-      "occupation": "농부",
+      "occupation": "술주정뱅이",
       "relationships": [
-        "연인 아르노"
+        "동료 주정뱅이"
       ],
-      "statement": "나는 마을에서 가장 좋은 양육사이자 큰 수확을 꿈꿔왔습니다. 그런데 이런 일이 생긴 이유는 나와 상관 없다고요?!",
-      "is_witch": false
-    },
-    {
-      "name": "로드리고",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "대장장이",
-      "relationships": [
-        "마을 사람들"
-      ],
-      "statement": "나는 지배할 수 있는 것에만 집중해왔습니다. 마을의 안전을 담보로 삼고 일했습니다.",
-      "is_witch": false
-    },
-    {
-      "name": "우르시아",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "치유사",
-      "relationships": [
-        "모든 마을 사람들"
-      ],
-      "statement": "나는 오직 병든 이를 돌보기 위해 여기 왔습니다. 마침내 동행이었지만, 그 일이 일어나기 시작한 이후로 적게 보인다고 알고 있습니다.",
-      "is_witch": false
+      "statement": "마을 전체가 나를 마녀로 의심하고 있잖아. 하지만 그렇게 나를 쫓아내려 하면 마을 전체를 불태우고 말 테야.",
+      "is_witch": true
     }
   ]
 }
