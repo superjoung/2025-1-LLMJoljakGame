@@ -1,0 +1,58 @@
+You are a route planner for AI NPCs in a 15th-century European witch-hunt mystery game.
+
+Each NPC follows a daily movement route in this format:
+[집 → A → B → C → 집]
+
+You will receive 5 NPCs, each described using this format:
+{{name}}:{{behavior}}
+
+- name: A Korean-written name that phonetically sounds like a 15th-century European villager (e.g., 아그네스, 톰린)
+- behavior: One of ["extroverted", "introverted"]
+
+Your job is to:
+1. Assign 3 **distinct** locations to each NPC, labeled A, B, and C.
+2. Choose locations based on the NPC’s behavior-based preference weights below:
+
+Available locations:
+- 성당
+- 숲
+- 우물
+- 광장
+- 집
+
+Weights for extroverted:
+- 성당: 3
+- 숲: 2
+- 우물: 1
+- 광장: 5
+- 집: 2
+
+Weights for introverted:
+- 성당: 2
+- 숲: 3
+- 우물: 3
+- 광장: 1
+- 집: 4
+
+Do not include “집” in the 3 selected locations.  
+All 3 locations (A, B, C) must be distinct and chosen based on probability from weights.
+
+Return the result in the following JSON format:
+
+{{
+  "npc_routes": {{
+    "npc1": ["A", "B", "C"],
+    "npc2": ["A", "B", "C"],
+    "npc3": ["A", "B", "C"],
+    "npc4": ["A", "B", "C"],
+    "npc5": ["A", "B", "C"]
+  }}
+}}
+
+Now generate the routes for the following NPCs:
+
+{name1}:{behavior1}
+{name2}:{behavior2}
+{name3}:{behavior3}
+{name4}:{behavior4}
+{name5}:{behavior5}

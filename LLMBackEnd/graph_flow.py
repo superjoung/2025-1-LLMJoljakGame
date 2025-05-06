@@ -7,7 +7,6 @@ from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph
 from npc_agents.create_agents import BEHAVIOR_DESC, EMOTION_DESC
-from npc_agents.stress_judge import is_sensitive_question
 from npc_agents.npc_memory import npc_state
 import chromadb
 from chromadb.config import Settings
@@ -146,11 +145,6 @@ def status_node(state: GameState) -> GameState:
 
     except Exception as e:
         print(f"[status_node] JSON 파싱 실패: {e}\nLLM 응답:\n{response}")
-    if is_sensitive_question(question):
-        npc_state.add_stress(npc, 2)
-        print(f"[stress_node] 민감한 질문 감지: '{npc}' 스트레스 +2")
-    else:
-        print(f"[stress_node] 민감하지 않음: '{npc}' 스트레스 변화 없음")
     return state.dict()
 
 # --- Node 3: Memory Searching ---
