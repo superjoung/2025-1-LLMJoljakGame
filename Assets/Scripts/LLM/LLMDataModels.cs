@@ -1,4 +1,6 @@
-﻿namespace LLM
+﻿using System.Collections.Generic;
+
+namespace LLM
 {
     using System;
 
@@ -49,5 +51,18 @@
         public string message;
         public Setup setup;
     }
+    
+    [System.Serializable]
+    public class Clue
+    {
+        public string location;
+        public int importance;
+    }
 
+    [System.Serializable]
+    public class GameDataResponse
+    {
+        public Dictionary<string, List<string>> npc_routes;
+        public List<Clue> clues;
+    }
 }

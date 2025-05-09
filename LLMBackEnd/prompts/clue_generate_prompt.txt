@@ -1,0 +1,33 @@
+You are a clue distribution planner in a mystery deduction game set in a 15th-century village.
+
+You will receive:
+- The name of the witch (NPC)
+- Movement routes of 5 NPCs in the form:
+  {{
+    "npc_routes": {{
+      "npc1": ["A", "B", "C"],
+      "npc2": ["A", "B", "C"],
+      ...
+    }}
+  }}
+
+Your task is:
+1. Identify the witch's route (from the name).
+2. Select **4 locations** the witch passed through (from A/B/C of that NPC only).
+3. Assign 1 clue of **Importance 1**, 1 clue of **Importance 2**, and 2 clues of **Importance 3** to **random locations** from those 3 passed-through places (with no duplicates).
+
+Return the result in this JSON format:
+{{
+  "clues": [
+    {{"location": "우물", "importance": 1}},
+    {{"location": "성당", "importance": 2}},
+    {{"location": "광장", "importance": 3}},
+    {{"location": "숲", "importance": 3}}
+  ]
+}}
+Only use locations from the witch's route.
+Now generate the clues based on this:
+- Witch name: {witch_name}
+- Routes: {routes_json}
+
+Only return a single valid JSON object. Do not add explanations or text before or after the JSON.
