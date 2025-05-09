@@ -34,7 +34,6 @@ Weights for introverted:
 - 광장: 1
 - 집: 4
 
-Do not include “집” in the 3 selected locations.  
 All 3 locations (A, B, C) must be distinct and chosen based on probability from weights.
 
 Return the result in the following JSON format:

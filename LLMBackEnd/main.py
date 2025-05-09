@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from graph_flow import game_app
-from npc_agents.npc_route_planner import plan_route
+from npc_agents.npc_route_planner import plan_full_game_data
 import chromadb
 from chromadb.config import Settings
 import uuid
@@ -84,12 +84,11 @@ async def generate_setup():
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Setup 생성 실패: {str(e)}")
-
-# 루트 생성
-@app.post("/generate_route")
-async def generate_route():
+    
+@app.post("/generate_turn_data")
+async def generate_turn_data():
     try:
-        route = plan_route()        
-        return route["npc_routes"]
+        game_data = plan_full_game_data()
+        return game_data
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Route 생성 실패: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"게임 데이터 생성 실패: {str(e)}")

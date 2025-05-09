@@ -10,7 +10,7 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
 {
     private const string SetupUrl = "http://127.0.0.1:8000/generate_setup";
     private const string AskUrl = "http://127.0.0.1:8000/ask";
-    private const string RouteUrl = "http://127.0.0.1:8000/generate_route";
+    private const string TurnUrl = "http://127.0.0.1:8000/generate_turn_data";
 
     private Setup _currentSetup;
 
@@ -81,12 +81,10 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
 
         request.Dispose();
     }
-
-    // --- [루트 설정] ---
-
-    public IEnumerator SetNPCRoutes(System.Action<Dictionary<string, List<string>>> onResponse)
+// --- [루트 + 증거 설정] ---
+    public IEnumerator SetNPCTurnData(System.Action<Dictionary<string, List<string>> /* npc_routes callback */, List<Clue> /* clues */> onResponse)
     {
-        UnityWebRequest request = UnityWebRequest.Post(RouteUrl, "");
+        UnityWebRequest request = UnityWebRequest.Post(TurnUrl, "");
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
 
@@ -98,27 +96,36 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
             Debug.Log("서버 응답 원본: " + jsonResult);
 
             var rawDict = Json.Deserialize(jsonResult) as Dictionary<string, object>;
-            var routeDict = new Dictionary<string, List<string>>();
 
-            foreach (var pair in rawDict)
+            var npcRoutes = new Dictionary<string, List<string>>();
+            var npcRouteRaw = rawDict["npc_routes"] as Dictionary<string, object>;
+            foreach (var kvp in npcRouteRaw)
             {
-                List<object> routeListRaw = pair.Value as List<object>;
-                List<string> routeList = routeListRaw.ConvertAll(item => item.ToString());
-                routeDict.Add(pair.Key, routeList);
+                List<object> routes = kvp.Value as List<object>;
+                List<string> routeList = routes.ConvertAll(r => r.ToString());
+                npcRoutes.Add(kvp.Key, routeList);
             }
 
-            // 결과 확인용 로그
-            foreach (var route in routeDict)
+            // clues 파싱
+            var cluesRaw = rawDict["clues"] as List<object>;
+            var clueList = new List<Clue>();
+            foreach (var c in cluesRaw)
             {
-                Debug.Log($"[{route.Key}]: {string.Join(", ", route.Value)}");
+                var clueDict = c as Dictionary<string, object>;
+                Clue clue = new Clue
+                {
+                    location = clueDict["location"].ToString(),
+                    importance = int.Parse(clueDict["importance"].ToString())
+                };
+                clueList.Add(clue);
             }
 
-            onResponse?.Invoke(routeDict);
+            onResponse?.Invoke(npcRoutes, clueList);
         }
         else
         {
-            Debug.LogError("LLM 루트 생성 실패: " + request.error);
-            onResponse?.Invoke(null);
+            Debug.LogError("게임 데이터 생성 실패: " + request.error);
+            onResponse?.Invoke(null, null);
         }
 
         request.Dispose();
