@@ -64,9 +64,12 @@ public class PlayerMainScreenUI : BaseUI
     {
         GetObject((int)GameObjects.PlayerChatPopUpUI).gameObject.SetActive(true);
         // 선택 가능 보여주기
+
         foreach(GameObject child in NoneCharacterManager.Instance.TalkList)
         {
             NPCInfoFrame npcInfoFrame = UIManager.Instance.MakeSubItem<NPCInfoFrame>(GetObject((int)GameObjects.NPCLayer).transform);
+            // 파괴 오브젝트 추가
+            GameManager.Instance.DestoryGameobjects.Add(npcInfoFrame.gameObject);
             npcInfoFrame.id = child.GetComponent<NPCAttachData>().ID;
         }
     }

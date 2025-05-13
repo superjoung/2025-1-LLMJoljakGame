@@ -17,6 +17,7 @@ public partial class GameManager : Singleton<GameManager>
         StartCoroutine(LLMConnectManager.Instance.GetGameSetup());
         ParentPrefabs = GameObject.Find("PrefabsBox").GetComponent<ParentPrefabs>();
         NoneCharacterManager.Instance.NpcSpawn();
+        NoneCharacterManager.Instance.FixNPCSpawn();
         _playerMainScreenUI = UIManager.Instance.ShowSceneUI<PlayerMainScreenUI>();
         Init();
     }
