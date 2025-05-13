@@ -82,7 +82,7 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
         request.Dispose();
     }
 // --- [루트 + 증거 설정] ---
-    public IEnumerator SetNPCTurnData(System.Action<Dictionary<string, List<string>> /* npc_routes callback */, List<Clue> /* clues */> onResponse)
+    public IEnumerator SetNPCTurnData(System.Action<Dictionary<string, List<string>> /* npc_routes */, List<Clue> /* clues */> onResponse)
     {
         UnityWebRequest request = UnityWebRequest.Post(TurnUrl, "");
         request.downloadHandler = new DownloadHandlerBuffer();
@@ -107,18 +107,21 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
             }
 
             // clues 파싱
-            var cluesRaw = rawDict["clues"] as List<object>;
-            var clueList = new List<Clue>();
-            foreach (var c in cluesRaw)
-            {
-                var clueDict = c as Dictionary<string, object>;
-                Clue clue = new Clue
-                {
-                    location = clueDict["location"].ToString(),
-                    importance = int.Parse(clueDict["importance"].ToString())
-                };
-                clueList.Add(clue);
-            }
+			var cluesRaw = rawDict["clues"] as List<object>;
+			var clueList = new List<Clue>();
+
+			foreach (var c in cluesRaw)
+			{
+   				var clueDict = c as Dictionary<string, object>;
+    			Clue clue = new Clue
+    			{
+        			id = clueDict["id"].ToString(),
+        			name = clueDict["name"].ToString(),
+        			location = clueDict["location"].ToString(),
+        			importance = int.Parse(clueDict["importance"].ToString())
+    			};
+    			clueList.Add(clue);
+			}
 
             onResponse?.Invoke(npcRoutes, clueList);
         }

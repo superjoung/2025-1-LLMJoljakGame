@@ -53,11 +53,13 @@ namespace LLM
     }
     
     [System.Serializable]
-    public class Clue
-    {
-        public string location;
-        public int importance;
-    }
+	public class Clue
+	{
+   		public string id;
+    	public string name;
+    	public string location;
+    	public int importance;
+	}
 
     [System.Serializable]
     public class GameDataResponse
