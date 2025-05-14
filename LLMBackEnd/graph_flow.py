@@ -11,6 +11,7 @@ from npc_agents.npc_memory import npc_state
 import chromadb
 from chromadb.config import Settings
 
+
 # ✅ ChromaDB 설정
 client = chromadb.Client(Settings(anonymized_telemetry=False))
 collection = client.get_or_create_collection(name="memory")
@@ -177,6 +178,41 @@ def memory_search_node(state: GameState) -> GameState:
 
     return state.dict()
 
+# --- 요약 함수들 ---
+# --- 관련된 기억 5개를 추려 그 중에 중요한 기억에 가중치를 부여하여 3개를 뽑는다. 그 후 요약하여 전달한다. ---
+# 세계관, 과거 설정 및 기억들 
+def summarize_memories(memories, npc_name=None, max_len=3):
+    if not memories:
+        return ""
+
+    scored = []
+    for m in memories:
+        score = 0
+        
+        # 기억에 현재 NPC 이름이 포함되어 있다면 가중치 부여
+        if npc_name and npc_name in m:
+            score += 2
+
+        # '사회자'라는 단어가 포함되어 있으면 추가 점수    
+        if "사회자" in m:
+            score += 1
+        
+        # 기억의 길이에 따라 정보량 점수 부여 (길수록 더 중요하다고 판단)
+        score += len(m) / 50  # 정보량 점수
+        scored.append((score, m))
+
+    # 상위 3개를 요약
+    sorted_memories = sorted(scored, key=lambda x: x[0], reverse=True)
+    selected = [mem for _, mem in sorted_memories[:max_len]]
+    return "\n".join(selected)
+
+# --- 플레이어와 npc 간 대화 간단하게 요약 ---
+def summarize_history(history_list, max_lines=2):
+    if not history_list:
+        return ""
+    return " / ".join([line.split("\n")[-1] for line in history_list[-max_lines:]])
+
+
 # --- Node 4: Answer Generation ---
 def answer_node(state: GameState) -> GameState:
     if not state.allowed:
@@ -187,15 +223,19 @@ def answer_node(state: GameState) -> GameState:
     stress = npc_state.get_stress(npc)
     anxiety = npc_state.get_anxiety(npc)
     history = npc_state.get_history(npc)
-    memory_text = "\n".join(state.memory_used or [])
-    history_text = "\n".join(history[-5:])
+
+    # 요약된 memory, history 적용
+    memory_text = summarize_memories(state.memory_used, npc_name=npc)
+    history_text = summarize_history(history)
 
     with open("setup.json", "r", encoding="utf-8") as f:
         data = json.load(f)
         suspects = data.get("suspects", [])
         target_npc = next((s for s in suspects if s["name"] == npc), None)
+
     if target_npc is None:
         raise Exception(f"NPC '{npc}' not found in setup.json")
+
     behavior = target_npc["personality"]["behavior"]
     emotion = target_npc["personality"]["emotion"]
     occupation = target_npc["occupation"]
@@ -222,12 +262,14 @@ def answer_node(state: GameState) -> GameState:
         emotion_desc=EMOTION_DESC[emotion],
     )
 
-    response = llm.invoke(prompt).content or ""
-    print(f"[answer_node] '{npc}' 응답:\n{response}")
-    npc_state.add_history(npc, f"플레이어: {question}\n{npc}: {response}")
-    state.response = response.strip()
+    response = llm.invoke(prompt)
+    reply_text = response.content.strip()
+    state.response = reply_text
+    npc_state.add_history(npc, f"플레이어: {question}\n{npc}: {reply_text}")
+
 
     return state.dict()
+
 
 # --- Node 5: Answer Storation --- 
 def memory_store_node(state: GameState) -> GameState:
@@ -240,7 +282,8 @@ def memory_store_node(state: GameState) -> GameState:
         print(f"[memory_store] 저장 제외됨: '{content}'")
         return state.dict()
 
-    collection.add(
+    else:
+        collection.add(
         documents=[f"{npc}: {content}"],
         metadatas=[{"npc": npc}],
         ids=[str(uuid.uuid4())]
