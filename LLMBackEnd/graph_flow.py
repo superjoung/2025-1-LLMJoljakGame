@@ -248,7 +248,7 @@ def memory_store_node(state: GameState) -> GameState:
     return state.dict()
 
 # --- LangGraph 빌더 ---
-def game_app():
+def response_graph():
     builder = StateGraph(schema=GameState)
     builder.add_node("filter_input", filter_input_node)
     builder.add_node("status_node", status_node)

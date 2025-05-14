@@ -1,11 +1,16 @@
 import os
 import json
+import uuid
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
+import chromadb
+from chromadb.config import Settings
 
+# 환경 변수 로드
 load_dotenv()
 
+# LLM 설정
 llm = ChatOpenAI(
     model="gpt-3.5-turbo",
     temperature=0.9,
@@ -20,6 +25,10 @@ route_prompt = PromptTemplate.from_template(
 clue_prompt = PromptTemplate.from_template(
     open("prompts/clue_generate_prompt.txt", encoding="utf-8").read()
 )
+
+# ChromaDB 클라이언트 초기화
+client = chromadb.Client(Settings(anonymized_telemetry=False))
+collection = client.get_or_create_collection(name="memory")
 
 def plan_full_game_data() -> dict:
     # 1. setup.json 읽기
@@ -60,7 +69,7 @@ def plan_full_game_data() -> dict:
     # 4. 증거 생성
     clue_input = clue_prompt.format(
         witch_name=witch_name,
-        routes_json=npc_routes
+        routes_json=json.dumps({"npc_routes": npc_routes}, ensure_ascii=False, indent=2)
     )
     clue_response = llm.invoke(clue_input).content.strip()
     print("[LLM 응답 - 증거]")
@@ -74,7 +83,23 @@ def plan_full_game_data() -> dict:
         print("원본 응답:\n", clue_response)
         clues = []
 
-    # 5. 반환값 (witch_name은 포함하지 않음)
+    # ✅ 4-1. 마녀 NPC의 memory DB에 증거 관련 기억 저장
+    for clue in clues:
+        memory_text = f"나는 {clue['location']}에 {clue['name']}({clue['id']})을(를) 두었다."
+        collection.add(
+            documents=[f"{witch_name}: {memory_text}"],
+            metadatas=[
+                {
+                    "npc": witch_name,
+                    "type": "evidence",
+                    "evidence_id": clue["id"]
+                }
+            ],
+            ids=[str(uuid.uuid4())]
+        )
+        print(f"[Memory 저장] {witch_name}: {memory_text}")
+
+    # 5. 반환
     return {
         "npc_routes": npc_routes,
         "clues": clues
