@@ -6,6 +6,15 @@ using UnityEngine.AI;
 
 public class NPCFixAttachData : MonoBehaviour
 {
+    public float ViewRadius;
+    [Range(0, 360)]
+    public float ViewAngle;
+
+    public LayerMask TargetMask;
+    public LayerMask ObstacleMask;
+    //있어야함, 왜냐면 타겟 사이에 다른 오브젝트가 있는데 그 오브젝트를 투과해서 뒤의 타겟오브젝트를 볼 수 있음 
+    public List<Transform> VisibleTargets = new List<Transform>();
+
     public int id;
     public List<Transform> MovePoints = new List<Transform>();
 
@@ -27,6 +36,8 @@ public class NPCFixAttachData : MonoBehaviour
         // 목적지로 출발
         if(MovePoints.Count > 1) _agent.SetDestination(MovePoints[_moveCount].position);
         else _agent.SetDestination(MovePoints[0].position);
+
+        StartCoroutine("FindTargetsDelay", .5f);
     }
 
     private void Update()
@@ -59,6 +70,40 @@ public class NPCFixAttachData : MonoBehaviour
             }
 
             _agent.SetDestination(MovePoints[_moveCount].position);
+        }
+    }
+
+    IEnumerator FindTargetsDelay(float delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delay);
+            FindTargets();
+        }
+    }
+
+    void FindTargets()
+    {
+        Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, ViewRadius, TargetMask);
+
+        for (int i = 0; i < targetInViewRadius.Length; i++)
+        //ViewRadius 안에 있는 타겟의 개수 = 배열의 개수보다 i가 작을 때 for 실행 
+        {
+            Transform target = targetInViewRadius[i].transform; //타겟[i]의 위치 
+            Vector3 dirToTarget = (target.position - transform.position).normalized;
+             //vector3타입의 타겟의 방향 변수 선언 = 타겟의 방향벡터, 타겟의 position - 이 게임오브젝트의 position) normalized = 벡터 크기 정규화 = 단위벡터화
+            if (Vector3.Angle(transform.forward, dirToTarget) < ViewAngle / 2)
+            // 전방 벡터와 타겟방향벡터의 크기가 시야각의 1/2이면 = 시야각 안에 타겟 존재 
+            {
+                float dstToTarget = Vector3.Distance(transform.position, target.position); //타겟과의 거리를 계산 
+                if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, ObstacleMask))
+                //레이캐스트를 쐈는데 ObstacleMask가 아닐 때 참이고 아래를 실행함 
+                {
+                    VisibleTargets.Add(target);
+                    print("raycast hit!");
+                    Debug.DrawRay(transform.position, dirToTarget * 10f, Color.red, 5f);
+                }
+            }
         }
     }
 }
