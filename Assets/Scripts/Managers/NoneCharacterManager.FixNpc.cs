@@ -22,7 +22,7 @@ public partial class NoneCharacterManager
             // 움직이지 않는 고정 NPC 목 돌려주기
             npc.transform.rotation = spawnPos.rotation;
             // NPC 아이디 넣어주기
-            npc.GetComponent<NPCFixAttachData>().id = count;
+            npc.GetComponent<NPCFixAttachData>().Id = count;
             // 고정 NPC에 맞는 Key 생성 후 리스트 선언
             CompleteWatchingLLMNpc.Add(count, new List<int>());
             count++;
