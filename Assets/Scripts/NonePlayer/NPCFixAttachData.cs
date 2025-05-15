@@ -1,3 +1,4 @@
+using DefineEnum.GameModeDefine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ public class NPCFixAttachData : MonoBehaviour
     //있어야함, 왜냐면 타겟 사이에 다른 오브젝트가 있는데 그 오브젝트를 투과해서 뒤의 타겟오브젝트를 볼 수 있음 
     public List<Transform> VisibleTargets = new List<Transform>();
 
-    public int id;
+    public int Id;
     public List<Transform> MovePoints = new List<Transform>();
 
     private NavMeshAgent _agent;
@@ -28,7 +29,7 @@ public class NPCFixAttachData : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
 
         // 해당 id를 가진 NPC가 어떤 경로로 이동해야하는지 리스트에 추가
-        foreach (Transform child in GameManager.Instance.ParentPrefabs.FixNpcMovePoint.transform.GetChild(id))
+        foreach (Transform child in GameManager.Instance.ParentPrefabs.FixNpcMovePoint.transform.GetChild(Id))
         {
             MovePoints.Add(child);
         }
@@ -36,6 +37,11 @@ public class NPCFixAttachData : MonoBehaviour
         // 목적지로 출발
         if(MovePoints.Count > 1) _agent.SetDestination(MovePoints[_moveCount].position);
         else _agent.SetDestination(MovePoints[0].position);
+
+        // 상호작용 UI 설정
+        _popUpUI = UIManager.Instance.ShowNPCUI<NPCInteractionPopUpUI>(UIPos);
+        _popUpUI.NpcID = Id;
+        UINeck.gameObject.SetActive(false);
 
         StartCoroutine("FindTargetsDelay", .5f);
     }
@@ -46,6 +52,16 @@ public class NPCFixAttachData : MonoBehaviour
         if(MovePoints.Count > 1)
         {
             AroundMove();
+        }
+
+        // 고정 NPC 대화 모드로 이동했을 때 상호작용 PopUp 비활성화
+        if (GameManager.Instance.CurrentGameMode == GameFlowMode.TalkMode)
+        {
+            _popUpUI.gameObject.SetActive(false);
+        }
+        else
+        {
+            _popUpUI.gameObject.SetActive(true);
         }
     }
 
@@ -100,10 +116,85 @@ public class NPCFixAttachData : MonoBehaviour
                 //레이캐스트를 쐈는데 ObstacleMask가 아닐 때 참이고 아래를 실행함 
                 {
                     VisibleTargets.Add(target);
+                    // 관측한 LLM NPC 아이디 추출 후 이미 관측한 NPC인지 확인
+                    int targetID = int.Parse(target.name.Split('_')[1]);
+                    if(!NoneCharacterManager.Instance.ObservationCompleted(Id, targetID))
+                    {
+                        // 만약 관측하지 않았다면 targetID에 저장
+                        NoneCharacterManager.Instance.CompleteWatchingLLMNpc[Id].Add(targetID);
+                        Debug.Log($"[INFO]NPCFixAttachData(FindTargets) : 아이디 - {Id} 고정 NPC가 아이디 - {targetID}를 관측 기록했습니다.");
+                    }
                     print("raycast hit!");
                     Debug.DrawRay(transform.position, dirToTarget * 10f, Color.red, 5f);
                 }
             }
         }
     }
+
+    //public Transform UIPos;
+    //public Transform UINeck;
+    //public Transform SeePoint;
+
+    //public bool IsTalkStart = false;  // 대화 시작
+    //public bool CanTalkStart = false; // 대화 시작 가능 (범위 안에 들어왔을 때)
+    //public string TalkText
+    //{
+    //    get
+    //    {
+    //        return _talkText;
+    //    }
+    //    set // TalkText 입력시 자동으로 텍스트 화면에 출력
+    //    {
+    //        if (PopUpTalkUI == null)
+    //        {
+    //            Debug.Log("[WARN] NPCAttachData - TalkText 프로퍼티에 문제가 있습니다.");
+    //            return;
+    //        }
+    //        PopUpTalkUI.ShowText(value);
+    //        _talkText = value;
+    //    }
+    //}
+
+    //private string _talkText = "";
+    //private NPCInteractionPopUpUI _popUpUI;
+    //public NPCTalkPanelUI PopUpTalkUI
+    //{
+    //    get
+    //    {
+    //        NPCTalkPanelUI npcTalkUI = null;
+    //        foreach (Transform child in UIPos)
+    //        {
+    //            if (child.name == "NPCTalkPanelUI") npcTalkUI = child.GetComponent<NPCTalkPanelUI>();
+    //        }
+    //        return npcTalkUI;
+    //    }
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        CanTalkStart = true;
+    //        Debug.Log($"{Id} NCP에게 {other.gameObject.name} In.");
+    //        UINeck.gameObject.SetActive(true);
+    //    }
+    //}
+
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        UINeck.LookAt(other.transform.position);
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //    {
+    //        CanTalkStart = false;
+    //        Debug.Log($"{Id} NCP에게 {other.gameObject.name} Out.");
+    //        UINeck.gameObject.SetActive(false);
+    //    }
+    //}
 }
