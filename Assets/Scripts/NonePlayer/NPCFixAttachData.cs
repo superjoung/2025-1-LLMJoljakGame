@@ -39,7 +39,7 @@ public class NPCFixAttachData : MonoBehaviour
         else _agent.SetDestination(MovePoints[0].position);
 
         // 상호작용 UI 설정
-        _popUpUI = UIManager.Instance.ShowNPCUI<NPCInteractionPopUpUI>(UIPos);
+        _popUpUI = UIManager.Instance.ShowNPCUI<FixNPCInteractionPopUpUI>(UIPos);
         _popUpUI.NpcID = Id;
         UINeck.gameObject.SetActive(false);
 

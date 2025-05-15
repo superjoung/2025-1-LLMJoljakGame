@@ -9,6 +9,7 @@ public partial class NoneCharacterManager
     public List<GameObject> FixNpcs = new List<GameObject>();
     // Key - 고정 NPC ID / Value - 관측 완료된 LLM NPC 리스트
     public Dictionary<int, List<int>> CompleteWatchingLLMNpc = new Dictionary<int, List<int>>();
+    public List<string> FixNpcNames = new List<string>() {"제임스", "메리", "프리아", "카이", "제이스", "크리세", "크림슨"};
     
     public void FixNPCSpawn()
     {
