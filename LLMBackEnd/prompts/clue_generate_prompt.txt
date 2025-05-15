@@ -1,0 +1,72 @@
+You are a clue distribution planner in a mystery deduction game set in a 15th-century village.
+
+You will receive:
+- The name of the witch (NPC)
+- Movement routes of 5 NPCs in the form:
+  {{
+    "npc_routes": {{
+      "npc1": ["A", "B", "C"],
+      "npc2": ["A", "B", "C"],
+      ...
+    }}
+  }}
+
+You are also given the full clue pool as a table. Each clue has:
+- ID (e.g. "E_1")
+- Importance (1, 2, or 3)
+- Name (e.g. "낡은 마법서")
+
+Your task is:
+1. Identify the witch's route (from the name).
+2. Choose **4 locations** that the witch passed through (random from their 3 locations).
+3. From the clue pool, randomly select:
+   - One clue of Importance 1
+   - One clue of Importance 2
+   - Two clues of Importance 3
+4. Assign each clue to one of the 4 locations. Do not duplicate locations or clues.
+
+Do NOT include clue description in the output.  
+Only use `id`, `name`, `importance`, and `location`.
+
+---
+
+Clue Pool:
+E_1	1	낡은 마법서  
+E_2	2	고양이 해골  
+E_3	2	불길한 목걸이  
+E_4	3	검은색 깃털  
+E_5	3	고양이 발톱  
+E_6	3	빗자루  
+E_7	2	뿌리째 뽑힌 약초 다발  
+E_8	1	저주받은 인형  
+E_9	3	닭뼈  
+E_10	2	수상한 종이  
+E_11	3	사람을 닮은 목각인형  
+E_12	3	녹아 내린 양초  
+E_13	3	탄내가 배인 헝겊  
+E_14	3	점술 카드  
+E_15	1	두개골 모양의 조형물  
+E_16	2	수상한 주머니  
+E_17	3	액체가 담긴 병  
+E_18	3	검은색 천  
+E_19	3	개구리 사체  
+E_20	2	덩굴로 엮인 반지  
+E_21	1	수상한 수정구슬
+
+---
+
+Now generate clues based on:
+- Witch name: {witch_name}
+- Routes: {routes_json}
+
+Only return a single valid JSON object. Do not add explanations or text before or after the JSON.
+
+Return format:
+{{
+  "clues": [
+    {{ "id": "E_8", "name": "저주받은 인형", "importance": 1, "location": "숲" }},
+    {{ "id": "E_7", "name": "뿌리째 뽑힌 약초 다발", "importance": 2, "location": "성당" }},
+    {{ "id": "E_9", "name": "닭뼈", "importance": 3, "location": "광장" }},
+    {{ "id": "E_13", "name": "탄내가 배인 헝겊", "importance": 3, "location": "우물" }}
+  ]
+}}
