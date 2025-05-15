@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from graph_flow import response_graph
 from npc_agents.npc_route_planner import plan_full_game_data
-from evidence_submit import evidence_graph  # ✅ 추가
+from evidence_submit import evidence_graph
 import chromadb
 from chromadb.config import Settings
 import uuid
@@ -47,21 +47,9 @@ async def ask_npc(user_input: UserInput):
             "response": None
         })
 
-        response = result.get("response", "")
-        content_to_save = (
-            f"{user_input.npc}: {user_input.input}" if user_input.npc == "사회자"
-            else f"{user_input.npc}: {response}"
-        )
-
-        collection.add(
-            documents=[content_to_save],
-            metadatas=[{"npc": user_input.npc}],
-            ids=[str(uuid.uuid4())]
-        )
-
         return {
             "npc": user_input.npc,
-            "response": response,
+            "response": result.get("response", ""),
             "memory_used": retrieved
         }
 
