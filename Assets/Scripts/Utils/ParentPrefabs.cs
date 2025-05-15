@@ -8,4 +8,6 @@ public class ParentPrefabs : MonoBehaviour
     public GameObject NpcMoveBox;
     public GameObject NpcCameraBox;
     public GameObject NpcSpawnBox;
+    public GameObject FixNpcBox;
+    public GameObject FixNpcMovePoint;
 }

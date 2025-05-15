@@ -7,15 +7,17 @@ TagManager:
   - Ground
   - WorldMap
   - PlayerHead
+  - FixNpc
+  - LLMNpc
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
-  - 
-  - 
+  - LLMNpc
+  - Player
   - 
   - 
   - 

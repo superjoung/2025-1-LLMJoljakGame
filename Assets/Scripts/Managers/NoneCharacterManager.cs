@@ -28,6 +28,7 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     {
         
     }
+
     // NPC 움직임 선택
     public void UpdateNpcAction()
     {
