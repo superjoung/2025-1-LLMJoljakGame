@@ -260,8 +260,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   VisibleTargets: []
-  id: 0
+  Id: 0
   MovePoints: []
+  UIPos: {fileID: 187108524}
+  UINeck: {fileID: 2543657963967018974}
+  SeePoint: {fileID: 70893020098252772}
+  IsTalkStart: 0
+  CanTalkStart: 0
 --- !u!1 &6388299555931438634
 GameObject:
   m_ObjectHideFlags: 0
