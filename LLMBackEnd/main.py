@@ -44,22 +44,10 @@ async def ask_npc(user_input: UserInput):
             "response": None 
         })
 
-        # 응답 저장
-        response = result.get("response", "")
-        if user_input.npc == "사회자":
-            content_to_save = f"{user_input.npc}: {user_input.input}"
-        else:
-            content_to_save = f"{user_input.npc}: {response}"
-
-        collection.add(
-            documents=[content_to_save],
-            metadatas=[{"npc": user_input.npc}],
-            ids=[str(uuid.uuid4())]
-        )
 
         return {
             "npc": user_input.npc,
-            "response": response,
+            "response": result.get("response", ""),
             "memory_used": retrieved
         }
 
