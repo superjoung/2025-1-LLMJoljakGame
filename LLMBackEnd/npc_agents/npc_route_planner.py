@@ -83,7 +83,7 @@ def plan_full_game_data() -> dict:
         print("원본 응답:\n", clue_response)
         clues = []
 
-    # ✅ 4-1. 마녀 NPC의 memory DB에 증거 관련 기억 저장
+    # 4-1. 마녀 NPC의 memory DB에 증거 관련 기억 저장
     for clue in clues:
         memory_text = f"나는 {clue['location']}에 {clue['name']}({clue['id']})을(를) 두었다."
         collection.add(
