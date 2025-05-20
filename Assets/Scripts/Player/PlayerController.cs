@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         {
             case GameFlowMode.FreeMoveMode:
                 _playerMove.CanPlayerAction = true;
+                // LLM NPC 먼저 검사 후 대화 시도
                 if (NoneCharacterManager.Instance.CanTalkNpcCount != 0)
                 {
                     // 대화키를 눌렀을 때
@@ -41,6 +42,15 @@ public class PlayerController : MonoBehaviour
                     else if (Input.GetKeyDown(KeyCode.Q))
                     {
                         NPCHearingStart();
+                    }
+                }
+                // -1 일 경우에는 어떤 고정 NPC도 선택 되지 않았다는 뜻
+                else if(NoneCharacterManager.Instance.CanTalkStartFixNPC != -1)
+                {
+                    // 대화키를 눌렀을 때
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        FixNPCTalkStart();
                     }
                 }
                 break;
@@ -59,6 +69,14 @@ public class PlayerController : MonoBehaviour
         int ID = NoneCharacterManager.Instance.CanStartTalkNpcs[0];
         NoneCharacterManager.Instance.TalkStartWithPlayer(ID);
         GameManager.Instance.CurrentGameMode = GameFlowMode.TalkMode;
+        _playerMove.CanPlayerAction = false;
+    }
+
+    private void FixNPCTalkStart()
+    {
+        int ID = NoneCharacterManager.Instance.CanTalkStartFixNPC;
+        NoneCharacterManager.Instance.FixNPCTalkStartWithPlayer(ID);
+        GameManager.Instance.CurrentGameMode = GameFlowMode.FixTalkMode;
         _playerMove.CanPlayerAction = false;
     }
 

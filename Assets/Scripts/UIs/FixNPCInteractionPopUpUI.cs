@@ -11,7 +11,7 @@ public class FixNPCInteractionPopUpUI : BaseUI
     }
 
     protected override bool IsSorting => false;
-    public override UIName ID => UIName.NPCInteractionPopUpUI;
+    public override UIName ID => UIName.FixNPCInteractionPopUpUI;
 
     public int NpcID = 0;
 

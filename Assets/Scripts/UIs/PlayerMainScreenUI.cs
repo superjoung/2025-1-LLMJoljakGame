@@ -27,6 +27,8 @@ public class PlayerMainScreenUI : BaseUI
         DayBackColor, // 시간 진행도 뒷배경 오브젝트
         DayFillColor, // 시간 채워지는 색 오브젝트
         PlayerChatPopUpUI,  // Player 채팅창 On/Off 용
+        LLMNPCShowChatUI, // LLM 캐릭터 대화 시도 시 뜨는 레이어
+        PlayerSelectChatPopUpUI, // FIX 캐릭터와 대화할 때 선택창
         NPCLayer        // 대화 가능 NPC 띄어주기
     }
 
@@ -47,7 +49,10 @@ public class PlayerMainScreenUI : BaseUI
         Bind<Slider>(typeof(Sliders));
         Bind<GameObject>(typeof(GameObjects));
 
+        // UI 숨기기
         GetObject((int)GameObjects.PlayerChatPopUpUI).SetActive(false);
+        GetObject((int)GameObjects.LLMNPCShowChatUI).SetActive(false);
+        GetObject((int)GameObjects.PlayerSelectChatPopUpUI).SetActive(false);
 
         // 이벤트 연결
         GetButton((int)Buttons.OptionButton).gameObject.BindEvent(OnClickOptionButton);
@@ -63,9 +68,10 @@ public class PlayerMainScreenUI : BaseUI
     public void ShowChatUI()
     {
         GetObject((int)GameObjects.PlayerChatPopUpUI).gameObject.SetActive(true);
+        GetObject((int)GameObjects.LLMNPCShowChatUI).gameObject.SetActive(true);
         // 선택 가능 보여주기
 
-        foreach(GameObject child in NoneCharacterManager.Instance.TalkList)
+        foreach (GameObject child in NoneCharacterManager.Instance.TalkList)
         {
             NPCInfoFrame npcInfoFrame = UIManager.Instance.MakeSubItem<NPCInfoFrame>(GetObject((int)GameObjects.NPCLayer).transform);
             // 파괴 오브젝트 추가
@@ -74,9 +80,29 @@ public class PlayerMainScreenUI : BaseUI
         }
     }
 
+    public void ShowFixChatUI()
+    {
+        // 자식에 아무것도 없을 때 LLM 용의자 생성
+        if(GetObject((int)GameObjects.PlayerSelectChatPopUpUI).transform.childCount == 0)
+        {
+            foreach(GameObject child in NoneCharacterManager.Instance.NpcList)
+            {
+                // 해당 칸에 프레임 소환 후 아이디 넘겨주기
+                UIManager.Instance.MakeSubItem<FixNpcSelectButtonFrame>(GetObject((int)GameObjects.PlayerSelectChatPopUpUI).transform).Id = child.GetComponent<NPCAttachData>().ID;
+            }
+        }
+        GetObject((int)GameObjects.PlayerSelectChatPopUpUI).SetActive(true);
+    }
+
     public void HideChatUI()
     {
         GetObject((int)GameObjects.PlayerChatPopUpUI).gameObject.SetActive(false);
+        GetObject((int)GameObjects.LLMNPCShowChatUI).gameObject.SetActive(false);
+    }
+
+    public void HideFixChatUI()
+    {
+        GetObject((int)GameObjects.PlayerSelectChatPopUpUI).gameObject.SetActive(false);
     }
 
     private void OnClickOptionButton(PointerEventData data)

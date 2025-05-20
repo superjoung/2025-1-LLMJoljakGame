@@ -45,10 +45,26 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
         return NpcList[ID];
     }
 
+    public GameObject GetFixNpcToID(int ID)
+    {
+        if (ID < 0 && TalkList.Count <= ID)
+        {
+            Debug.LogWarning("[Warning] NoneCharacterManager - GetNpcToID 올바른 인수를 넘기지 않았습니다.");
+            return null;
+        }
+        return FixNpcs[ID];
+    }
+
     public string GetNpcNameToID(int ID)
     {
         // TEMP : LLM API ID 값으로 전달해서 캐릭터 이름 받아오기
         return LLMConnectManager.Instance.GetAllSuspects()[ID].name;
+    }
+
+    public string GetFixNpcNameToID(int ID)
+    {
+        // 고정 NPC 이름 받아오기
+        return FixNpcNames[ID];
     }
 
     public NonePlayerAction GetNpcActionType(int npcId)

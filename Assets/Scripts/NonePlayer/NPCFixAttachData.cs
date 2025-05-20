@@ -19,6 +19,47 @@ public class NPCFixAttachData : MonoBehaviour
     public int Id;
     public List<Transform> MovePoints = new List<Transform>();
 
+    public Transform UIPos;
+    public Transform UINeck;
+    public Transform SeePoint;
+
+    public bool IsTalkStart = false;  // 대화 시작
+    public bool CanTalkStart = false; // 대화 시작 가능 (범위 안에 들어왔을 때)
+
+    public NPCTalkPanelUI PopUpTalkUI
+    {
+        get
+        {
+            NPCTalkPanelUI npcTalkUI = null;
+            foreach (Transform child in UIPos)
+            {
+                if (child.name == "NPCTalkPanelUI") npcTalkUI = child.GetComponent<NPCTalkPanelUI>();
+            }
+            return npcTalkUI;
+        }
+    }
+
+    public string TalkText
+    {
+        get
+        {
+            return _talkText;
+        }
+        set // TalkText 입력시 자동으로 텍스트 화면에 출력
+        {
+            if (PopUpTalkUI == null)
+            {
+                Debug.Log("[WARN] NPCAttachData - TalkText 프로퍼티에 문제가 있습니다.");
+                return;
+            }
+            PopUpTalkUI.ShowText(value);
+            _talkText = value;
+        }
+    }
+
+    private string _talkText = "";
+    private FixNPCInteractionPopUpUI _popUpUI;
+
     private NavMeshAgent _agent;
     private int _moveCount = 1; // 리스트 인덱스
     private bool _moveFlag = true; // 어느 방향으로 이동할지 결정
@@ -55,7 +96,7 @@ public class NPCFixAttachData : MonoBehaviour
         }
 
         // 고정 NPC 대화 모드로 이동했을 때 상호작용 PopUp 비활성화
-        if (GameManager.Instance.CurrentGameMode == GameFlowMode.TalkMode)
+        if (GameManager.Instance.CurrentGameMode == GameFlowMode.FixTalkMode)
         {
             _popUpUI.gameObject.SetActive(false);
         }
@@ -128,45 +169,6 @@ public class NPCFixAttachData : MonoBehaviour
                     Debug.DrawRay(transform.position, dirToTarget * 10f, Color.red, 5f);
                 }
             }
-        }
-    }
-
-    public Transform UIPos;
-    public Transform UINeck;
-    public Transform SeePoint;
-
-    public bool IsTalkStart = false;  // 대화 시작
-    public bool CanTalkStart = false; // 대화 시작 가능 (범위 안에 들어왔을 때)
-    public string TalkText
-    {
-        get
-        {
-            return _talkText;
-        }
-        set // TalkText 입력시 자동으로 텍스트 화면에 출력
-        {
-            if (PopUpTalkUI == null)
-            {
-                Debug.Log("[WARN] NPCAttachData - TalkText 프로퍼티에 문제가 있습니다.");
-                return;
-            }
-            PopUpTalkUI.ShowText(value);
-            _talkText = value;
-        }
-    }
-
-    private string _talkText = "";
-    private NPCInteractionPopUpUI _popUpUI;
-    public NPCTalkPanelUI PopUpTalkUI
-    {
-        get
-        {
-            NPCTalkPanelUI npcTalkUI = null;
-            foreach (Transform child in UIPos)
-            {
-                if (child.name == "NPCTalkPanelUI") npcTalkUI = child.GetComponent<NPCTalkPanelUI>();
-            }
-            return npcTalkUI;
         }
     }
 
