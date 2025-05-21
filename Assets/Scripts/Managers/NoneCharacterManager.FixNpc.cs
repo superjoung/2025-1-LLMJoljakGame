@@ -10,6 +10,27 @@ public partial class NoneCharacterManager
     // Key - 고정 NPC ID / Value - 관측 완료된 LLM NPC 리스트
     public Dictionary<int, List<int>> CompleteWatchingLLMNpc = new Dictionary<int, List<int>>();
     public List<string> FixNpcNames = new List<string>() {"제임스", "메리", "프리아", "카이", "제이스", "크리세", "크림슨"};
+
+    // 고정 NPC와 플레이어가 대화할 때 어떤 NPC와 대화할 수 있는지 ID값으로 넘겨주기
+    public int CanTalkStartFixNPC
+    {
+        get
+        {
+            int npcID = -1;
+            foreach(GameObject child in FixNpcs)
+            {
+                NPCFixAttachData data = child.GetComponent<NPCFixAttachData>();
+                if (data.CanTalkStart)
+                {
+                    // 다중의 NPC가 겹칠 경우 예외처리
+                    npcID = data.Id;
+                    Debug.Log($"[INFO]NoneCharacterManager.FixNpc - CanTalkStartFixNPC 프로퍼티 동작 {npcID}가 선택되었습니다.");
+                    break;
+                }
+            }
+            return npcID;
+        }
+    }
     
     public void FixNPCSpawn()
     {
@@ -27,6 +48,7 @@ public partial class NoneCharacterManager
             // 고정 NPC에 맞는 Key 생성 후 리스트 선언
             CompleteWatchingLLMNpc.Add(count, new List<int>());
             count++;
+            FixNpcs.Add(npc);
         }
     }
 
@@ -42,6 +64,36 @@ public partial class NoneCharacterManager
         return false;
     }
 
+    // 안에 들어가는 여러명일 경우 수정이 필요
+    public void FixNPCTalkStartWithPlayer(int NpcId)
+    {
+        // 플레이어랑 대화중에는 이동 중이던 행동 멈추기
+        // NonePlayersAction[NpcId].Peek().IsTalkWithPlayer = true;
+        GameObject npc = GetFixNpcToID(NpcId);
+
+        CurrentTalkNpcID = NpcId;
+   
+        GameObject player = GameObject.FindWithTag("Player");
+        npc.transform.LookAt(player.transform.position);
+
+        // 플레이어가 바라보는 각도 조절
+        PlayerLookAtToNpc(npc);
+
+        // 파괴해야하는 오브젝트에 추가
+        UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCFixAttachData>().UIPos);
+
+        // TEMP : test입니당
+        GetFixTalkString("안녕하세요! 심판관님!");
+    }
+
+    // 고정 NPC에게 대화 문장 넘겨주기 이거 기존에 없던거라 코드 효율 개박음 양해좀 ;
+    public void GetFixTalkString(string Sentence)
+    {
+        GameObject npc = GetFixNpcToID(CurrentTalkNpcID);
+        npc.GetComponent<NPCFixAttachData>().TalkText = Sentence;
+    }
+
+    // 관측기록 초기화 함수
     public void ObservationReset(int ID = -1)
     {
         // 아이디 직접 입력시 해당 고정 NPC만 관측 결과 초기화

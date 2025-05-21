@@ -77,6 +77,9 @@ public partial class GameManager
             case GameFlowMode.TalkMode:
                 TalkModeEnd();
                 break;
+            case GameFlowMode.FixTalkMode:
+                FixTalkModeEnd();
+                break;
             default:
                 Debug.LogWarning("[WARN]GameManager(ModeEnd) - 해당 mode는 존재하지 않습니다.");
                 break;
@@ -98,6 +101,9 @@ public partial class GameManager
                 break;
             case GameFlowMode.TalkMode:
                 TalkModeInit();
+                break;
+            case GameFlowMode.FixTalkMode:
+                FixTalkModeInit();
                 break;
             default:
                 Debug.LogWarning("[WARN]GameManager(ModeInit) - 해당 mode는 존재하지 않습니다.");
@@ -189,6 +195,7 @@ public partial class GameManager
 
     }
     #endregion
+
     #region Talking
     private void TalkModeInit()
     {
@@ -204,6 +211,21 @@ public partial class GameManager
     {
         NoneCharacterManager.Instance.TalkList.Clear();
         _playerMainScreenUI.HideChatUI();
+    }
+    #endregion
+
+    #region FixNpcTalking
+    private void FixTalkModeInit()
+    {
+        FreeMovePlayer.SetActive(true);
+        // 파괴 오브젝트 추가
+        DestoryGameobjects.Add(NoneCharacterManager.Instance.GetFixNpcToID(NoneCharacterManager.Instance.CurrentTalkNpcID).GetComponent<NPCFixAttachData>().PopUpTalkUI.gameObject);
+        _playerMainScreenUI.ShowFixChatUI();
+    }
+    private void FixTalkModeEnd()
+    {
+        NoneCharacterManager.Instance.TalkList.Clear();
+        _playerMainScreenUI.HideFixChatUI();
     }
     #endregion
 }

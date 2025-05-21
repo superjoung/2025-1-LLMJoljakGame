@@ -28,7 +28,16 @@ public class NPCTalkPanelUI : BaseUI
     {
         Bind<TMP_Text>(typeof(Texts));
 
-        GetText((int)Texts.NPCNameText).text = NoneCharacterManager.Instance.GetNpcNameToID(NoneCharacterManager.Instance.CurrentTalkNpcID);
+        // 무조건 LLM NPC먼저 동작하도록 설정
+        if(NoneCharacterManager.Instance.CanTalkNpcCount > 0)
+        {
+            GetText((int)Texts.NPCNameText).text = NoneCharacterManager.Instance.GetNpcNameToID(NoneCharacterManager.Instance.CurrentTalkNpcID);
+        }
+        // 고정 NPC에서 스크립트 실행 시 else 실행
+        else
+        {
+            GetText((int)Texts.NPCNameText).text = NoneCharacterManager.Instance.GetFixNpcNameToID(NoneCharacterManager.Instance.CurrentTalkNpcID);
+        }
         _targetText = GetText((int)Texts.NPCTalkText);
     }
 

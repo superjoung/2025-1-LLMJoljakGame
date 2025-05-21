@@ -70,7 +70,7 @@ public partial class NoneCharacterManager
         npc.transform.LookAt(player.transform.position);
 
         // 플레이어가 바라보는 각도 조절
-        PlayerLookAtToNpc();
+        PlayerLookAtToNpc(npc);
 
         // 파괴해야하는 오브젝트에 추가
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
@@ -79,14 +79,23 @@ public partial class NoneCharacterManager
         GetTalkString("안녕하세요! 심판관님!");
     }
 
-    public void PlayerLookAtToNpc()
+    public void PlayerLookAtToNpc(GameObject npc)
     {
-        GameObject npc = GetNpcToID(CurrentTalkNpcID);
         GameObject player = GameObject.FindWithTag("Player");
 
+        Transform seePoint = null;
         // 플레이어가 바라보는 각도 조절
-        player.transform.LookAt(npc.GetComponent<NPCAttachData>().SeePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
-        player.GetComponent<PlayerMove>().PlayerHead.transform.LookAt(npc.GetComponent<NPCAttachData>().SeePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
+        if (npc.tag == "FixNpc")
+        {
+            seePoint = npc.GetComponent<NPCFixAttachData>().SeePoint;
+        }
+        else if(npc.tag == "LLMNpc")
+        {
+            seePoint = npc.GetComponent<NPCAttachData>().SeePoint;
+        }
+
+        player.transform.LookAt(seePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
+        player.GetComponent<PlayerMove>().PlayerHead.transform.LookAt(seePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
     }
 
     // ID에 일치하는 NPC에게 대화 문장 넘겨주기

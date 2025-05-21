@@ -12,7 +12,9 @@ public enum UIName
     OptionPopUpUI,
     NPCInteractionPopUpUI, // NPC 옆 행동 UI 박스
     NPCTalkPanelUI,        // NPC 대화 UI
-    NPCInfoUI
+    NPCInfoUI,
+    FixNPCInteractionPopUpUI, // 고정 NPC 옆 행동 UI 박스
+    FixNPCSelectButtonUI     // 고정 NPC 대화 NPC 선택
 }
 
 public class UIManager : Singleton<UIManager>

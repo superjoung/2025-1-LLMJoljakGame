@@ -47,6 +47,6 @@ public class NPCInfoFrame : BaseUI
     private void SelectTalkNpc(PointerEventData data)
     {
         NoneCharacterManager.Instance.CurrentTalkNpcID = id;
-        NoneCharacterManager.Instance.PlayerLookAtToNpc();
+        NoneCharacterManager.Instance.PlayerLookAtToNpc(NoneCharacterManager.Instance.GetNpcToID(id));
     }
 }
