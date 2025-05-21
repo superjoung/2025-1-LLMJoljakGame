@@ -67,4 +67,11 @@ namespace LLM
         public Dictionary<string, List<string>> npc_routes;
         public List<Clue> clues;
     }
+    
+    [System.Serializable]
+    public class FinalStatementResponse
+    {
+        public string[] final_statements;
+    }
+
 }

@@ -11,6 +11,8 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
     private const string SetupUrl = "http://127.0.0.1:8000/generate_setup";
     private const string AskUrl = "http://127.0.0.1:8000/ask";
     private const string TurnUrl = "http://127.0.0.1:8000/generate_turn_data";
+    private const string FinalStatementUrl = "http://localhost:8000/final_statements";
+
 
     private Setup _currentSetup;
 
@@ -133,7 +135,42 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
 
         request.Dispose();
     }
+    
+    // --- [루트 + 증거 설정] ---
+    public IEnumerator GetFinalStatements(Action<Dictionary<string, string>> onResponse)
+    {
+        string url = "http://localhost:8000/final_statements";
 
+        UnityWebRequest request = new UnityWebRequest(url, "POST");
+        request.uploadHandler = new UploadHandlerRaw(new byte[0]);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string jsonResult = request.downloadHandler.text;
+            var dict = Json.Deserialize(jsonResult) as Dictionary<string, object>;
+
+            // {NPC 이름, 최종 발언}
+            var result = new Dictionary<string, string>();
+            foreach (var pair in dict)
+            {
+                result[pair.Key] = pair.Value.ToString();
+            }
+
+            onResponse?.Invoke(result);
+        }
+        else
+        {
+            Debug.LogError("최종 발언 요청 실패: " + request.error);
+            onResponse?.Invoke(null);
+        }
+
+        request.Dispose();
+    }
+    
     // --- [Getter 함수들] ---
     public Setup GetCurrentSetup()
     {
@@ -175,11 +212,5 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
                 return suspect;
         }
         return null;
-    }
-
-    // --- [테스트용 자동 실행] ---
-    private void Start()
-    {
-        // StartCoroutine(GetGameSetup());
     }
 }
