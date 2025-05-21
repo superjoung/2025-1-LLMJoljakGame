@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from graph_flow import response_graph
 from npc_agents.npc_route_planner import plan_full_game_data
 from evidence_submit import evidence_graph
+from npc_agents.npc_last_statement import generate_final_statements_from_setup
 import chromadb
 from chromadb.config import Settings
 import uuid
@@ -116,3 +117,11 @@ async def generate_turn_data():
         return game_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"게임 데이터 생성 실패: {str(e)}")
+
+@app.post("/final_statements")
+async def generate_final_statements_api():
+    try:
+        result = generate_final_statements_from_setup()
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"최종 발언 생성 실패: {str(e)}")
