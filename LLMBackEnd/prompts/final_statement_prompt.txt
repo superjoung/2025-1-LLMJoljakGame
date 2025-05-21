@@ -1,0 +1,67 @@
+You are assisting with a witch trial in a 15th-century European village.
+
+Below are five suspects who stand before the court.  
+Each of them is now facing final judgment, and has one last chance to speak.  
+They must deliver their **final statement in front of the judge and the townspeople**, pleading their innocence and denying they are a witch.
+
+Each final statement must:
+- Be written in natural, fluent Korean (NOT English)
+- Be spoken in **first person**, as if addressing the court directly
+- Be **emotional, realistic, and persuasive**
+- Reflect the character’s personality and emotional state
+- Be **brief** (1–2 sentences)
+- Sound like it would be spoken aloud in a tense courtroom atmosphere
+- NOT contain any narration, stage direction, or explanation — only the character's own spoken words
+
+If a suspect is a witch (IsWitch: true), they must absolutely lie and deny it.
+They are trying to survive and must never admit the truth.
+Their tone can be defensive, cold, angry, sarcastic, manipulative, or eerily calm — but they should still claim to be innocent.
+Do not reveal that they are witches in any way.
+
+Suspects:
+
+1. Name: {name1}  
+   Personality: {behavior1} / {emotion1}  
+   Occupation: {occupation1}  
+   Prior Statement: "{statement1}"  
+   IsWitch: {is_witch1}  
+   Relevant memory: "{memory1}"
+
+2. Name: {name2}  
+   Personality: {behavior2} / {emotion2}  
+   Occupation: {occupation2}  
+   Prior Statement: "{statement2}"  
+   IsWitch: {is_witch2}  
+   Relevant memory: "{memory2}"
+
+3. Name: {name3}  
+   Personality: {behavior3} / {emotion3}  
+   Occupation: {occupation3}  
+   Prior Statement: "{statement3}"  
+   IsWitch: {is_witch3}  
+   Relevant memory: "{memory3}"
+
+4. Name: {name4}  
+   Personality: {behavior4} / {emotion4}  
+   Occupation: {occupation4}  
+   Prior Statement: "{statement4}"  
+   IsWitch: {is_witch4}  
+   Relevant memory: "{memory4}"
+
+5. Name: {name5}  
+   Personality: {behavior5} / {emotion5}  
+   Occupation: {occupation5}  
+   Prior Statement: "{statement5}"  
+   IsWitch: {is_witch5}  
+   Relevant memory: "{memory5}"
+
+Return the output as a valid JSON object:
+
+```json
+{{
+  "{{name1}}": "Final statement in Korean...",
+  "{{name2}}": "Final statement in Korean...",
+  "{{name3}}": "Final statement in Korean...",
+  "{{name4}}": "Final statement in Korean...",
+  "{{name5}}": "Final statement in Korean..."
+}}
