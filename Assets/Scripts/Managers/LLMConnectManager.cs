@@ -13,6 +13,7 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
     private const string AskUrl = "http://127.0.0.1:8000/ask";
     private const string TurnUrl = "http://127.0.0.1:8000/generate_turn_data";
     private const string FinalStatementUrl = "http://localhost:8000/final_statements";
+    private const string ChiefStatementUrl = "http://127.0.0.1:8000/chief_statement";
 
 
     private Setup _currentSetup;
@@ -65,6 +66,34 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
         {
             Debug.LogError("로컬 setup.json 파일도 존재하지 않습니다: " + filePath);
         }
+    }
+    
+    // --- [촌장 발언 받아오기] ---
+    public IEnumerator GetChiefStatement(Action<string> onFinish)
+    {
+        UnityWebRequest request = UnityWebRequest.Get(ChiefStatementUrl);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string json = request.downloadHandler.text;
+
+            // { "statement": "..." } 형태 파싱
+            ChiefStatementResponse response = JsonUtility.FromJson<ChiefStatementResponse>(json);
+            Debug.Log("[촌장 발언] " + response.statement);
+
+            onFinish?.Invoke(response.statement);
+        }
+        else
+        {
+            Debug.LogError("촌장 발언 가져오기 실패: " + request.error);
+            onFinish?.Invoke("촌장의 발언을 불러오는 데 실패했습니다.");
+        }
+
+        request.Dispose();
     }
     
     // --- [LLM 질문 보내기] ---

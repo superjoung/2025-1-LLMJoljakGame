@@ -6,7 +6,7 @@ using TMPro;
 
 public class NPCTalkPanelUI : BaseUI
 {
-    enum Texts
+    protected enum Texts
     {
         NPCNameText, // NPC 이름
         NPCTalkText  // NPC 대화창
@@ -17,7 +17,7 @@ public class NPCTalkPanelUI : BaseUI
 
     private float _textDelay = 0.12f; // 텍스트가 나오는 속도
     private bool _printEnd = false;
-    private TMP_Text _targetText;
+    protected TMP_Text _targetText;
 
     public void Awake()
     {

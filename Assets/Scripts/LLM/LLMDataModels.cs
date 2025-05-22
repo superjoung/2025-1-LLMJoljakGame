@@ -74,4 +74,9 @@ namespace LLM
         public string[] final_statements;
     }
 
+    [System.Serializable]
+    public class ChiefStatementResponse
+    {
+        public string statement;
+    }
 }

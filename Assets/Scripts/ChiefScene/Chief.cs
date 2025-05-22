@@ -6,9 +6,12 @@ namespace ChiefScene
     // 사건을 생성하고 UI를 호출시켜 안내해주는 Chief
     public class Chief : MonoBehaviour
     {
+        private ChiefTalkPanelUI _chiefTalkPanelUI;
+        
         public void Awake()
         {
-            StartCoroutine(LLMConnectManager.Instance.GetGameSetup(ExplainGameSetup));
+            StartCoroutine(LLMConnectManager.Instance.GetGameSetup(LoadChiefStatement));
+            _chiefTalkPanelUI = gameObject.GetComponentInChildren<ChiefTalkPanelUI>();
         }
 
         public void Start()
@@ -22,9 +25,14 @@ namespace ChiefScene
             NoneCharacterManager.Instance.DestroySelf();
         }
 
-        private void ExplainGameSetup()
+        private void LoadChiefStatement()
         {
-            Debug.Log($"{LLMConnectManager.Instance.GetVillageName()}: {LLMConnectManager.Instance.GetEventDescription()}");
+            StartCoroutine(LLMConnectManager.Instance.GetChiefStatement(SetChiefDialogue));
+        }
+
+        private void SetChiefDialogue(string statement)
+        {
+            _chiefTalkPanelUI.ShowText(statement);
         }
     }
 }
