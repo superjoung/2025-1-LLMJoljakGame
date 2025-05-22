@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class FixNpcSelectButtonFrame : BaseUI
@@ -20,6 +21,8 @@ public class FixNpcSelectButtonFrame : BaseUI
 
     public int Id = -1;
 
+    private Button _selectButton;
+
     public void Start()
     {
         Init();
@@ -27,13 +30,23 @@ public class FixNpcSelectButtonFrame : BaseUI
 
     public override void Init()
     {
-        base.Init();
         Bind<TMP_Text>(typeof(Texts));
         Bind<Button>(typeof(Buttons));
 
-        GetText((int)Texts.NpcName).text = NoneCharacterManager.Instance.GetNpcNameToID(Id);
+        //GetText((int)Texts.NpcName).text = NoneCharacterManager.Instance.GetNpcNameToID(Id);
+        GetText((int)Texts.NpcName).text = NoneCharacterManager.Instance.TempLLMNpcNames[Id];
 
-        //GetButton((int)Buttons.SelectButton).gameObject.BindEvent(SelectTalkNpc);
-        //gameObject.GetComponent<Canvas>().sortingOrder = 1;
+        _selectButton = GetButton((int)Buttons.SelectButton);
+        Debug.Log(_selectButton);
+        _selectButton.gameObject.BindEvent(OnClickNpcNameButton);
+    }
+
+    public void OnClickNpcNameButton(PointerEventData data)
+    {
+        if (NoneCharacterManager.Instance.CanPlayerEnterText) // NPC 대화 출력이 끝났을 때 
+        {
+            // 버튼 클릭시 대화 시작
+            NoneCharacterManager.Instance.GetFixTalkString(NoneCharacterManager.Instance.GetTalkAnswerText(Id));
+        }
     }
 }
