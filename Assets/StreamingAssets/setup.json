@@ -1,0 +1,73 @@
+{
+  "village": "15세기 유럽 마을은 어느 흔한 날과 다를 바 없이 조용하고 평화로운 풍수를 띠고 있었습니다. 그러나 최근 몇 달 동안 이상한 사건들이 연이어 발생하여 마을 사람들을 불안에 빠뜨리고 있습니다. 어둠 속에 잠긴 마을은 모두가 주변을 의심하며, 교회의 심문관은 이 모든 것의 원인이 마녀일 것이라고 의심하고 있습니다.",
+  "event": "마을에서 최근에 이상한 열매를 만들어내는 나무가 나타났습니다. 이 열매는 먹게 되면 사람들의 정신을 혼미하게 만들어 미친 듯한 행동을 할 정도로 강력한 영향을 미치는 것으로 알려져 있습니다.",
+  "suspects": [
+    {
+      "name": "에릭",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "rational"
+      },
+      "occupation": "미장원 수리공",
+      "relationships": [
+        "마을장",
+        "사냥꾼"
+      ],
+      "statement": "나는 이상한 나무가 처음 발견됐을 때에도 마을 근처에 있었어. 마녀를 찾는 건 무리일 거라고 생각해.",
+      "is_witch": false
+    },
+    {
+      "name": "카타리나",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "emotional"
+      },
+      "occupation": "손수리공",
+      "relationships": [
+        "약초 상인"
+      ],
+      "statement": "나는 마을 사람들이 나쁜 일을 할 리가 없어. 나도 마녀를 찾을 수 있도록 도울 테니 믿어봐.",
+      "is_witch": false
+    },
+    {
+      "name": "헨드릭",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "emotional"
+      },
+      "occupation": "가난한 농부",
+      "relationships": [
+        "아내",
+        "어머니"
+      ],
+      "statement": "마녀를 찾는 게 우리에겐 어려울지도 몰라. 그러나 이 마을을 구해야 한다면 내가 도울 수밖에 없지.",
+      "is_witch": false
+    },
+    {
+      "name": "마티아스",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "rational"
+      },
+      "occupation": "성직자",
+      "relationships": [
+        "교회 심문관"
+      ],
+      "statement": "마녀는 마을에 깊숙히 숨었을 거라 생각해. 나는 그를 찾는 데 있어서 가장 효과적인 방법을 알려줄 수 있어.",
+      "is_witch": false
+    },
+    {
+      "name": "벨렌",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "술주정뱅이",
+      "relationships": [
+        "동료 주정뱅이"
+      ],
+      "statement": "마을 전체가 나를 마녀로 의심하고 있잖아. 하지만 그렇게 나를 쫓아내려 하면 마을 전체를 불태우고 말 테야.",
+      "is_witch": true
+    }
+  ]
+}
