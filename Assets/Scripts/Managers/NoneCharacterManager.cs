@@ -24,6 +24,12 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     private string NPC_PREFABS_PATH = "NPC/NPC";
     private int _npcCount = 3;
 
+    // 파셜 클래스 Start 부분 전부 실행
+    public void Start()
+    {
+        FixNpcInit();
+    }
+
     public void Update()
     {
         

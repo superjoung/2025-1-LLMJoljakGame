@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using DefineEnum.SpotNameDefine;
 
 public class NPCFixAttachData : MonoBehaviour
 {
@@ -13,12 +14,16 @@ public class NPCFixAttachData : MonoBehaviour
 
     public LayerMask TargetMask;
     public LayerMask ObstacleMask;
-    //있어야함, 왜냐면 타겟 사이에 다른 오브젝트가 있는데 그 오브젝트를 투과해서 뒤의 타겟오브젝트를 볼 수 있음 
+    // 있어야함, 왜냐면 타겟 사이에 다른 오브젝트가 있는데 그 오브젝트를 투과해서 뒤의 타겟오브젝트를 볼 수 있음 
     public List<Transform> VisibleTargets = new List<Transform>();
+    // 현재 관측하고 있는 NPC ID
+    public List<int> SeeNpcIDs = new List<int>();
 
     public int Id;
+    public SpotName StandingSpotName;
     public List<Transform> MovePoints = new List<Transform>();
 
+    #region Talking
     public Transform UIPos;
     public Transform UINeck;
     public Transform SeePoint;
@@ -59,6 +64,7 @@ public class NPCFixAttachData : MonoBehaviour
 
     private string _talkText = "";
     private FixNPCInteractionPopUpUI _popUpUI;
+    #endregion
 
     private NavMeshAgent _agent;
     private int _moveCount = 1; // 리스트 인덱스
@@ -142,7 +148,7 @@ public class NPCFixAttachData : MonoBehaviour
     void FindTargets()
     {
         Collider[] targetInViewRadius = Physics.OverlapSphere(transform.position, ViewRadius, TargetMask);
-
+        List<int> tempIDs = new List<int>();
         for (int i = 0; i < targetInViewRadius.Length; i++)
         //ViewRadius 안에 있는 타겟의 개수 = 배열의 개수보다 i가 작을 때 for 실행 
         {
@@ -156,7 +162,11 @@ public class NPCFixAttachData : MonoBehaviour
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, ObstacleMask))
                 //레이캐스트를 쐈는데 ObstacleMask가 아닐 때 참이고 아래를 실행함 
                 {
-                    VisibleTargets.Add(target);
+                    // 위치 정보 저장
+                    if (!VisibleTargets.Contains(target))
+                    {
+                        VisibleTargets.Add(target);
+                    }
                     // 관측한 LLM NPC 아이디 추출 후 이미 관측한 NPC인지 확인
                     int targetID = int.Parse(target.name.Split('_')[1]);
                     if(!NoneCharacterManager.Instance.ObservationCompleted(Id, targetID))
@@ -165,10 +175,30 @@ public class NPCFixAttachData : MonoBehaviour
                         NoneCharacterManager.Instance.CompleteWatchingLLMNpc[Id].Add(targetID);
                         Debug.Log($"[INFO]NPCFixAttachData(FindTargets) : 아이디 - {Id} 고정 NPC가 아이디 - {targetID}를 관측 기록했습니다.");
                     }
+                    // 임시 관측된 ID 저장
+                    tempIDs.Add(targetID);
+                    if (!SeeNpcIDs.Contains(targetID))
+                    {
+                        SeeNpcIDs.Add(targetID);
+                    }
                     print("raycast hit!");
                     Debug.DrawRay(transform.position, dirToTarget * 10f, Color.red, 5f);
                 }
             }
+        }
+        // 리스트 정리
+        List<int> delIDs = new List<int>();
+        foreach(int npcId in SeeNpcIDs)
+        {
+            if (!tempIDs.Contains(npcId))
+            {
+                delIDs.Add(npcId);
+            }
+        }
+        // 리스트안 식별 끝난 리스트 삭제
+        foreach(int npcId in delIDs)
+        {
+            SeeNpcIDs.Remove(npcId);
         }
     }
 
