@@ -21,6 +21,7 @@ public class PlayerMainScreenUI : BaseUI
         OptionButton, // 마우스 설정 및 기타 편의 사항 설정 버튼
         PlayerChatStartButton,   // NPC 대화 시작 버튼
         PlayerChatEndButton,     // NPC 대화 종료 버튼
+        SelectStopButton         // 고정 NPC 선택 종료 버튼
     }
     enum GameObjects
     {
@@ -59,6 +60,7 @@ public class PlayerMainScreenUI : BaseUI
         GetButton((int)Buttons.OptionButton).gameObject.BindEvent(OnClickOptionButton);
         GetButton((int)Buttons.PlayerChatStartButton).gameObject.BindEvent(OnClickTalkStartButton);
         GetButton((int)Buttons.PlayerChatEndButton).gameObject.BindEvent(OnClickTalkEndButton);
+        GetButton((int)Buttons.SelectStopButton).gameObject.BindEvent(OnClickTalkEndButton);
         GetSlider((int)Sliders.DayProgressBar).onValueChanged.AddListener(OnChangeDayProgressBar);
 
         GetText((int)Texts.DayText).text = GameManager.Instance.Days + "일차 " + (GameManager.Instance.IsMorning ? "아침" : "밤");

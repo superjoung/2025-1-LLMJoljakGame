@@ -43,7 +43,7 @@ public class FixNpcSelectButtonFrame : BaseUI
 
     public void OnClickNpcNameButton(PointerEventData data)
     {
-        if (NoneCharacterManager.Instance.CanPlayerEnterText) // NPC 대화 출력이 끝났을 때 
+        if (NoneCharacterManager.Instance.CanPlayerEnterText && !NoneCharacterManager.Instance.IsEndSelect) // NPC 대화 출력이 끝났을 때 
         {
             // 버튼 클릭시 대화 시작
             NoneCharacterManager.Instance.GetFixTalkString(NoneCharacterManager.Instance.GetTalkAnswerText(Id));

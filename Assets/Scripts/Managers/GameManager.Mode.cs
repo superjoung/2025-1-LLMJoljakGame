@@ -226,6 +226,7 @@ public partial class GameManager
     {
         NoneCharacterManager.Instance.TalkList.Clear();
         _playerMainScreenUI.HideFixChatUI();
+        NoneCharacterManager.Instance.IsEndSelect = false;
     }
     #endregion
 }
