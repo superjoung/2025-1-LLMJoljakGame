@@ -33,6 +33,11 @@ public partial class GameManager : Singleton<GameManager>
         {
             CurrentGameMode = GameFlowMode.EvidenceMode;
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            UIManager.Instance.ShowPopupUI<MiniMapPopUpUI>();
+        }
     }
 
     private void Init()

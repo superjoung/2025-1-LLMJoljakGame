@@ -164,13 +164,21 @@ public partial class GameManager
         FreeMovePlayer.SetActive(true);
         foreach(GameObject child in NoneCharacterManager.Instance.NpcList)
         {
+            // 다른 LLMNPC들은 행동을 멈추게 만들 것
             if (int.Parse(child.name.Split("_")[1]) != HearingNpcID)
             {
                 child.SetActive(false);
             }
         }
         GameObject Npc = NoneCharacterManager.Instance.GetNpcToID(HearingNpcID);
-        ResourceManager.Instance.Instantiate("HearingRoom", Npc.transform.GetChild(3).position, null);
+        ResourceManager.Instance.Instantiate("HearingRoom", Npc.transform.GetChild(Npc.transform.childCount-1).position, null);
+
+        // 파괴 오브젝트 추가
+        foreach (GameObject child in NoneCharacterManager.Instance.TalkList)
+        {
+            DestoryGameobjects.Add(child.GetComponent<NPCAttachData>().PopUpTalkUI.gameObject);
+        }
+        _playerMainScreenUI.ShowChatUI();
     }
     private void HearingEnd()
     {
@@ -182,6 +190,8 @@ public partial class GameManager
             }
         }
         HearingNpcID = -1;
+        NoneCharacterManager.Instance.TalkList.Clear();
+        _playerMainScreenUI.HideChatUI();
     }
     #endregion
 

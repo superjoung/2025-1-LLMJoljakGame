@@ -33,7 +33,6 @@ public class NPCInfoFrame : BaseUI
 
     public override void Init()
     {   
-        base.Init();
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
         Bind<Button>(typeof(Buttons));

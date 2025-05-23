@@ -90,7 +90,9 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
             int spawnInt = 0;
             do
             {
-                spawnInt = Random.Range(0, GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.childCount);
+                // 임시 테스트 코드
+                spawnInt = Random.Range(0, 3);
+                //spawnInt = Random.Range(0, GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.childCount);
             } while (spawnList.Contains(spawnInt));
             spawnList.Add(spawnInt);
             // NPC 소환
