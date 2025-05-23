@@ -29,6 +29,7 @@ public class PlayerMainScreenUI : BaseUI
         PlayerChatPopUpUI,  // Player 채팅창 On/Off 용
         LLMNPCShowChatUI, // LLM 캐릭터 대화 시도 시 뜨는 레이어
         PlayerSelectChatPopUpUI, // FIX 캐릭터와 대화할 때 선택창
+        PlayerChatBoundary,      // 고정 캐릭터와 대화 중인 상자 ON/OFF
         NPCLayer        // 대화 가능 NPC 띄어주기
     }
 
@@ -52,7 +53,7 @@ public class PlayerMainScreenUI : BaseUI
         // UI 숨기기
         GetObject((int)GameObjects.PlayerChatPopUpUI).SetActive(false);
         GetObject((int)GameObjects.LLMNPCShowChatUI).SetActive(false);
-        GetObject((int)GameObjects.PlayerSelectChatPopUpUI).SetActive(false);
+        GetObject((int)GameObjects.PlayerChatBoundary).SetActive(false);
 
         // 이벤트 연결
         GetButton((int)Buttons.OptionButton).gameObject.BindEvent(OnClickOptionButton);
@@ -82,16 +83,17 @@ public class PlayerMainScreenUI : BaseUI
 
     public void ShowFixChatUI()
     {
+        GetObject((int)GameObjects.PlayerChatBoundary).SetActive(true);
+
         // 자식에 아무것도 없을 때 LLM 용의자 생성
-        if(GetObject((int)GameObjects.PlayerSelectChatPopUpUI).transform.childCount == 0)
+        if (GetObject((int)GameObjects.PlayerSelectChatPopUpUI).transform.childCount == 0)
         {
-            foreach(GameObject child in NoneCharacterManager.Instance.NpcList)
+            foreach (GameObject child in NoneCharacterManager.Instance.NpcList)
             {
                 // 해당 칸에 프레임 소환 후 아이디 넘겨주기
                 UIManager.Instance.MakeSubItem<FixNpcSelectButtonFrame>(GetObject((int)GameObjects.PlayerSelectChatPopUpUI).transform).Id = child.GetComponent<NPCAttachData>().ID;
             }
         }
-        GetObject((int)GameObjects.PlayerSelectChatPopUpUI).SetActive(true);
     }
 
     public void HideChatUI()
@@ -102,7 +104,7 @@ public class PlayerMainScreenUI : BaseUI
 
     public void HideFixChatUI()
     {
-        GetObject((int)GameObjects.PlayerSelectChatPopUpUI).gameObject.SetActive(false);
+        GetObject((int)GameObjects.PlayerChatBoundary).gameObject.SetActive(false);
     }
 
     private void OnClickOptionButton(PointerEventData data)

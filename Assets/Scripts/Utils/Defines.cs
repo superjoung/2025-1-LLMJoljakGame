@@ -28,4 +28,17 @@ namespace DefineEnum
             EvidenceMode    // 증거 수집 모드
         }
     }
+
+    namespace SpotNameDefine
+    {
+        public enum SpotName
+        {
+            None = -1,
+            House,
+            Church,
+            Brook,
+            Square,
+            Forest
+        }
+    }
 }
