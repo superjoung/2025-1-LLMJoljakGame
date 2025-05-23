@@ -6,7 +6,7 @@ using TMPro;
 
 public class NPCTalkPanelUI : BaseUI
 {
-    protected enum Texts
+    private enum Texts
     {
         NPCNameText, // NPC 이름
         NPCTalkText  // NPC 대화창
