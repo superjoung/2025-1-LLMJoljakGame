@@ -18,7 +18,6 @@ public partial class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        StartCoroutine(LLMConnectManager.Instance.GetGameSetup());
         EvidenceDatas = CSVReader.Read("CSV/EvidenceDatas");
         ParentPrefabs = GameObject.Find("PrefabsBox").GetComponent<ParentPrefabs>();
         NoneCharacterManager.Instance.NpcSpawn();
