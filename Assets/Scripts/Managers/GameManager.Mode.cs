@@ -13,6 +13,21 @@ public partial class GameManager
     [SerializeField] private GameObject World;
     [SerializeField] private GameObject HearingRoom;
     public List<GameObject> DestoryGameobjects = new List<GameObject>();
+    // 시간 변수
+    public float Timer
+    {
+        get
+        {
+            return _timer;
+        }
+        set
+        {
+            _playerMainScreenUI.Timer = value;
+            _timer = value;
+        }
+    }
+    private float _timer = 0f;
+
     private GameObject _saveEvidenceSpot = null;
 
     public GameFlowMode CurrentGameMode
@@ -37,6 +52,22 @@ public partial class GameManager
 
     private GameFlowMode _currentGameMode = GameFlowMode.None;
 
+    // 각모드에서 계속 업데이트해야하는 부분 적을 예정
+    private void ModeUpdate()
+    {
+        if(CurrentGameMode == GameFlowMode.FreeMoveMode)
+        {
+            Timer += Time.deltaTime;
+            // 5분 타이머
+            if (Timer >= 300)
+            {
+                // 캐릭터 움직임 멈추기 + 미니맵과 함께 증거 모드 돌입
+                UIManager.Instance.ShowPopupUI<EvidenceMiniMapPopUpUI>();
+                Timer = 0;
+            }
+        }
+    }
+
     // 모드 클래스 초기 실행 시 필요한 함수
     private void ModeInit()
     {
@@ -47,13 +78,15 @@ public partial class GameManager
     private void ModeChange(GameFlowMode currentMode, GameFlowMode changeMode)
     {
         // 모드 변경 전 파괴되어야하는 오브젝트 파괴
-        foreach(GameObject child in DestoryGameobjects)
+        foreach (GameObject child in DestoryGameobjects)
         {
             DestroyImmediate(child);
         }
 
         if (_currentGameMode != GameFlowMode.None)
         {
+            // 상시 시간 초기화
+            Timer = 0;
             ModeEnd(currentMode);
         }
 

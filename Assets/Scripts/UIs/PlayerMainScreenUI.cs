@@ -38,6 +38,14 @@ public class PlayerMainScreenUI : BaseUI
     public override UIName ID => UIName.PlayerMainScreenUI;
     private PlayerMove _playerMove;
 
+    public float Timer
+    {
+        set
+        {
+            GetSlider((int)Sliders.DayProgressBar).value = value / 3;
+        }
+    }
+
     public void Start()
     {
         Init();
@@ -111,9 +119,13 @@ public class PlayerMainScreenUI : BaseUI
 
     private void OnClickOptionButton(PointerEventData data)
     {
-        // 옵션 판넬 생성
-        UIManager.Instance.ShowPopupUI<OptionPopUpUI>();
-        _playerMove.CanPlayerAction = false;
+        // 자유시점 모드일 때만 감도조절할 수 있도록 설정
+        if (GameManager.Instance.CurrentGameMode == GameFlowMode.FreeMoveMode)
+        {
+            // 옵션 판넬 생성
+            UIManager.Instance.ShowPopupUI<OptionPopUpUI>();
+            _playerMove.CanPlayerAction = false;
+        }
     }
 
     // 대화 시작 함수

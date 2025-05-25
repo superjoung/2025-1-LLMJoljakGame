@@ -15,7 +15,8 @@ public enum UIName
     NPCInfoUI,
     FixNPCInteractionPopUpUI, // 고정 NPC 옆 행동 UI 박스
     FixNPCSelectButtonUI,     // 고정 NPC 대화 NPC 선택
-    MiniMapPopUpUI          // 미니맵 팝업 UI
+    MiniMapPopUpUI,           // 미니맵 팝업 UI
+    EvidenceMiniMapPopUpUI    // 증거수집 장소 선택 UI
 }
 
 public class UIManager : Singleton<UIManager>
