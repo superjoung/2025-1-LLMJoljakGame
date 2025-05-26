@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using DefineEnum.GameModeDefine;
+using DefineEnum.SpotNameDefine;
 
 public class NPCAttachData : MonoBehaviour
 {
@@ -48,7 +49,43 @@ public class NPCAttachData : MonoBehaviour
     }
     #endregion
 
+    #region MovingValues
+    // 조건에 달성해 움직일 수 있게 되었을때
+    public bool CanMove
+    {
+        get
+        {
+            return _canMove;
+        }
+        set
+        {
+            // 이동가능 상태로 변경되었을때
+            if (value)
+            {
+                // 현 NPC가 이동해야하는 장소로 자동 할당 추후 이동을 멈춰야하는 경우 수정 필요
+                SpotName currentName = NoneCharacterManager.Instance.LLMNPCMoveSpots[ID][_moveCount];
+                TargetSpot = NoneCharacterManager.Instance.GetMoveSpotPos(currentName, ID);
+            }
+            _canMove = value;
+        }
+    }
+
+    public Transform TargetSpot
+    {
+        set
+        {
+            // TargetSpot이 지정되었을 때 해당 지점으로 이동
+            CanMove = false;
+            _agent.SetDestination(value.position);
+        }
+    }
     private NavMeshAgent _agent;
+    private float _timer = 0f;
+    // 해당 시간에 도달하면 다시 다른 곳으로 이동할 수 있도록 제작
+    private float _targetTime = 30f;
+    private bool _canMove = true;
+    private int _moveCount = 0;
+    #endregion
 
     private void Start()
     {
@@ -69,6 +106,16 @@ public class NPCAttachData : MonoBehaviour
         else
         {
             _popUpUI.gameObject.SetActive(true);
+        }
+        // 도착지점에 도달했을 때
+        if (_agent.velocity.sqrMagnitude >= 0.2f * 0.2f && _agent.remainingDistance <= 0.5f)
+        {
+            // 도착지점에 도달했을 때 타이머 시작
+            _timer += Time.deltaTime;
+            if (_timer >= _targetTime)
+            {
+                CanMove = true;
+            }
         }
     }
 
