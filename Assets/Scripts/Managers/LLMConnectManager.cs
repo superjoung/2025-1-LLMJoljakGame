@@ -251,7 +251,6 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
 
     public Suspect GetWitchSuspect()
     {
-        if (GetCurrentSetup().suspects == null) return null;
         foreach (var suspect in GetCurrentSetup().suspects)
         {
             if (suspect.is_witch)
