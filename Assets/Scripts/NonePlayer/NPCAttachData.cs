@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using DefineEnum.GameModeDefine;
 
 public class NPCAttachData : MonoBehaviour
 {
     public int ID;
+    #region TalkingUIValues
     public Transform UIPos;
     public Transform UINeck;
     public Transform SeePoint;
@@ -44,6 +46,9 @@ public class NPCAttachData : MonoBehaviour
             return npcTalkUI;
         }
     }
+    #endregion
+
+    private NavMeshAgent _agent;
 
     private void Start()
     {
@@ -51,6 +56,8 @@ public class NPCAttachData : MonoBehaviour
         _popUpUI = UIManager.Instance.ShowNPCUI<NPCInteractionPopUpUI>(UIPos);
         _popUpUI.NpcID = ID;
         UINeck.gameObject.SetActive(false);
+        // agent 등록
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()

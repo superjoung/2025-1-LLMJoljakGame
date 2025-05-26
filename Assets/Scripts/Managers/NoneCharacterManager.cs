@@ -24,12 +24,6 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     private string NPC_PREFABS_PATH = "NPC/NPC";
     private int _npcCount = 3;
 
-    // 파셜 클래스 Start 부분 전부 실행
-    public void Start()
-    {
-        FixNpcInit();
-    }
-
     public void Update()
     {
         
@@ -39,6 +33,16 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     public void UpdateNpcAction()
     {
 
+    }
+
+    // 모든 파셜 클래스에 존재하는 Start 부분을 모아 GameManager에서 실행
+    public void NoneCharacterStart()
+    {
+        NpcSpawn();
+        FixNPCSpawn();
+        FixNpcInit();
+        MoveSpotSetting();
+        LLMMoveSpotNameSetting();
     }
 
     public GameObject GetNpcToID(int ID)  
