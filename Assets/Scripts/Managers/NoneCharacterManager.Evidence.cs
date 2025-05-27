@@ -48,9 +48,19 @@ public partial class NoneCharacterManager
             if (child.GetComponent<LLMSpotAttachData>().Name.Contains(convertName))
             {
                 pos = child;
+                Debug.Log($"[INFO]NoneCharacterManager.Evidence(GetMoveSpotPos) - {LLMID} 번호가 {pos} 위치를 할당 받았습니다.");
             }
         }
         return pos;
+    }
+
+    public void LLMNPCMoveStart()
+    {
+        // 모든 LLM 캐릭터 움직임 시작
+        foreach(GameObject child in NpcList)
+        {
+            child.GetComponent<NPCAttachData>().CanMove = true;
+        }
     }
 
     // 초기 LLM NPC 움직이는 장소 넣어두기 추후 삭제될 함수

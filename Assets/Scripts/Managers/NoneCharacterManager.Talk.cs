@@ -68,6 +68,7 @@ public partial class NoneCharacterManager
 
         GameObject player = GameObject.FindWithTag("Player");
         npc.transform.LookAt(player.transform.position);
+        npc.GetComponent<NPCAttachData>().Agent.isStopped = true;
 
         // 플레이어가 바라보는 각도 조절
         PlayerLookAtToNpc(npc);

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using DefineEnum.GameModeDefine;
 using DefineEnum.SpotNameDefine;
+using UnityEngine.UIElements;
 
 public class NPCAttachData : MonoBehaviour
 {
@@ -65,6 +66,8 @@ public class NPCAttachData : MonoBehaviour
                 // 현 NPC가 이동해야하는 장소로 자동 할당 추후 이동을 멈춰야하는 경우 수정 필요
                 SpotName currentName = NoneCharacterManager.Instance.LLMNPCMoveSpots[ID][_moveCount];
                 TargetSpot = NoneCharacterManager.Instance.GetMoveSpotPos(currentName, ID);
+                _timer = 0;
+                _moveCount += 1;
             }
             _canMove = value;
         }
@@ -76,15 +79,18 @@ public class NPCAttachData : MonoBehaviour
         {
             // TargetSpot이 지정되었을 때 해당 지점으로 이동
             CanMove = false;
-            _agent.SetDestination(value.position);
+            _currentDestination = value;
+            Agent.SetDestination(value.position);
         }
     }
-    private NavMeshAgent _agent;
+    public NavMeshAgent Agent;
     private float _timer = 0f;
     // 해당 시간에 도달하면 다시 다른 곳으로 이동할 수 있도록 제작
-    private float _targetTime = 30f;
-    private bool _canMove = true;
+    private float _targetTime = 5f;
+    private bool _canMove = false;
+    private bool _isGoal = false;
     private int _moveCount = 0;
+    private Transform _currentDestination = null;
     #endregion
 
     private void Start()
@@ -93,13 +99,19 @@ public class NPCAttachData : MonoBehaviour
         _popUpUI = UIManager.Instance.ShowNPCUI<NPCInteractionPopUpUI>(UIPos);
         _popUpUI.NpcID = ID;
         UINeck.gameObject.SetActive(false);
-        // agent 등록
-        _agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void OnEnable()
+    {
+        if (_currentDestination)
+        {
+            Agent.SetDestination(_currentDestination.position);
+        }
     }
 
     private void Update()
     {
-        if (GameManager.Instance.CurrentGameMode == GameFlowMode.TalkMode)
+        if (GameManager.Instance.CurrentGameMode == GameFlowMode.TalkMode || GameManager.Instance.CurrentGameMode == GameFlowMode.HearingMode)
         {
             _popUpUI.gameObject.SetActive(false);
         }
@@ -108,12 +120,18 @@ public class NPCAttachData : MonoBehaviour
             _popUpUI.gameObject.SetActive(true);
         }
         // 도착지점에 도달했을 때
-        if (_agent.velocity.sqrMagnitude >= 0.2f * 0.2f && _agent.remainingDistance <= 0.5f)
+        if (Agent.velocity.sqrMagnitude >= 0.2f * 0.2f && Agent.remainingDistance <= 0.5f)
+        {
+            _isGoal = true;
+        }
+
+        if (_isGoal)
         {
             // 도착지점에 도달했을 때 타이머 시작
             _timer += Time.deltaTime;
             if (_timer >= _targetTime)
             {
+                _isGoal = false;
                 CanMove = true;
             }
         }

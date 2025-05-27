@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 6388299554798284194}
   - component: {fileID: 251909308665539513}
   - component: {fileID: 6325516247171359073}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NPC
   m_TagString: LLMNpc
   m_Icon: {fileID: 0}
@@ -256,6 +256,7 @@ MonoBehaviour:
   SeePoint: {fileID: 70893020098252772}
   IsTalkStart: 0
   CanTalkStart: 0
+  Agent: {fileID: 6388299554798284194}
 --- !u!1 &6388299555931438634
 GameObject:
   m_ObjectHideFlags: 0

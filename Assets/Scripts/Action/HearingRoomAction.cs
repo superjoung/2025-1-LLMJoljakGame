@@ -48,4 +48,33 @@ public class HearingRoomAction : MonoBehaviour
         // 레거시코드
         _npc = NoneCharacterManager.Instance.InteractiveNPC;
     }
+
+    public void EndHearingRoom()
+    {
+        _timer = 1.5f;
+        StartCoroutine(RemoveHearingRoom());
+        _playerHead.transform.DOShakePosition(3f, 2, 10, 1, false, true, ShakeRandomnessMode.Full);
+
+        Sequence haeringSeq = DOTween.Sequence();
+
+        haeringSeq.Append(_world.transform.DOScale(new Vector3(1, 1, 1), 1f).SetEase(Ease.InCubic));
+        haeringSeq.Append(_hearingFloor.transform.DOScale(new Vector3(0f, 0f, 0f), 1.5f).SetEase(Ease.OutElastic));
+        for (int i = 0; i < 4; i++)
+        {
+            haeringSeq.Insert(_timer, _walls[i].transform.DOMove(new Vector3(_walls[i].transform.position.x, 15f, 0), 1f).SetEase(Ease.OutQuart));
+            haeringSeq.Join(_walls[i].transform.GetChild(0).DOShakePosition(2f, 2, 10, 1, false, true, ShakeRandomnessMode.Full));
+            _timer += Random.Range(0.1f, 0.6f);
+        }
+        haeringSeq.Insert(_timer, _hearingCeiling.transform.DOScale(new Vector3(0, 0, 0), 1f).SetEase(Ease.OutElastic));
+
+        haeringSeq.Append(_probsObject.transform.DOScale(new Vector3(0, 0, 0), 1).SetEase(Ease.OutElastic));
+
+        haeringSeq.Play();
+    }
+
+    private IEnumerator RemoveHearingRoom()
+    {
+        yield return new WaitForSeconds(4f);
+        DestroyImmediate(gameObject);
+    }
 }

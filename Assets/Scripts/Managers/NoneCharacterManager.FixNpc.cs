@@ -97,6 +97,7 @@ public partial class NoneCharacterManager
         // 파괴해야하는 오브젝트에 추가
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCFixAttachData>().UIPos);
 
+        npc.GetComponent<NPCFixAttachData>().Agent.isStopped = true;
         // TEMP : test입니당
         GetFixTalkString(GetTalkStartText(npc.GetComponent<NPCFixAttachData>().StandingSpotName));
     }

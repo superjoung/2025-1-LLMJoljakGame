@@ -12,6 +12,7 @@ public partial class GameManager
     [SerializeField] private GameObject FreeMovePlayer;
     [SerializeField] private GameObject World;
     [SerializeField] private GameObject HearingRoom;
+    private GameObject _inGameHearingRoom;
     public List<GameObject> DestoryGameobjects = new List<GameObject>();
     // 시간 변수
     public float Timer
@@ -89,7 +90,6 @@ public partial class GameManager
             Timer = 0;
             ModeEnd(currentMode);
         }
-
         ModeInit(changeMode);
     }
 
@@ -169,6 +169,7 @@ public partial class GameManager
         {
             // Frame : ID_NpcName or SpotName 수정 필요
             string spotName = child.name.Split("_")[1];
+
             if(spotName == EvidenceSpotName) // 증거수집을 원하는 지역 이름과 같을 경우
             {
                 _saveEvidenceSpot = child.gameObject;
@@ -203,24 +204,34 @@ public partial class GameManager
                 child.SetActive(false);
             }
         }
+        foreach(GameObject child in NoneCharacterManager.Instance.FixNpcs)
+        {
+            child.SetActive(false);
+        }
         GameObject Npc = NoneCharacterManager.Instance.GetNpcToID(HearingNpcID);
-        ResourceManager.Instance.Instantiate("HearingRoom", Npc.transform.GetChild(Npc.transform.childCount-1).position, null);
+        _inGameHearingRoom = ResourceManager.Instance.Instantiate("HearingRoom", Npc.transform.GetChild(Npc.transform.childCount-1).position, null);
 
         // 파괴 오브젝트 추가
         foreach (GameObject child in NoneCharacterManager.Instance.TalkList)
         {
             DestoryGameobjects.Add(child.GetComponent<NPCAttachData>().PopUpTalkUI.gameObject);
         }
+        _playerMainScreenUI.ShowHearingEvidence();
         _playerMainScreenUI.ShowChatUI();
     }
     private void HearingEnd()
     {
+        _inGameHearingRoom.GetComponent<HearingRoomAction>().EndHearingRoom();
         foreach (GameObject child in NoneCharacterManager.Instance.NpcList)
         {
             if (int.Parse(child.name.Split("_")[1]) != HearingNpcID)
             {
                 child.SetActive(true);
             }
+        }
+        foreach (GameObject child in NoneCharacterManager.Instance.FixNpcs)
+        {
+            child.SetActive(true);
         }
         HearingNpcID = -1;
         NoneCharacterManager.Instance.TalkList.Clear();

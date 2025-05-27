@@ -11,21 +11,31 @@ public partial class GameManager : Singleton<GameManager>
     public bool IsMorning { get { return Days % 2 == 1; } }
     public ParentPrefabs ParentPrefabs;
 
-    // 증거 테이블
+    // 증거 테이블 데이터
     public List<Dictionary<string, object>> EvidenceDatas = new List<Dictionary<string, object>>();
+
+    // 플레이어 증거 담아두기
+    public List<string> EvidenceInventory = new List<string>();
 
     protected PlayerMainScreenUI _playerMainScreenUI;
 
     private bool _isMapOpened = false;
 
-    private void Start()
+    private void Awake()
     {
+        base.Awake();
         StartCoroutine(LLMConnectManager.Instance.GetGameSetup());
         EvidenceDatas = CSVReader.Read("CSV/EvidenceDatas");
         ParentPrefabs = GameObject.Find("PrefabsBox").GetComponent<ParentPrefabs>();
-        NoneCharacterManager.Instance.NoneCharacterStart();
+        NoneCharacterManager.Instance.NoneCharacterAwake();
         _playerMainScreenUI = UIManager.Instance.ShowSceneUI<PlayerMainScreenUI>();
+    }
+
+    private void Start()
+    {
         Init();
+        EvidenceInventory.Add("E_1");
+        EvidenceInventory.Add("E_3");
     }
 
     private void Update()
@@ -76,6 +86,11 @@ public partial class GameManager : Singleton<GameManager>
         {
             // 바로 종료
             Timer = 300;
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            NoneCharacterManager.Instance.NoneCharacterStart();
         }
     }
 }

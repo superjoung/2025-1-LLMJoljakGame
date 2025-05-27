@@ -40,7 +40,6 @@ public class NPCInfoFrame : BaseUI
         GetText((int)Texts.NPCName).text = NoneCharacterManager.Instance.GetNpcNameToID(id);
 
         GetButton((int)Buttons.NPCButton).gameObject.BindEvent(SelectTalkNpc);
-        gameObject.GetComponent<Canvas>().sortingOrder = 1;
     }
 
     private void SelectTalkNpc(PointerEventData data)
