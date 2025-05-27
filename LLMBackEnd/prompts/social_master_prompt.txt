@@ -12,9 +12,11 @@ Please generate the full setup for the scenario based on the following constrain
 1. A short description of the village and atmosphere (in Korean)
 2. A single ominous event caused by the witch (in Korean)
 3. 5 villagers with:
-   - name: Use names that sound like 15th-century European villagers, but **write them in Korean using phonetic transcription** (e.g., "아그네스", "톰린", "오스윈"). Do not use Korean-style names like "김순자" or poetic names like "하얀눈". Names must sound medieval and European, but appear in Korean text.    - personality (behavior: extroverted/introverted, emotion: rational/emotional/psychopathic)
+   - name: Use names that sound like 15th-century European villagers, but **write them in Korean using phonetic transcription** (e.g., "아그네스", "톰린", "오스윈"). Do not use Korean-style names like "김순자" or poetic names like "하얀눈". Names must sound medieval and European, but appear in Korean text.    
+   - gender: male / female
+   - age_group: young / old
+   - personality (behavior: extroverted/introverted, emotion: rational/emotional/psychopathic)
    - occupation (in Korean)
-   - relationships (in Korean)
    - statement (what they would say when interrogated, in Korean)
    - is_witch (true/false)
 
@@ -28,12 +30,13 @@ Example:
   "suspects": [
     {
       "name": "...",
+      "gender": "male",
+      "age_group": "young",
       "personality": {
         "behavior": "extroverted",
         "emotion": "emotional"
       },
       "occupation": "...",
-      "relationships": ["..."],
       "statement": "...",
       "is_witch": false
     },
