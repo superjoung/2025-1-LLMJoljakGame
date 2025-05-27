@@ -83,8 +83,7 @@ async def submit_evidence(evidence_input: EvidenceInput):
 
         return {
             "npc": evidence_input.npc,
-            "response": result["response"],
-            "memory_used": result.get("memory_used", [])
+            "response": result["response"]
         }
 
     except Exception as e:

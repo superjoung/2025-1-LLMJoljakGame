@@ -14,7 +14,7 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
     private const string TurnUrl = "http://127.0.0.1:8000/generate_turn_data";
     private const string FinalStatementUrl = "http://localhost:8000/final_statements";
     private const string ChiefStatementUrl = "http://127.0.0.1:8000/chief_statement";
-
+    private const string SubmitEvidenceUrl = "http://127.0.0.1:8000/submit_evidence";
 
     private Setup _currentSetup;
 
@@ -180,7 +180,7 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
         request.Dispose();
     }
     
-    // --- [루트 + 증거 설정] ---
+// --- [최종 발언] ---
     public IEnumerator GetFinalStatements(Action<Dictionary<string, string>> onResponse)
     {
         UnityWebRequest request = new UnityWebRequest(FinalStatementUrl, "POST");
@@ -208,6 +208,42 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
         {
             Debug.LogError("최종 발언 요청 실패: " + request.error);
             onResponse?.Invoke(null);
+        }
+
+        request.Dispose();
+    }
+    
+    // --- [증거 제출] ---
+    public IEnumerator SubmitEvidence(string npcName, string evidenceId, Action<string> onFinish)
+    {
+        EvidenceInput input = new EvidenceInput
+        {
+            npc = npcName,
+            evidence = evidenceId
+        };
+
+        string jsonData = JsonUtility.ToJson(input);
+
+        UnityWebRequest request = new UnityWebRequest(SubmitEvidenceUrl, "POST");
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string resultJson = request.downloadHandler.text;
+            EvidenceResponse result = JsonUtility.FromJson<EvidenceResponse>(resultJson);
+            Debug.Log($"[{result.npc}] 반응: {result.response}");
+
+            onFinish?.Invoke(result.response);
+        }
+        else
+        {
+            Debug.LogError("증거 제출 실패: " + request.error);
+            onFinish?.Invoke("증거 제출 중 오류가 발생했습니다.");
         }
 
         request.Dispose();

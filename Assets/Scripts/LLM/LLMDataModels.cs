@@ -79,4 +79,18 @@ namespace LLM
     {
         public string statement;
     }
+    
+    [System.Serializable]
+    public class EvidenceInput
+    {
+        public string npc;
+        public string evidence;
+    }
+
+    [System.Serializable]
+    public class EvidenceResponse
+    {
+        public string npc;
+        public string response;
+    }
 }
