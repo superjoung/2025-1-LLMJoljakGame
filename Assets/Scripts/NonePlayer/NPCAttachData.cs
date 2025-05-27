@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using DefineEnum.GameModeDefine;
+using DefineEnum.SpotNameDefine;
+using UnityEngine.UIElements;
 
 public class NPCAttachData : MonoBehaviour
 {
     public int ID;
+    #region TalkingUIValues
     public Transform UIPos;
     public Transform UINeck;
     public Transform SeePoint;
@@ -44,6 +48,50 @@ public class NPCAttachData : MonoBehaviour
             return npcTalkUI;
         }
     }
+    #endregion
+
+    #region MovingValues
+    // 조건에 달성해 움직일 수 있게 되었을때
+    public bool CanMove
+    {
+        get
+        {
+            return _canMove;
+        }
+        set
+        {
+            // 이동가능 상태로 변경되었을때
+            if (value)
+            {
+                // 현 NPC가 이동해야하는 장소로 자동 할당 추후 이동을 멈춰야하는 경우 수정 필요
+                SpotName currentName = NoneCharacterManager.Instance.LLMNPCMoveSpots[ID][_moveCount];
+                TargetSpot = NoneCharacterManager.Instance.GetMoveSpotPos(currentName, ID);
+                _timer = 0;
+                _moveCount += 1;
+            }
+            _canMove = value;
+        }
+    }
+
+    public Transform TargetSpot
+    {
+        set
+        {
+            // TargetSpot이 지정되었을 때 해당 지점으로 이동
+            CanMove = false;
+            _currentDestination = value;
+            Agent.SetDestination(value.position);
+        }
+    }
+    public NavMeshAgent Agent;
+    private float _timer = 0f;
+    // 해당 시간에 도달하면 다시 다른 곳으로 이동할 수 있도록 제작
+    private float _targetTime = 5f;
+    private bool _canMove = false;
+    private bool _isGoal = false;
+    private int _moveCount = 0;
+    private Transform _currentDestination = null;
+    #endregion
 
     private void Start()
     {
@@ -53,15 +101,39 @@ public class NPCAttachData : MonoBehaviour
         UINeck.gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        if (_currentDestination)
+        {
+            Agent.SetDestination(_currentDestination.position);
+        }
+    }
+
     private void Update()
     {
-        if (GameManager.Instance.CurrentGameMode == GameFlowMode.TalkMode)
+        if (GameManager.Instance.CurrentGameMode == GameFlowMode.TalkMode || GameManager.Instance.CurrentGameMode == GameFlowMode.HearingMode)
         {
             _popUpUI.gameObject.SetActive(false);
         }
         else
         {
             _popUpUI.gameObject.SetActive(true);
+        }
+        // 도착지점에 도달했을 때
+        if (Agent.velocity.sqrMagnitude >= 0.2f * 0.2f && Agent.remainingDistance <= 0.5f)
+        {
+            _isGoal = true;
+        }
+
+        if (_isGoal)
+        {
+            // 도착지점에 도달했을 때 타이머 시작
+            _timer += Time.deltaTime;
+            if (_timer >= _targetTime)
+            {
+                _isGoal = false;
+                CanMove = true;
+            }
         }
     }
 

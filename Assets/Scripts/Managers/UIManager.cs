@@ -14,7 +14,10 @@ public enum UIName
     NPCTalkPanelUI,        // NPC 대화 UI
     NPCInfoUI,
     FixNPCInteractionPopUpUI, // 고정 NPC 옆 행동 UI 박스
-    FixNPCSelectButtonUI     // 고정 NPC 대화 NPC 선택
+    FixNPCSelectButtonUI,     // 고정 NPC 대화 NPC 선택
+    MiniMapPopUpUI,           // 미니맵 팝업 UI
+    EvidenceMiniMapPopUpUI,   // 증거수집 장소 선택 UI
+    HREvidenceFrame           // 심문시 증거 제출 부분
 }
 
 public class UIManager : Singleton<UIManager>

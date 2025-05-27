@@ -24,12 +24,6 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     private string NPC_PREFABS_PATH = "NPC/NPC";
     private int _npcCount = 3;
 
-    // 파셜 클래스 Start 부분 전부 실행
-    public void Start()
-    {
-        FixNpcInit();
-    }
-
     public void Update()
     {
         
@@ -39,6 +33,22 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     public void UpdateNpcAction()
     {
 
+    }
+
+    public void NoneCharacterAwake()
+    {
+        NpcSpawn();
+        FixNPCSpawn();
+        FixNpcInit();
+        MoveSpotSetting();
+    }
+
+    // 모든 파셜 클래스에 존재하는 Start 부분을 모아 GameManager에서 실행
+    public void NoneCharacterStart()
+    {
+        // LLM으로 이름 & NPC 이동 장소 선정 완료 되고 데이터가 들어왔을 때 실행
+        LLMMoveSpotNameSetting();
+        LLMNPCMoveStart();
     }
 
     public GameObject GetNpcToID(int ID)  
@@ -64,7 +74,8 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     public string GetNpcNameToID(int ID)
     {
         // TEMP : LLM API ID 값으로 전달해서 캐릭터 이름 받아오기
-        return LLMConnectManager.Instance.GetAllSuspects()[ID].name;
+        //return LLMConnectManager.Instance.GetAllSuspects()[ID].name;
+        return TempLLMNpcNames[ID];
     }
 
     public string GetFixNpcNameToID(int ID)
@@ -90,7 +101,9 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
             int spawnInt = 0;
             do
             {
-                spawnInt = Random.Range(0, GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.childCount);
+                // 임시 테스트 코드
+                spawnInt = Random.Range(0, 3);
+                //spawnInt = Random.Range(0, GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.childCount);
             } while (spawnList.Contains(spawnInt));
             spawnList.Add(spawnInt);
             // NPC 소환

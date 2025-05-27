@@ -88,9 +88,10 @@ public class PlayerController : MonoBehaviour
     private void NPCHearingStart()
     {
         int ID = NoneCharacterManager.Instance.CanStartTalkNpcs[0];
-        NoneCharacterManager.Instance.GetNpcToID(ID).transform.LookAt(transform.position);
+        //NoneCharacterManager.Instance.GetNpcToID(ID).transform.LookAt(transform.position);
+        NoneCharacterManager.Instance.TalkStartWithPlayer(ID);
         GameManager.Instance.HearingNpcID = ID;
-        GameManager.Instance.CurrentGameMode = DefineEnum.GameModeDefine.GameFlowMode.HearingMode;
+        GameManager.Instance.CurrentGameMode = GameFlowMode.HearingMode;
         _playerMove.CanPlayerAction = false;
     }
 

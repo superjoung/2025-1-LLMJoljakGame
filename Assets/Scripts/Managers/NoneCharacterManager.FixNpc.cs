@@ -13,7 +13,8 @@ public partial class NoneCharacterManager
     public List<string> FixNpcNames = new List<string>() {"제임스", "메리", "프리아", "카이", "제이스", "크리세", "크림슨"};
     // 고정 NPC 대화 스트링 전부 저장
     public List<Dictionary<string, object>> FixNpcTalkData = new List<Dictionary<string, object>>();
-
+    // 질문 1회 끝났을 때
+    public bool IsEndSelect = false;
     // 임시 LLM 이름들 나중에 삭제 예정
     public List<string> TempLLMNpcNames = new List<string>() { "캐리미", "썸밋", "데즐러", "갓데드", "텍스처" };
 
@@ -41,6 +42,7 @@ public partial class NoneCharacterManager
     // 고정 NPC 스크립스 시작부
     private void FixNpcInit()
     {
+        FixNpcTalkData.Clear();
         FixNpcTalkData = CSVReader.Read("CSV/FixNpcTalkDatas");
     }
     
@@ -96,6 +98,7 @@ public partial class NoneCharacterManager
         // 파괴해야하는 오브젝트에 추가
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCFixAttachData>().UIPos);
 
+        npc.GetComponent<NPCFixAttachData>().Agent.isStopped = true;
         // TEMP : test입니당
         GetFixTalkString(GetTalkStartText(npc.GetComponent<NPCFixAttachData>().StandingSpotName));
     }
@@ -183,31 +186,36 @@ public partial class NoneCharacterManager
         }
         if (textFrame.Contains("SpotName"))
         {
-            textFrame.Replace("SpotName", GetSpotName(FixNpcs[CurrentTalkNpcID].GetComponent<NPCFixAttachData>().StandingSpotName));
+            textFrame =  textFrame.Replace("SpotName", GetSpotName(FixNpcs[CurrentTalkNpcID].GetComponent<NPCFixAttachData>().StandingSpotName, true));
         }
-
+        IsEndSelect = true;
         return textFrame;
     }
 
-    private string GetSpotName(SpotName Spot)
+    private string GetSpotName(SpotName Spot, bool IsKorea = false)
     {
         string spotName = "";
         switch (Spot)
         {
             case SpotName.House:
-                spotName = "House";
+                if (IsKorea) spotName = "집";
+                else spotName = "House";
                 break;
             case SpotName.Church:
-                spotName = "Church";
+                if (IsKorea) spotName = "성당";
+                else spotName = "Church";
                 break;
             case SpotName.Brook:
-                spotName = "Brook";
+                if (IsKorea) spotName = "개울";
+                else spotName = "Brook";
                 break;
             case SpotName.Square:
-                spotName = "Square";
+                if (IsKorea) spotName = "광장";
+                else spotName = "Square";
                 break;
             case SpotName.Forest:
-                spotName = "Forest";
+                if (IsKorea) spotName = "숲";
+                else spotName = "Forest";
                 break;
             default:
                 Debug.Log("[WANR]NoneCharacterManager.FixNpc(GetTalkStartText) - 올바르지 않은 SpotName입니다.");

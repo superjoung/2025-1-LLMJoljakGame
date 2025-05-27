@@ -12,7 +12,23 @@ public partial class GameManager
     [SerializeField] private GameObject FreeMovePlayer;
     [SerializeField] private GameObject World;
     [SerializeField] private GameObject HearingRoom;
+    private GameObject _inGameHearingRoom;
     public List<GameObject> DestoryGameobjects = new List<GameObject>();
+    // 시간 변수
+    public float Timer
+    {
+        get
+        {
+            return _timer;
+        }
+        set
+        {
+            _playerMainScreenUI.Timer = value;
+            _timer = value;
+        }
+    }
+    private float _timer = 0f;
+
     private GameObject _saveEvidenceSpot = null;
 
     public GameFlowMode CurrentGameMode
@@ -37,6 +53,22 @@ public partial class GameManager
 
     private GameFlowMode _currentGameMode = GameFlowMode.None;
 
+    // 각모드에서 계속 업데이트해야하는 부분 적을 예정
+    private void ModeUpdate()
+    {
+        if(CurrentGameMode == GameFlowMode.FreeMoveMode)
+        {
+            Timer += Time.deltaTime;
+            // 5분 타이머
+            if (Timer >= 300)
+            {
+                // 캐릭터 움직임 멈추기 + 미니맵과 함께 증거 모드 돌입
+                UIManager.Instance.ShowPopupUI<EvidenceMiniMapPopUpUI>();
+                Timer = 0;
+            }
+        }
+    }
+
     // 모드 클래스 초기 실행 시 필요한 함수
     private void ModeInit()
     {
@@ -47,16 +79,17 @@ public partial class GameManager
     private void ModeChange(GameFlowMode currentMode, GameFlowMode changeMode)
     {
         // 모드 변경 전 파괴되어야하는 오브젝트 파괴
-        foreach(GameObject child in DestoryGameobjects)
+        foreach (GameObject child in DestoryGameobjects)
         {
             DestroyImmediate(child);
         }
 
         if (_currentGameMode != GameFlowMode.None)
         {
+            // 상시 시간 초기화
+            Timer = 0;
             ModeEnd(currentMode);
         }
-
         ModeInit(changeMode);
     }
 
@@ -136,6 +169,7 @@ public partial class GameManager
         {
             // Frame : ID_NpcName or SpotName 수정 필요
             string spotName = child.name.Split("_")[1];
+
             if(spotName == EvidenceSpotName) // 증거수집을 원하는 지역 이름과 같을 경우
             {
                 _saveEvidenceSpot = child.gameObject;
@@ -164,16 +198,30 @@ public partial class GameManager
         FreeMovePlayer.SetActive(true);
         foreach(GameObject child in NoneCharacterManager.Instance.NpcList)
         {
+            // 다른 LLMNPC들은 행동을 멈추게 만들 것
             if (int.Parse(child.name.Split("_")[1]) != HearingNpcID)
             {
                 child.SetActive(false);
             }
         }
+        foreach(GameObject child in NoneCharacterManager.Instance.FixNpcs)
+        {
+            child.SetActive(false);
+        }
         GameObject Npc = NoneCharacterManager.Instance.GetNpcToID(HearingNpcID);
-        ResourceManager.Instance.Instantiate("HearingRoom", Npc.transform.GetChild(3).position, null);
+        _inGameHearingRoom = ResourceManager.Instance.Instantiate("HearingRoom", Npc.transform.GetChild(Npc.transform.childCount-1).position, null);
+
+        // 파괴 오브젝트 추가
+        foreach (GameObject child in NoneCharacterManager.Instance.TalkList)
+        {
+            DestoryGameobjects.Add(child.GetComponent<NPCAttachData>().PopUpTalkUI.gameObject);
+        }
+        _playerMainScreenUI.ShowHearingEvidence();
+        _playerMainScreenUI.ShowChatUI();
     }
     private void HearingEnd()
     {
+        _inGameHearingRoom.GetComponent<HearingRoomAction>().EndHearingRoom();
         foreach (GameObject child in NoneCharacterManager.Instance.NpcList)
         {
             if (int.Parse(child.name.Split("_")[1]) != HearingNpcID)
@@ -181,7 +229,13 @@ public partial class GameManager
                 child.SetActive(true);
             }
         }
+        foreach (GameObject child in NoneCharacterManager.Instance.FixNpcs)
+        {
+            child.SetActive(true);
+        }
         HearingNpcID = -1;
+        NoneCharacterManager.Instance.TalkList.Clear();
+        _playerMainScreenUI.HideChatUI();
     }
     #endregion
 
@@ -226,6 +280,7 @@ public partial class GameManager
     {
         NoneCharacterManager.Instance.TalkList.Clear();
         _playerMainScreenUI.HideFixChatUI();
+        NoneCharacterManager.Instance.IsEndSelect = false;
     }
     #endregion
 }

@@ -33,7 +33,6 @@ public class NPCInfoFrame : BaseUI
 
     public override void Init()
     {   
-        base.Init();
         Bind<TMP_Text>(typeof(Texts));
         Bind<Image>(typeof(Images));
         Bind<Button>(typeof(Buttons));
@@ -41,7 +40,6 @@ public class NPCInfoFrame : BaseUI
         GetText((int)Texts.NPCName).text = NoneCharacterManager.Instance.GetNpcNameToID(id);
 
         GetButton((int)Buttons.NPCButton).gameObject.BindEvent(SelectTalkNpc);
-        gameObject.GetComponent<Canvas>().sortingOrder = 1;
     }
 
     private void SelectTalkNpc(PointerEventData data)
