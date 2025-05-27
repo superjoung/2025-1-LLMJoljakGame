@@ -23,6 +23,7 @@ public partial class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
+        //StartCoroutine(LLMConnectManager.Instance.GetGameSetup(null));
         base.Awake();
         EvidenceDatas.Clear();
         EvidenceDatas = CSVReader.Read("CSV/EvidenceDatas");

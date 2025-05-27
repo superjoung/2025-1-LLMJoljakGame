@@ -112,9 +112,21 @@ public partial class NoneCharacterManager
         if (inputText.Count() > 0)
         {
             // 증거 제출 시
-            if (SaveEvidenceData != string.Empty && GameManager.Instance.CurrentGameMode == DefineEnum.GameModeDefine.GameFlowMode.HearingMode) 
+            if (SaveEvidenceData != string.Empty && GameManager.Instance.CurrentGameMode == DefineEnum.GameModeDefine.GameFlowMode.HearingMode)
             {
-
+                StartCoroutine(LLMConnectManager.Instance.SubmitEvidence(GetNpcNameToID(CurrentTalkNpcID),
+                    SaveEvidenceData, response =>
+                    {
+                        if (response != null)
+                        {
+                            GetTalkString(response);
+                        }
+                        else
+                        {
+                            Debug.Log("응답이 null입니다.");
+                        }
+                    })
+                );
             }
             else
             {
