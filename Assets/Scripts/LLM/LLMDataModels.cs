@@ -16,7 +16,6 @@ namespace LLM
     {
         public string npc;
         public string response;
-        public bool allowed;
     }
 
     [Serializable]
