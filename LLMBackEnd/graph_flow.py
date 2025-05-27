@@ -44,8 +44,16 @@ class GameState(BaseModel):
     memory_used: Optional[list] = []
 
 # LLM 초기화
-llm = ChatOpenAI(
+# 일반 필터링/상태 체크용 (GPT-3.5)
+llm = ChatOpenAI(  
     model="gpt-3.5-turbo",
+    temperature=0.5,
+    openai_api_key=os.getenv("OPENAI_API_KEY")
+)
+
+# 자연스러운 응답 전용 (GPT-4)
+llm_respond = ChatOpenAI(  
+    model="gpt-4",
     temperature=0.5,
     openai_api_key=os.getenv("OPENAI_API_KEY")
 )
@@ -241,6 +249,9 @@ def answer_node(state: GameState) -> GameState:
     occupation = target_npc["occupation"]
     statement = target_npc["statement"]
     is_witch = target_npc["is_witch"]
+    gender = target_npc["gender"]
+    age_group = target_npc["age_group"]
+
 
     truth_or_lie = "lying" if is_witch else "truthful"
     truth_or_lie_detail = "You are the witch and must lie." if is_witch else "You are innocent and telling the truth."
@@ -260,9 +271,11 @@ def answer_node(state: GameState) -> GameState:
         truth_or_lie_detail=truth_or_lie_detail,
         behavior_desc=BEHAVIOR_DESC[behavior],
         emotion_desc=EMOTION_DESC[emotion],
+        gender=gender,
+        age_group=age_group
     )
 
-    response = llm.invoke(prompt)
+    response = llm_respond.invoke(prompt)
     reply_text = response.content.strip()
     state.response = reply_text
     npc_state.add_history(npc, f"플레이어: {question}\n{npc}: {reply_text}")
