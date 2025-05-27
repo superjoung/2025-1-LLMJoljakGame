@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/UI/PopUp/MiniMapPopUpUI.prefab.meta
 guid: 43ff0c5926b52894d8b107581eed596a
 PrefabImporter:
+========
+guid: d8d6ece045cdf9c48b395991a983a5ee
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> main:Assets/StreamingAssets.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

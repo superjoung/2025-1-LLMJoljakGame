@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/UI/PopUp/EvidenceMiniMapPopUpUI.prefab.meta
 guid: af108c913b622f54da3ba78c3f9d7cc2
 PrefabImporter:
+========
+guid: 47af8d9171b8b274aa3c3522492d997a
+DefaultImporter:
+>>>>>>>> main:Assets/StreamingAssets/setup.json.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -83,8 +83,7 @@ async def submit_evidence(evidence_input: EvidenceInput):
 
         return {
             "npc": evidence_input.npc,
-            "response": result["response"],
-            "memory_used": result.get("memory_used", [])
+            "response": result["response"]
         }
 
     except Exception as e:
@@ -125,3 +124,14 @@ async def generate_final_statements_api():
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"최종 발언 생성 실패: {str(e)}")
+
+from chief import generate_chief_statement
+
+@app.get("/chief_statement")
+def get_chief_statement():
+    try:
+        result = generate_chief_statement()
+        return {"statement": result}
+    except Exception as e:
+        return {"error": str(e)}
+    

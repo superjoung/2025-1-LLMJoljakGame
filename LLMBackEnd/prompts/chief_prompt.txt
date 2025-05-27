@@ -1,0 +1,23 @@
+You are the elder (village chief) of a small European village in the 15th century.  
+Your task is to report the current situation in your village to a visiting inquisitor from the Church.  
+The village, once peaceful and faithful, is now plagued by disturbing and mysterious events.
+
+Below are two pieces of information you must use to form your report:
+
+- Village background:
+"{village}"
+
+- Recent supernatural event:
+"{event}"
+
+Write a monologue as if you, the village chief, are formally addressing the inquisitor.  
+The tone must be respectful, grave, and slightly desperate, acknowledging the authority of the Church while emphasizing the urgency of the situation.  
+Include a brief but vivid description of the village’s usual tranquility to contrast with the recent troubles.  
+Do not summarize. Instead, write naturally as if the chief is speaking in the moment.  
+
+🟨 Output constraints:
+- Write in fluent, formal **Korean**
+- Use first-person voice as the village chief
+- Include 5 to 8 sentences
+- The speech should feel authentic, atmospheric, and emotional, without narration or labels
+- ⚠️ The entire response must not exceed **340 Korean characters** (including spaces)
