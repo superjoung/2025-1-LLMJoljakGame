@@ -7,6 +7,9 @@ public partial class NoneCharacterManager
 {
     public Dictionary<int, List<SpotName>> LLMNPCMoveSpots = new Dictionary<int, List<SpotName>>();
 
+    // 증거 제출 변수 저장
+    public string SaveEvidenceData = string.Empty;
+
     public void LLMMoveSpotNameSetting()
     {
         int idCount = 0;

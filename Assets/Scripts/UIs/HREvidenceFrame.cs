@@ -15,6 +15,10 @@ public class HREvidenceFrame : BaseUI
     {
         SelectButton
     }
+    enum Texts
+    {
+        EvidenceName
+    }
 
     protected override bool IsSorting => false;
     public override UIName ID => UIName.HREvidenceFrame;
@@ -27,13 +31,15 @@ public class HREvidenceFrame : BaseUI
 
     public override void Init()
     {
-        Bind<TMP_Text>(typeof(Images));
         Bind<Button>(typeof(Buttons));
+        Bind<Image>(typeof(Images));
+        Bind<TMP_Text>(typeof(Texts));
 
         // 해당 이미지 연결
         if(EvidenceID != string.Empty)
         {
-            Debug.Log(EvidenceID);
+            Sprite sprite = Resources.Load<Sprite>("Images/UI/" + EvidenceID);
+            Debug.Log(sprite);
             GetImage((int)Images.SelectButton).sprite = Resources.Load<Sprite>("Images/UI/" + EvidenceID);
         }
         else
@@ -43,10 +49,11 @@ public class HREvidenceFrame : BaseUI
 
         // 이벤트 등록
         GetButton((int)Buttons.SelectButton).gameObject.BindEvent(OnClickEvidenceButton);
+        GetText((int)Texts.EvidenceName).text = GameManager.Instance.GetEvidenceDatas(EvidenceID)[1];
     }
 
     public void OnClickEvidenceButton(PointerEventData data)
     {
-        
+        NoneCharacterManager.Instance.SaveEvidenceData = EvidenceID;
     }
 }

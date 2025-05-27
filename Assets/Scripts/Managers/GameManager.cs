@@ -24,6 +24,8 @@ public partial class GameManager : Singleton<GameManager>
     private void Awake()
     {
         base.Awake();
+        EvidenceDatas.Clear();
+        
         StartCoroutine(LLMConnectManager.Instance.GetGameSetup());
         EvidenceDatas = CSVReader.Read("CSV/EvidenceDatas");
         ParentPrefabs = GameObject.Find("PrefabsBox").GetComponent<ParentPrefabs>();

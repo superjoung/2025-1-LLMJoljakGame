@@ -111,16 +111,25 @@ public partial class NoneCharacterManager
     {
         if (inputText.Count() > 0)
         {
-            StartCoroutine(LLMConnectManager.Instance.AskLLM(inputText, GetNpcNameToID(CurrentTalkNpcID), response => {
-                if (response != null)
-                {
-                    GetTalkString(response);
-                }
-                else
-                {
-                    Debug.Log("응답이 null입니다.");
-                }
-            }));
+            // 증거 제출 시
+            if (SaveEvidenceData != string.Empty && GameManager.Instance.CurrentGameMode == DefineEnum.GameModeDefine.GameFlowMode.HearingMode) 
+            {
+
+            }
+            else
+            {
+                // 일반 대화 시도
+                StartCoroutine(LLMConnectManager.Instance.AskLLM(inputText, GetNpcNameToID(CurrentTalkNpcID), response => {
+                    if (response != null)
+                    {
+                        GetTalkString(response);
+                    }
+                    else
+                    {
+                        Debug.Log("응답이 null입니다.");
+                    }
+                }));
+            }
         }
     }
 }

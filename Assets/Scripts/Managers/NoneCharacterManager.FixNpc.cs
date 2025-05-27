@@ -42,6 +42,7 @@ public partial class NoneCharacterManager
     // 고정 NPC 스크립스 시작부
     private void FixNpcInit()
     {
+        FixNpcTalkData.Clear();
         FixNpcTalkData = CSVReader.Read("CSV/FixNpcTalkDatas");
     }
     
