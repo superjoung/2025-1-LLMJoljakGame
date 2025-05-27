@@ -21,8 +21,8 @@ namespace ChiefScene
 
         private void DestroyAllManagers()
         {
-            GameManager.Instance.DestroySelf();
-            NoneCharacterManager.Instance.DestroySelf();
+            if(FindObjectOfType<GameManager>()) GameManager.Instance.DestroySelf();
+            if(FindObjectOfType<NoneCharacterManager>()) NoneCharacterManager.Instance.DestroySelf();
         }
 
         private void LoadChiefStatement()
@@ -32,6 +32,7 @@ namespace ChiefScene
 
         private void SetChiefDialogue(string statement)
         {
+            _chiefTalkPanelUI.FinishLoading();
             _chiefTalkPanelUI.ShowText(statement);
         }
     }

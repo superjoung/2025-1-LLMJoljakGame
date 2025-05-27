@@ -23,7 +23,8 @@ public class TrialTalkPanelUI : NPCTalkPanelUI
         NPCImage3,
         NPCImage4,
         NPCImage5,
-        Result
+        Result,
+        Loading,
     }
     private enum Buttons
     {
@@ -46,8 +47,6 @@ public class TrialTalkPanelUI : NPCTalkPanelUI
         Bind<Button>(typeof(Buttons));
         Bind<Image>(typeof(TrialImages));
         StartCoroutine(LLMConnectManager.Instance.GetFinalStatements(SetFinalStatements));
-        GetButton((int)Buttons.LastCheckButton).gameObject.SetActive(false);
-        GetImage((int)TrialImages.Result).gameObject.SetActive(false);
         for (int i = 0; i < 5; i++)
         {
             int idx = i;
@@ -84,10 +83,18 @@ public class TrialTalkPanelUI : NPCTalkPanelUI
                 }
             );
         }
+        
+        GetButton((int)Buttons.LastCheckButton).gameObject.SetActive(false);
+        GetButton((int)Buttons.CheckButton1).transform.parent.parent.gameObject.SetActive(false);
+        GetText((int)TrialTexts.LastStatementText).transform.parent.gameObject.SetActive(false);
+        GetImage((int)TrialImages.Result).gameObject.SetActive(false);
     }
 
     private void SetFinalStatements(Dictionary<string, string> finalStatements)
     {
+        GetImage((int)TrialImages.Loading).gameObject.SetActive(false);
+        GetText((int)TrialTexts.LastStatementText).transform.parent.gameObject.SetActive(true);
+        GetButton((int)Buttons.CheckButton1).transform.parent.parent.gameObject.SetActive(true);
         int count = 0;
         foreach (var item in finalStatements)
         {
@@ -108,6 +115,9 @@ public class TrialTalkPanelUI : NPCTalkPanelUI
     private void PrintResult()
     {
         print(LLMConnectManager.Instance.GetWitchSuspect().name);
+        GetButton((int)Buttons.LastCheckButton).gameObject.SetActive(false);
+        GetButton((int)Buttons.CheckButton1).transform.parent.parent.gameObject.SetActive(false);
+        GetText((int)TrialTexts.LastStatementText).transform.parent.gameObject.SetActive(false);
         GetImage((int)TrialImages.Result).gameObject.SetActive(true);
         bool isWitch = LLMConnectManager.Instance.GetWitchSuspect().name == _lastCheckNpcName;
         string text = "플레이어가 선택한 " + _lastCheckNpcName + "은(는)...\n";
