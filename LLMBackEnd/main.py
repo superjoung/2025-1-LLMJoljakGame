@@ -50,8 +50,7 @@ async def ask_npc(user_input: UserInput):
 
         return {
             "npc": user_input.npc,
-            "response": result.get("response", ""),
-            "memory_used": retrieved
+            "response": result.get("response", "")
         }
 
     except Exception as e:
