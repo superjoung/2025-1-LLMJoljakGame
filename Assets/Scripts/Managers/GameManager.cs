@@ -16,7 +16,7 @@ public partial class GameManager : Singleton<GameManager>
 
     // 플레이어 증거 담아두기
     public List<string> EvidenceInventory = new List<string>();
-
+        
     protected PlayerMainScreenUI _playerMainScreenUI;
 
     private bool _isMapOpened = false;

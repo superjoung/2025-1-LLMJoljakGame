@@ -34,7 +34,7 @@ public class PlayerMainScreenUI : BaseUI
         PlayerSelectChatPopUpUI, // FIX 캐릭터와 대화할 때 선택창
         PlayerChatBoundary,      // 고정 캐릭터와 대화 중인 상자 ON/OFF
         HearingEvidencePanelUI,  // 심문 증거 UI 팝업
-        EvidenceContent,         // 심문 증거 넣어두는 부모 오브젝트
+        HearingContent,         // 심문 증거 넣어두는 부모 오브젝트
         NPCLayer        // 대화 가능 NPC 띄어주기
     }
 
@@ -102,7 +102,7 @@ public class PlayerMainScreenUI : BaseUI
     public void ShowHearingEvidence()
     {
         GetObject((int)GameObjects.HearingEvidencePanelUI).gameObject.SetActive(true);
-        Transform parent = GetObject((int)GameObjects.EvidenceContent).transform;
+        Transform parent = GetObject((int)GameObjects.HearingContent).transform;
 
         // 게임 매니저에 있는 증거 증거창에 띄어주기
         foreach(string child in GameManager.Instance.EvidenceInventory)

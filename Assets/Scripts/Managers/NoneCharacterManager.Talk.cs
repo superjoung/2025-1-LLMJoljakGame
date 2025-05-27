@@ -120,6 +120,7 @@ public partial class NoneCharacterManager
                         if (response != null)
                         {
                             GetTalkString(response);
+                            SaveEvidenceData = string.Empty;
                         }
                         else
                         {
