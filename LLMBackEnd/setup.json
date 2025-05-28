@@ -1,9 +1,33 @@
 {
-  "village": "15세기 유럽 마을, 초가집이 나란히 늘어선 좁은 골목, 밤에는 빛이 드문 으스스한 분위기",
-  "event": "마을 주변의 수확량이 급격히 줄어들어 굶주린 사람들이 속출하고, 어린이들 사이에 이상한 질병이 퍼지고 있음",
+  "village": "15세기 유럽 마을. 쓰라린 느낌이 느껴지는 어두운 숲으로 둘러싸인 마을. 사람들은 무서움에 질린 표정을 지으며 마을 일상을 이어가고 있다.",
+  "event": "숲 속에서 갑자기 피어나는 괴이한 소리와 함께 마을 주민들이 죽음에 이르는 이상한 질병에 걸린 사례가 발생했다.",
   "suspects": [
     {
-      "name": "에드문트",
+      "name": "가브리엘",
+      "gender": "male",
+      "age_group": "old",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "rational"
+      },
+      "occupation": "목수",
+      "statement": "나는 숲 속에서 이상한 여자를 본 적이 없다. 내가 아는 사람들은 다 괴짜가 아니야.",
+      "is_witch": false
+    },
+    {
+      "name": "엠마",
+      "gender": "female",
+      "age_group": "young",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "허술러",
+      "statement": "나는 무고한 여자야. 이상한 일들은 나와 상관없어.",
+      "is_witch": true
+    },
+    {
+      "name": "로렌초",
       "gender": "male",
       "age_group": "old",
       "personality": {
@@ -11,55 +35,31 @@
         "emotion": "rational"
       },
       "occupation": "농부",
-      "statement": "나는 이 마을을 오래 살아왔다. 이런 일은 전혀 예상하지 못했다.",
+      "statement": "나는 숲을 거의 가본 적이 없어. 그저 나의 일상을 살고 있을 뿐이야.",
       "is_witch": false
     },
     {
-      "name": "마르가렛",
+      "name": "베라",
       "gender": "female",
-      "age_group": "old",
+      "age_group": "young",
       "personality": {
-        "behavior": "introverted",
+        "behavior": "extroverted",
         "emotion": "emotional"
       },
-      "occupation": "약초 채집가",
-      "statement": "나는 마녀가 아니야. 나는 오직 식물을 따는 것 뿐이야.",
+      "occupation": "세탁부",
+      "statement": "좀 무서운 일들이 일어나고 있어. 내가 무슨 관련이 있겠어?",
       "is_witch": false
     },
     {
-      "name": "라이너",
+      "name": "하인리히",
       "gender": "male",
       "age_group": "young",
       "personality": {
         "behavior": "extroverted",
         "emotion": "emotional"
       },
-      "occupation": "목수",
-      "statement": "이번에 식물들이 좋지 않아서 피부병이 많이 생겼어. 내가 신경쓸 일이 많았다구.",
-      "is_witch": false
-    },
-    {
-      "name": "아네트",
-      "gender": "female",
-      "age_group": "young",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "직조공",
-      "statement": "슬픈 일이 많이 생기긴 했지만, 당신이 마녀를 찾는 것은 잘못된 길이라고 생각해.",
-      "is_witch": true
-    },
-    {
-      "name": "헨리크",
-      "gender": "male",
-      "age_group": "young",
-      "personality": {
-        "behavior": "extroverted",
-        "emotion": "emotional"
-      },
-      "occupation": "무역상",
-      "statement": "나는 이 마을을 돌아다니면서 물건을 팔았는데, 최근에는 소문이 번 거지 곧품에 강림한 마녀가 있다고 들었어. 나쁜 일들이 생기고 있어.",
+      "occupation": "주방 보조",
+      "statement": "나는 모든 사람들이 행복하길 바랄 뿐. 마을에 무시무시한 것이 있다는 건 처음 들어봤어.",
       "is_witch": false
     }
   ]

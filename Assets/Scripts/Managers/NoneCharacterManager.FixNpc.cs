@@ -64,6 +64,9 @@ public partial class NoneCharacterManager
             // 고정 NPC에 맞는 Key 생성 후 리스트 선언
             CompleteWatchingLLMNpc.Add(count, new List<int>());
             count++;
+            // 모델 할당
+            ResourceManager.Instance.Instantiate("NPC/Normal_NPC/Normal_NPC_" + count, npc.transform.position + Vector3.down, npc.transform);
+
             FixNpcs.Add(npc);
         }
     }
