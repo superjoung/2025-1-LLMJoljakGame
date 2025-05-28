@@ -69,16 +69,18 @@ public partial class NoneCharacterManager
         npc.GetComponent<NPCAttachData>().Agent.isStopped = true;
 
         GameObject player = GameObject.FindWithTag("Player");
-        npc.transform.LookAt(player.transform.position);
-
-        // 플레이어가 바라보는 각도 조절
-        PlayerLookAtToNpc(npc);
 
         // 파괴해야하는 오브젝트에 추가
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
 
         // TEMP : test입니당
+        CanPlayerEnterText = false;
         GetTalkString("안녕하세요! 심판관님!");
+
+        npc.transform.LookAt(player.transform.position);
+
+        // 플레이어가 바라보는 각도 조절
+        PlayerLookAtToNpc(npc);
     }
 
     public void PlayerLookAtToNpc(GameObject npc)
