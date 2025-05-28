@@ -21,10 +21,10 @@ public partial class NoneCharacterManager
             if (data.Name.Contains("NPC"))
             {
                 // 이름 가지고 와서 장소 이름으로 변경
-                //data.Name = GetNpcNameToID(NpcList[idCount].GetComponent<NPCAttachData>().ID);
+                data.Name = GetNpcNameToID(NpcList[idCount].GetComponent<NPCAttachData>().ID);
 
                 // TEMP : 임시 이름으로 잘 작동하는지 확인
-                data.Name = TempLLMNpcNames[idCount] + "_" + idCount.ToString();
+                //data.Name = TempLLMNpcNames[idCount] + "_" + idCount.ToString();
                 Debug.Log("[INFO]NoneCharacterManager.Evidence(LLMMoveSpotNameSetting) - 장소 이름 변경");
                 idCount += 1;
             }
@@ -43,7 +43,7 @@ public partial class NoneCharacterManager
         Transform pos = null;
 
         // Enum 형식을 String형식으로 변경
-        string convertName = Name == SpotName.House ? TempLLMNpcNames[LLMID] : GetSpotName(Name, true);
+        string convertName = Name == SpotName.House ? GetNpcNameToID(LLMID) : GetSpotName(Name, true);
 
         // converName과 맞는 장소 pos를 전달
         foreach(Transform child in GameManager.Instance.ParentPrefabs.NpcMoveBox.transform)
