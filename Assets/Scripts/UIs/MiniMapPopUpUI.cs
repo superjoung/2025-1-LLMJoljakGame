@@ -44,8 +44,8 @@ public class MiniMapPopUpUI : BaseUI
             if (text.text.Contains("NPC"))
             {
                 // TMP변경
-                //text.text = NoneCharacterManager.Instance.GetNpcNameToID(idCount) + " 집";
-                text.text = NoneCharacterManager.Instance.TempLLMNpcNames[idCount] + " 집";
+                text.text = NoneCharacterManager.Instance.GetNpcNameToID(idCount) + " 집";
+                //text.text = NoneCharacterManager.Instance.TempLLMNpcNames[idCount] + " 집";
                 idCount += 1;
             }
         }

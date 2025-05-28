@@ -186,7 +186,7 @@ public partial class NoneCharacterManager
         {
             // 해당 부분 LLM 연결 후 아랫줄 주석 풀고 사용
             // textFrame = textFrame.Replace("NpcName", GetNpcNameToID(WantNpcID));
-            textFrame = textFrame.Replace("NpcName", TempLLMNpcNames[WantNpcID]);
+            textFrame = textFrame.Replace("NpcName", GetNpcNameToID(WantNpcID));
         }
         if (textFrame.Contains("SpotName"))
         {
