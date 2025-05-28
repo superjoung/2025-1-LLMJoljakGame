@@ -52,6 +52,7 @@ public partial class GameManager
     }
 
     private GameFlowMode _currentGameMode = GameFlowMode.None;
+    private int EvidenceCount = 2;
 
     // 각모드에서 계속 업데이트해야하는 부분 적을 예정
     private void ModeUpdate()
@@ -67,6 +68,28 @@ public partial class GameManager
                 Timer = 0;
             }
         }
+
+        if(CurrentGameMode == GameFlowMode.EvidenceMode)
+        {
+            Timer += Time.deltaTime;
+
+            if (Timer >= 120)
+            {
+                EvidenceCount -= 1;
+                if(EvidenceCount == 0)
+                {
+                    CurrentGameMode = GameFlowMode.FreeMoveMode;
+                    Days += 1;
+                    _playerMainScreenUI.ChangeDays();
+                }
+                else
+                {
+                    CurrentGameMode = GameFlowMode.FreeMoveMode;
+                    UIManager.Instance.ShowPopupUI<EvidenceMiniMapPopUpUI>();
+                    Timer = 0;
+                }
+            }
+        }
     }
 
     // 모드 클래스 초기 실행 시 필요한 함수
@@ -78,6 +101,7 @@ public partial class GameManager
     // 현재 모드와 바뀔 모드를 입력받아 모드의 시작과 끝에 필요한 값들을 넣어줌
     private void ModeChange(GameFlowMode currentMode, GameFlowMode changeMode)
     {
+        Debug.Log("[INFO]GameManager.Mode(ModeChange) - 모드가 변경되었습니다."); 
         // 모드 변경 전 파괴되어야하는 오브젝트 파괴
         foreach (GameObject child in DestoryGameobjects)
         {
@@ -164,6 +188,17 @@ public partial class GameManager
     private void EvidenceInit()
     {
         FreeMovePlayer.SetActive(false);
+
+        _playerMainScreenUI.ShowEvidenceModeUI();
+        foreach (GameObject child in NoneCharacterManager.Instance.NpcList)
+        {
+            child.SetActive(false);
+        }
+        foreach (GameObject child in NoneCharacterManager.Instance.FixNpcs)
+        {
+            child.SetActive(false);
+        }
+
         // 해당 지역 이름과 동일한 게임 오브젝트 확인
         foreach (Transform child in ParentPrefabs.NpcCameraBox.transform)
         {
@@ -187,6 +222,15 @@ public partial class GameManager
 
     private void EvidenceEnd()
     {
+        _playerMainScreenUI.HideEvidenceModeUI();
+        foreach (GameObject child in NoneCharacterManager.Instance.NpcList)
+        {
+            child.SetActive(true);
+        }
+        foreach (GameObject child in NoneCharacterManager.Instance.FixNpcs)
+        {
+            child.SetActive(true);
+        }
         _saveEvidenceSpot.transform.GetChild(0).gameObject.SetActive(false);
         EvidenceSpotName = "";
     }

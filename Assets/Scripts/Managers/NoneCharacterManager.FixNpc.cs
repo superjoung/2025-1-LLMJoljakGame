@@ -42,7 +42,7 @@ public partial class NoneCharacterManager
 
     // 고정 NPC 스크립스 시작부
     private void FixNpcInit()
-    {
+    {   
         FixNpcTalkData.Clear();
         FixNpcTalkData = CSVReader.Read("CSV/FixNpcTalkDatas");
     }
@@ -93,7 +93,9 @@ public partial class NoneCharacterManager
         GameObject npc = GetFixNpcToID(NpcId);
 
         CurrentTalkNpcID = NpcId;
-   
+
+        npc.GetComponent<NPCFixAttachData>().Agent.isStopped = true;
+
         GameObject player = GameObject.FindWithTag("Player");
         npc.transform.LookAt(player.transform.position);
 
@@ -103,7 +105,6 @@ public partial class NoneCharacterManager
         // 파괴해야하는 오브젝트에 추가
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCFixAttachData>().UIPos);
 
-        npc.GetComponent<NPCFixAttachData>().Agent.isStopped = true;
         // TEMP : test입니당
         GetFixTalkString(GetTalkStartText(npc.GetComponent<NPCFixAttachData>().StandingSpotName));
     }

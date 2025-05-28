@@ -85,7 +85,7 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     {
         // TEMP : LLM API ID 값으로 전달해서 캐릭터 이름 받아오기
         return LLMConnectManager.Instance.GetAllSuspects()[ID].name;
-        return TempLLMNpcNames[ID];
+        //return TempLLMNpcNames[ID];
     }
 
     public string GetFixNpcNameToID(int ID)

@@ -14,7 +14,8 @@ public class PlayerMainScreenUI : BaseUI
     }
     enum Sliders
     {
-        DayProgressBar // 아침 or 밤이 얼마나 남았는지 보여주는 진행도 바
+        DayProgressBar, // 아침 or 밤이 얼마나 남았는지 보여주는 진행도 바
+        EvidecneProgressBar // 증거 수집 시간 타이머
     }
     enum Buttons
     {
@@ -34,7 +35,8 @@ public class PlayerMainScreenUI : BaseUI
         PlayerSelectChatPopUpUI, // FIX 캐릭터와 대화할 때 선택창
         PlayerChatBoundary,      // 고정 캐릭터와 대화 중인 상자 ON/OFF
         HearingEvidencePanelUI,  // 심문 증거 UI 팝업
-        EvidenceContent,         // 심문 증거 넣어두는 부모 오브젝트
+        HearingContent,          // 심문 증거 넣어두는 부모 오브젝트
+        EvidenceModePanelUI,     // 증거 탐색 시 위쪽 상단 증거 UI
         NPCLayer        // 대화 가능 NPC 띄어주기
     }
 
@@ -46,7 +48,14 @@ public class PlayerMainScreenUI : BaseUI
     {
         set
         {
-            GetSlider((int)Sliders.DayProgressBar).value = value / 3;
+            if (GameManager.Instance.CurrentGameMode == GameFlowMode.FreeMoveMode)
+            {
+                GetSlider((int)Sliders.DayProgressBar).value = value / 3;
+            }
+            else if(GameManager.Instance.CurrentGameMode == GameFlowMode.EvidenceMode)
+            {
+                GetSlider((int)Sliders.EvidecneProgressBar).value = value;
+            }
         }
     }
 
@@ -68,6 +77,7 @@ public class PlayerMainScreenUI : BaseUI
         GetObject((int)GameObjects.LLMNPCShowChatUI).SetActive(false);
         GetObject((int)GameObjects.PlayerChatBoundary).SetActive(false);
         GetObject((int)GameObjects.HearingEvidencePanelUI).SetActive(false);
+        GetObject((int)GameObjects.EvidenceModePanelUI).SetActive(false);
 
         // 이벤트 연결
         GetButton((int)Buttons.OptionButton).gameObject.BindEvent(OnClickOptionButton);
@@ -76,7 +86,7 @@ public class PlayerMainScreenUI : BaseUI
         GetButton((int)Buttons.SelectStopButton).gameObject.BindEvent(OnClickTalkEndButton);
         //GetSlider((int)Sliders.DayProgressBar).onValueChanged.AddListener(OnChangeDayProgressBar);
 
-        GetText((int)Texts.DayText).text = GameManager.Instance.Days + "일차 " + (GameManager.Instance.IsMorning ? "아침" : "밤");
+        GetText((int)Texts.DayText).text = GameManager.Instance.Days + "일차 " + "아침";
         
         _playerMove = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
     }
@@ -102,7 +112,7 @@ public class PlayerMainScreenUI : BaseUI
     public void ShowHearingEvidence()
     {
         GetObject((int)GameObjects.HearingEvidencePanelUI).gameObject.SetActive(true);
-        Transform parent = GetObject((int)GameObjects.EvidenceContent).transform;
+        Transform parent = GetObject((int)GameObjects.HearingContent).transform;
 
         // 게임 매니저에 있는 증거 증거창에 띄어주기
         foreach(string child in GameManager.Instance.EvidenceInventory)
@@ -131,6 +141,14 @@ public class PlayerMainScreenUI : BaseUI
         }
     }
 
+    public void ShowEvidenceModeUI()
+    {
+        GetObject((int)GameObjects.DayPanelUI).gameObject.SetActive(false);
+        GetObject((int)GameObjects.OptionPanelUI).gameObject.SetActive(false);
+
+        GetObject((int)GameObjects.EvidenceModePanelUI).SetActive(true);
+    }
+
     public void HideChatUI()
     {
         GetObject((int)GameObjects.PlayerChatPopUpUI).gameObject.SetActive(false);
@@ -149,6 +167,19 @@ public class PlayerMainScreenUI : BaseUI
         GetObject((int)GameObjects.DayPanelUI).gameObject.SetActive(true);
         GetObject((int)GameObjects.OptionPanelUI).gameObject.SetActive(true);
         NoneCharacterManager.Instance.GetFixNpcToID(NoneCharacterManager.Instance.CurrentTalkNpcID).GetComponent<NPCFixAttachData>().Agent.isStopped = false;
+    }
+
+    public void HideEvidenceModeUI()
+    {
+        GetObject((int)GameObjects.DayPanelUI).gameObject.SetActive(true);
+        GetObject((int)GameObjects.OptionPanelUI).gameObject.SetActive(true);
+
+        GetObject((int)GameObjects.EvidenceModePanelUI).SetActive(false);
+    }
+
+    public void ChangeDays()
+    {
+        GetText((int)Texts.DayText).text = GameManager.Instance.Days + "일차 " + "아침";
     }
 
     private void OnClickOptionButton(PointerEventData data)

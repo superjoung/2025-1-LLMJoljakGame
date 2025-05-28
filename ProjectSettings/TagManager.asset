@@ -9,6 +9,7 @@ TagManager:
   - PlayerHead
   - FixNpc
   - LLMNpc
+  - Evidence
   layers:
   - Default
   - TransparentFX
