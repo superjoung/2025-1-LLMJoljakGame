@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Male_Middle_Mat 2
+  m_Name: Male_Old_Mat_1
   m_Shader: {fileID: 4800000, guid: 5fdb92501eac48d4a87329098a14e790, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -89,9 +89,9 @@ Material:
     - _CLOTH1COLOR1: {r: 0, g: 0.1792453, b: 0.05062231, a: 0}
     - _CLOTH2COLOR: {r: 0.6132076, g: 0.39048594, b: 0.39373732, a: 0}
     - _CLOTH2COLOR1: {r: 1, g: 0, b: 0, a: 0}
-    - _CLOTH3COLOR: {r: 0.3490566, g: 0.106353186, b: 0, a: 0}
+    - _CLOTH3COLOR: {r: 0.16037738, g: 0.0511834, b: 0.0036311813, a: 0}
     - _CLOTH3COLOR1: {r: 0.3962264, g: 0.3391397, b: 0.2710039, a: 0}
-    - _CLOTH4COLOR: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0}
+    - _CLOTH4COLOR: {r: 0.754717, g: 0.754717, b: 0.754717, a: 0}
     - _CLOTH4COLOR1: {r: 0.2011392, g: 0.3773585, b: 0.3739074, a: 0}
     - _COATOFARMSCOLOR: {r: 1, g: 0, b: 0, a: 0}
     - _EYESCOLOR: {r: 0.003935064, g: 0.009433985, b: 0.0017354974, a: 1}
@@ -124,6 +124,6 @@ Material:
     - _OTHERCOLOR1: {r: 0.5188679, g: 0.4637216, b: 0.3206212, a: 0}
     - _SCLERACOLOR: {r: 0.9056604, g: 0.8159487, b: 0.8159487, a: 0}
     - _SCLERACOLOR1: {r: 0.9056604, g: 0.8159487, b: 0.8159487, a: 0}
-    - _SKINCOLOR: {r: 0.5566038, g: 0.43320578, b: 0.43320578, a: 1}
+    - _SKINCOLOR: {r: 0.8396226, g: 0.55763614, b: 0.55763614, a: 1}
     - _SKINCOLOR1: {r: 2.02193, g: 1.0081, b: 0.6199315, a: 0}
   m_BuildTextureStacks: []
