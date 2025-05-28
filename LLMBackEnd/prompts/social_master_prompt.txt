@@ -22,7 +22,7 @@ Please generate the full setup for the scenario based on the following constrain
 - Write as if it could be read aloud by a narrator in the game.
 
 3. 5 villagers with:
-   - name: Use names that sound like 15th-century European villagers, but **write them in Korean using phonetic transcription** (e.g., "아그네스", "톰린", "오스윈"). Do not use Korean-style names like "김순자" or poetic names like "하얀눈". Names must sound medieval and European, but appear in Korean text.    
+   - name: Generate a diverse set of names that sound like 15th-century European villagers. Write the names using Korean phonetic transcription. Use a large variety of historically plausible names. Do not reuse names or follow fixed examples. Be creative and consistent with the setting. Do not rely on any specific example. Names must vary significantly in every generation. Do not use Korean-style names like "김순자", or poetic names like "하얀눈"    
    - gender: male / female
    - age_group: young / old
    - personality (behavior: extroverted/introverted, emotion: rational/emotional/psychopathic)
