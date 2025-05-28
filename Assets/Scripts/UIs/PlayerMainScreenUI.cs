@@ -34,7 +34,8 @@ public class PlayerMainScreenUI : BaseUI
         PlayerSelectChatPopUpUI, // FIX 캐릭터와 대화할 때 선택창
         PlayerChatBoundary,      // 고정 캐릭터와 대화 중인 상자 ON/OFF
         HearingEvidencePanelUI,  // 심문 증거 UI 팝업
-        HearingContent,         // 심문 증거 넣어두는 부모 오브젝트
+        HearingContent,          // 심문 증거 넣어두는 부모 오브젝트
+        EvidenceModePanelUI,     // 증거 탐색 시 위쪽 상단 증거 UI
         NPCLayer        // 대화 가능 NPC 띄어주기
     }
 
@@ -68,6 +69,7 @@ public class PlayerMainScreenUI : BaseUI
         GetObject((int)GameObjects.LLMNPCShowChatUI).SetActive(false);
         GetObject((int)GameObjects.PlayerChatBoundary).SetActive(false);
         GetObject((int)GameObjects.HearingEvidencePanelUI).SetActive(false);
+        GetObject((int)GameObjects.EvidenceModePanelUI).SetActive(false);
 
         // 이벤트 연결
         GetButton((int)Buttons.OptionButton).gameObject.BindEvent(OnClickOptionButton);
