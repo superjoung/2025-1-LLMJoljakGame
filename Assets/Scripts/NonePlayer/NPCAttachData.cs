@@ -64,10 +64,13 @@ public class NPCAttachData : MonoBehaviour
             if (value)
             {
                 // 현 NPC가 이동해야하는 장소로 자동 할당 추후 이동을 멈춰야하는 경우 수정 필요
-                SpotName currentName = NoneCharacterManager.Instance.LLMNPCMoveSpots[ID][_moveCount];
-                TargetSpot = NoneCharacterManager.Instance.GetMoveSpotPos(currentName, ID);
-                _timer = 0;
-                _moveCount += 1;
+                if(_moveCount < 3)
+                {
+                    SpotName currentName = NoneCharacterManager.Instance.LLMNPCMoveSpots[ID][_moveCount];
+                    TargetSpot = NoneCharacterManager.Instance.GetMoveSpotPos(currentName, ID);
+                    _timer = 0;
+                    _moveCount += 1;
+                }
             }
             _canMove = value;
         }
