@@ -31,12 +31,14 @@ class EvidenceInput(BaseModel):
 @app.post("/ask")
 async def ask_npc(user_input: UserInput):
     try:
+        print(f"[npc] 이름: {user_input.npc}")
         memories = collection.query(
             query_texts=[user_input.input],
             n_results=3,
             where={"npc": user_input.npc},
         )
         retrieved = memories.get("documents", [[]])[0]
+        
         print(f"[memory] 검색된 기억: {retrieved}")
 
         compiled_graph = response_graph()

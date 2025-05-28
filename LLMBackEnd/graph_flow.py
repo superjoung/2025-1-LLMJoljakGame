@@ -115,6 +115,8 @@ def status_node(state: GameState) -> GameState:
     if not target_npc:
         print(f"[status_node] NPC '{npc}' 정보 없음")
         return state.dict()
+    else:
+        print(f"[status_node] NPC '{npc}' 정보 찾음")
 
     # 성격, 상태 정보
     is_witch = target_npc["is_witch"]

@@ -67,12 +67,48 @@ public partial class NoneCharacterManager
     }
 
     // 초기 LLM NPC 움직이는 장소 넣어두기 추후 삭제될 함수
-    private void MoveSpotSetting()
+    public void MoveSpotSetting(Dictionary<string, List<string>> routes)
     {
-        LLMNPCMoveSpots.Add(0, new List<SpotName>() { SpotName.Brook, SpotName.House, SpotName.Forest });
-        LLMNPCMoveSpots.Add(1, new List<SpotName>() { SpotName.Square, SpotName.House, SpotName.Church });
-        LLMNPCMoveSpots.Add(2, new List<SpotName>() { SpotName.Square, SpotName.House, SpotName.Brook });
-        LLMNPCMoveSpots.Add(3, new List<SpotName>() { SpotName.Forest, SpotName.Brook, SpotName.House });
-        LLMNPCMoveSpots.Add(4, new List<SpotName>() { SpotName.Brook, SpotName.Church, SpotName.Forest });
+        LLMNPCMoveSpots.Clear();
+
+        foreach (var route in routes)
+        {
+            int npcId = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                if (LLMConnectManager.Instance.GetAllSuspects()[i].name == route.Key)
+                {
+                    npcId = i;
+                    break;
+                }
+            }
+            
+            LLMNPCMoveSpots.Add(npcId, new List<SpotName>());
+            SpotName spotName = SpotName.None;
+            foreach (var spot in route.Value)
+            {
+                if (spot == "집")
+                {
+                    spotName = SpotName.House;
+                }
+                else if (spot == "성당")
+                {
+                    spotName = SpotName.Church;
+                }
+                else if (spot == "숲")
+                {
+                    spotName = SpotName.Forest;
+                }
+                else if (spot == "광장")
+                {
+                    spotName = SpotName.Square;
+                }
+                else if (spot == "우물")
+                {
+                    spotName = SpotName.Brook;
+                }
+                LLMNPCMoveSpots[npcId].Add(spotName);
+            }
+        }
     }
 }

@@ -11,6 +11,9 @@ All dialogue and interactions, including user input and NPC responses, must be i
 
 All interactions must be in the form of dialogue. Do not allow non-dialogue narration or actions (e.g., “*He pulls out a gun*” or “*I teleport*”). Descriptions must remain brief and conversational, such as noting an NPC’s expression or visible clues. Players may speak bluntly, emotionally, or with suspicion.
 
+Here is the user's input:  
+"{user_input}"
+
 Please rate the user’s input accordingly:
 - {{ "allowed": true, "reason": "Why it is allowed" }}
 - {{ "allowed": false, "reason": "Why it is NOT allowed" }}

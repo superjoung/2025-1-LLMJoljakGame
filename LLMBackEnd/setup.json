@@ -1,9 +1,9 @@
 {
-  "village": "잿빛 푸른 산의 발 아래 숲으로 둘러싸인 소박한 마을이 위치해 있다. 교회, 마을 광장, 그리고 몇 개의 상점들이 서로를 둘러보며 조용한 평온함을 유지하고 있다.",
-  "event": "어느 날 새벽, 교회의 종소리는 마을 사람들을 깨웠다. 교회의 대형 십자가가 불타오르는 것을 보고 모두들 공포에 질려 밤을 지새웠다.",
+  "village": "고요한 숲에 둘러싸인 작은 마을, 주민들이 모여 기도하는 성당과 중앙 광장, 그리고 생활용품을 파는 상점들이 조용한 생활을 이루고 있다.",
+  "event": "한 달 전, 마을의 우물이 진홍빛으로 변했다. 마을 사람들은 공포에 빠져 그것을 마녀의 저주로 추측하였다.",
   "suspects": [
     {
-      "name": "아그네스",
+      "name": "헬가",
       "gender": "female",
       "age_group": "old",
       "personality": {
@@ -11,55 +11,55 @@
         "emotion": "rational"
       },
       "occupation": "약초상",
-      "statement": "조용한 아그네스는 나이가 많은 냉정한 약초상이다. 그녀가 가장 먼저 십자가를 발견했다는 소문이 돌고 있다.",
+      "statement": "늙은 여인 헬가는 이성적인 성격을 가진 고요한 약초상이다. 그녀가 주변 숲에서 약초를 캐는 동안에만 우물이 붉게 변했다는 소문이 귓속말처럼 퍼지고 있다.",
       "is_witch": false
     },
     {
-      "name": "톰린",
+      "name": "엘리자베트",
+      "gender": "female",
+      "age_group": "old",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "감정인",
+      "statement": "엘리자베트는 사이코패스적인 성격을 가진 노년의 감정인이다. 그녀는 최근에 신비로운 사건들이 발생하기 전, 마을 사람들에게 어둠의 시간이 올 것을 경고하였다.",
+      "is_witch": false
+    },
+    {
+      "name": "하인리히",
       "gender": "male",
       "age_group": "young",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "emotional"
-      },
-      "occupation": "목수",
-      "statement": "젊으며 활발한 톰린은 마을의 목수이다. 그는 최근에 십자가를 고치는 일을 맡았다는 이야기가 있다.",
-      "is_witch": true
-    },
-    {
-      "name": "오스윈",
-      "gender": "male",
-      "age_group": "old",
-      "personality": {
-        "behavior": "introverted",
         "emotion": "psychopathic"
       },
-      "occupation": "목동",
-      "statement": "오스윈은 노령이며 조용한 목동이지만, 때때로 이상한 행동을 보이곤 한다. 그는 종종 밤에도 양을 몰고 다니며, 그를 두려워하는 사람들이 많다.",
+      "occupation": "대장장이",
+      "statement": "하인리히는 젊은 대장장이로 밝은 성격에 사이코패스 경향이 있다. 그는 불의 힘에 대한 이상한 집착을 보이는데, 이는 일부 마을 사람들에게 불안감을 준다.",
       "is_witch": false
     },
     {
-      "name": "윌프리드",
-      "gender": "male",
-      "age_group": "old",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "emotional"
-      },
-      "occupation": "외로운 어부",
-      "statement": "윌프리드는 늙은 감성적인 어부로, 자주 혼자서 보낸다. 그는 종종 밤에만 나타나며, 어느 날 그는 불길한 꿈을 꾸었다고 했다.",
-      "is_witch": false
-    },
-    {
-      "name": "엘마",
+      "name": "마리아",
       "gender": "female",
       "age_group": "young",
       "personality": {
-        "behavior": "extroverted",
+        "behavior": "introverted",
         "emotion": "emotional"
       },
-      "occupation": "곡물상",
-      "statement": "열정적인 젊은 엘마는 마을의 곡물상이다. 그녀는 십자가 불타는 것을 보며 웃었다는 소문이 돈다.",
+      "occupation": "솜직공",
+      "statement": "마리아는 젊고 내성적인 솜직공으로, 감성적인 성격을 가지고 있다. 어린 시절 그녀가 꿈에서 이야기한 우물의 아름다운 붉은 빛이 현실이 된 것이 불안한 마을 사람들에게 의문을 던진다.",
+      "is_witch": true
+    },
+    {
+      "name": "르네",
+      "gender": "male",
+      "age_group": "old",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "rational"
+      },
+      "occupation": "목수",
+      "statement": "르네는 이성적인 성격을 가진 노년의 목수이다. 그는 최근에 목재를 주문한 교회의 십자가를 만드는 일에 어떤 이유에서인지 꺼려하는 모습을 보였다.",
       "is_witch": false
     }
   ]
