@@ -1,65 +1,65 @@
 {
-  "village": "15세기 유럽 마을, 초가집이 나란히 늘어선 좁은 골목, 밤에는 빛이 드문 으스스한 분위기",
-  "event": "마을 주변의 수확량이 급격히 줄어들어 굶주린 사람들이 속출하고, 어린이들 사이에 이상한 질병이 퍼지고 있음",
+  "village": "15세기 유럽 마을의 분위기는 어두운 숲과 산이 둘러싸인 곳에 자리하고 있으며, 두려움에 떨게 하는 신성한 교회와 작은 집들이 모여 함께 살고 있는 것처럼 보입니다. 이 곳에서는 마녀사냥으로 인한 두려움이 굳어져 있습니다.",
+  "event": "마을에는 최근에 시루를 타고 불을 지르는 이상한 사건이 발생하였습니다. 주민들은 누가 이를 일으켰는지 알아내야 합니다.",
   "suspects": [
     {
-      "name": "에드문트",
+      "name": "알비온",
       "gender": "male",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
         "emotion": "rational"
       },
-      "occupation": "농부",
-      "statement": "나는 이 마을을 오래 살아왔다. 이런 일은 전혀 예상하지 못했다.",
+      "occupation": "성직자",
+      "statement": "마녀는 이 마을에 있다. 그리고 그녀의 잔인한 악령이 모든 것을 파괴하고 있다.",
       "is_witch": false
     },
     {
-      "name": "마르가렛",
-      "gender": "female",
-      "age_group": "old",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "emotional"
-      },
-      "occupation": "약초 채집가",
-      "statement": "나는 마녀가 아니야. 나는 오직 식물을 따는 것 뿐이야.",
-      "is_witch": false
-    },
-    {
-      "name": "라이너",
+      "name": "마데릭",
       "gender": "male",
-      "age_group": "young",
+      "age_group": "old",
       "personality": {
         "behavior": "extroverted",
         "emotion": "emotional"
       },
-      "occupation": "목수",
-      "statement": "이번에 식물들이 좋지 않아서 피부병이 많이 생겼어. 내가 신경쓸 일이 많았다구.",
+      "occupation": "농부",
+      "statement": "저는 이 마을에 평화를 찾아주려고 노력하고 있습니다. 마녀는 절대적으로 없습니다.",
       "is_witch": false
     },
     {
-      "name": "아네트",
+      "name": "카타리나",
       "gender": "female",
       "age_group": "young",
       "personality": {
         "behavior": "introverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "가정주부",
+      "statement": "저는 모든 것을 알고 있어요. 마녀는 바로 내 옆에 있어요.",
+      "is_witch": false
+    },
+    {
+      "name": "루도비크",
+      "gender": "male",
+      "age_group": "young",
+      "personality": {
+        "behavior": "extroverted",
         "emotion": "rational"
       },
-      "occupation": "직조공",
-      "statement": "슬픈 일이 많이 생기긴 했지만, 당신이 마녀를 찾는 것은 잘못된 길이라고 생각해.",
+      "occupation": "목수",
+      "statement": "마녀는 아마도 숲 속에 숨어 있을 거에요. 제가 찾아볼까요?",
       "is_witch": true
     },
     {
-      "name": "헨리크",
-      "gender": "male",
+      "name": "엘리자",
+      "gender": "female",
       "age_group": "young",
       "personality": {
-        "behavior": "extroverted",
-        "emotion": "emotional"
+        "behavior": "introverted",
+        "emotion": "rational"
       },
-      "occupation": "무역상",
-      "statement": "나는 이 마을을 돌아다니면서 물건을 팔았는데, 최근에는 소문이 번 거지 곧품에 강림한 마녀가 있다고 들었어. 나쁜 일들이 생기고 있어.",
+      "occupation": "가사부",
+      "statement": "마녀사냥은 억지로 누군가를 몰아내는 것이 아닙니다. 모든 것은 탐구해야만 합니다.",
       "is_witch": false
     }
   ]

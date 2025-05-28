@@ -29,9 +29,10 @@ namespace LLM
     public class Suspect
     {
         public string name;
+        public string gender;
+        public string age_group;
         public Personality personality;
         public string occupation;
-        public string[] relationships;
         public string statement;
         public bool is_witch;
     }

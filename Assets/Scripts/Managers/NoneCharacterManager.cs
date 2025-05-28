@@ -95,6 +95,7 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     public void NpcSpawn()
     {
         List<int> spawnList = new List<int>();
+        Dictionary<string, int> MeshNameCount = new();
         for (int i = 0; i < _npcCount; i++)
         {   
             // NPC 위치 조정
@@ -109,8 +110,18 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
             // NPC 소환
             Transform spawnPos = GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.GetChild(spawnInt);
             GameObject npc = ResourceManager.Instance.Instantiate(NPC_PREFABS_PATH, spawnPos.position, GameManager.Instance.ParentPrefabs.NpcBox.transform);
+
+            string MeshPrefabPath = "NPC/AI_NPC/";
+            MeshPrefabPath += LLMConnectManager.Instance.GetSuspectByName(GetNpcNameToID(i)).gender + "_";
+            MeshPrefabPath += LLMConnectManager.Instance.GetSuspectByName(GetNpcNameToID(i)).age_group + "_";
+            
+            MeshNameCount.TryAdd(MeshPrefabPath, 0);
+            MeshNameCount[MeshPrefabPath] += 1;
+            MeshPrefabPath += (MeshNameCount[MeshPrefabPath]);
+            ResourceManager.Instance.Instantiate(MeshPrefabPath, npc.transform.position + Vector3.down, npc.transform);
+            
             npc.name = "NPC_" + i; // id 연결 이후 _스플릿 후 ID만 가져올 예정
-            //npc.GetComponent<NPCAttachData>().ID = i; // id 연결
+            npc.GetComponent<NPCAttachData>().ID = i; // id 연결
             // NPC 오브젝트 리스트 추가
             NpcList.Add(npc);
             NonePlayersAction.Add(i, new Queue<BaseNpcStatAction>());
