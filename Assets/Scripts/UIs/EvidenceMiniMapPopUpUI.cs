@@ -50,6 +50,8 @@ public class EvidenceMiniMapPopUpUI : BaseUI
 
     private void OnClickEvidenceButton(PointerEventData data)
     {
-        Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+        GameManager.Instance.EvidenceSpotName = EventSystem.current.currentSelectedGameObject.name.Split("_")[1];
+        GameManager.Instance.CurrentGameMode = DefineEnum.GameModeDefine.GameFlowMode.EvidenceMode;
+        UIManager.Instance.CloseUI(this);
     }
 }

@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 4377625512777512858}
   - component: {fileID: 7567068954125248847}
   m_Layer: 5
-  m_Name: Point (8)
+  m_Name: Forest_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1446,7 +1446,7 @@ GameObject:
   - component: {fileID: 3635021413354693964}
   - component: {fileID: 4490744292931969193}
   m_Layer: 5
-  m_Name: Point (7)
+  m_Name: Square_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1568,7 +1568,7 @@ GameObject:
   - component: {fileID: 1818735707456777494}
   - component: {fileID: 1981465210665872035}
   m_Layer: 5
-  m_Name: Point (6)
+  m_Name: Brook_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1690,7 +1690,7 @@ GameObject:
   - component: {fileID: 6688586473902595571}
   - component: {fileID: 6906445099866737951}
   m_Layer: 5
-  m_Name: Point (2)
+  m_Name: Church_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

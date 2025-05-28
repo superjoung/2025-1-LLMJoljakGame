@@ -8,10 +8,12 @@ public class PlayerEvidenceMove : MonoBehaviour
 {
     public Transform ClickPos;
     public Camera UseCamera;
+    public Collider EvidecneCol;
 
     private NavMeshAgent _agent;
     private TouchUtils.TouchState _touchState = TouchUtils.TouchState.None;
     private Vector2 _touchPos;
+    private List<GameObject> _getEvidences = new List<GameObject>();
 
     private void Awake()
     {
@@ -30,6 +32,43 @@ public class PlayerEvidenceMove : MonoBehaviour
             {
                 _agent.SetDestination(hit.point);
                 ClickPos.position = hit.point;
+            }
+        }
+
+        // 탐색 시작 키를 눌렀을 때
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if(_getEvidences.Count > 0)
+            {
+                EvidenceObjectAttachData data = _getEvidences[0].GetComponent<EvidenceObjectAttachData>();
+                UIManager.Instance.ShowPopupUI<GetEvidencePopUpUI>().EvidenceID = data.EvidenceID;
+                Destroy(data);
+                GameManager.Instance.EvidenceInventory.Add(data.EvidenceID);
+                _getEvidences[0].tag = "Untagged";
+                _getEvidences.RemoveAt(0);
+            }
+            else
+            {
+                UIManager.Instance.ShowPopupUI<GetNotEvidencePopUpUI>();
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Evidence")
+        {
+            _getEvidences.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Evidence")
+        {
+            if (_getEvidences.Contains(other.gameObject))
+            {
+                _getEvidences.Remove(other.gameObject);
             }
         }
     }
