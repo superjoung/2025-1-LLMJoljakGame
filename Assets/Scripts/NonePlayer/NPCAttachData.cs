@@ -71,6 +71,13 @@ public class NPCAttachData : MonoBehaviour
                     _timer = 0;
                     _moveCount += 1;
                 }
+                else if(_moveCount == 3)
+                {
+                    SpotName currentName = SpotName.House;
+                    TargetSpot = NoneCharacterManager.Instance.GetMoveSpotPos(currentName, ID);
+                    _timer = 0;
+                    _moveCount += 1;
+                }
             }
             _canMove = value;
         }

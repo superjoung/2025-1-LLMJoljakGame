@@ -97,16 +97,18 @@ public partial class NoneCharacterManager
         npc.GetComponent<NPCFixAttachData>().Agent.isStopped = true;
 
         GameObject player = GameObject.FindWithTag("Player");
-        npc.transform.LookAt(player.transform.position);
-
-        // 플레이어가 바라보는 각도 조절
-        PlayerLookAtToNpc(npc);
 
         // 파괴해야하는 오브젝트에 추가
         UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCFixAttachData>().UIPos);
 
+        CanPlayerEnterText = false;
         // TEMP : test입니당
         GetFixTalkString(GetTalkStartText(npc.GetComponent<NPCFixAttachData>().StandingSpotName));
+
+        npc.transform.LookAt(player.transform.position);
+
+        // 플레이어가 바라보는 각도 조절
+        PlayerLookAtToNpc(npc);
     }
 
     // 고정 NPC에게 대화 문장 넘겨주기 이거 기존에 없던거라 코드 효율 개박음 양해좀 ;
