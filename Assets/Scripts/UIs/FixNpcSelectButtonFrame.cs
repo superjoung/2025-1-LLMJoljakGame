@@ -37,7 +37,6 @@ public class FixNpcSelectButtonFrame : BaseUI
         //GetText((int)Texts.NpcName).text = NoneCharacterManager.Instance.TempLLMNpcNames[Id];
 
         _selectButton = GetButton((int)Buttons.SelectButton);
-        Debug.Log(_selectButton);
         _selectButton.gameObject.BindEvent(OnClickNpcNameButton);
     }
 
