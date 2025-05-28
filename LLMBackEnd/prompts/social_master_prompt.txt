@@ -9,15 +9,32 @@ Please generate the full setup for the scenario based on the following constrain
 - The witch is hiding and lying. Others will tell the truth based on what they know.
 
 ## What to generate:
-1. A short description of the village and atmosphere (in Korean)
-2. A single ominous event caused by the witch (in Korean)
+1. A short description of the village and atmosphere (in Korean).
+- Use 2~3 sentences.
+- Make it vivid and immersive, but compact.
+- Describe specific features such as forests, chapel, square, or shops.
+- Avoid overly poetic language. Keep it useful for a game background.
+
+2. A single ominous event caused by the witch (in Korean).
+- Use 2~3 sentences.
+- Include when it happened, what was seen or heard, and how villagers reacted.
+- Keep it mysterious but short. Avoid exaggeration.
+- Write as if it could be read aloud by a narrator in the game.
+
 3. 5 villagers with:
    - name: Use names that sound like 15th-century European villagers, but **write them in Korean using phonetic transcription** (e.g., "아그네스", "톰린", "오스윈"). Do not use Korean-style names like "김순자" or poetic names like "하얀눈". Names must sound medieval and European, but appear in Korean text.    
    - gender: male / female
    - age_group: young / old
    - personality (behavior: extroverted/introverted, emotion: rational/emotional/psychopathic)
    - occupation (in Korean)
-   - statement (what they would say when interrogated, in Korean)
+   - statement ( Write two short Korean sentences about this character.
+
+  - First sentence: Summarize their gender, age group, personality, and occupation **in a compact and natural style**. Do not use formal lists or explanations. Keep it simple and readable in 1 line.
+
+  - Second sentence: Add a brief rumor or subtle detail related to them that might feel **suspicious or meaningful in the context of a witch-hunt game**. Avoid clear accusations or obvious hints. Make it vague or indirect, but a bit unsettling.
+
+Each sentence should be under 20 words. Write in Korean. No first-person, no direct quotes.
+)
    - is_witch (true/false)
 
 ## Format:
