@@ -17,6 +17,7 @@ public partial class NoneCharacterManager
     public bool IsEndSelect = false;
     // 임시 LLM 이름들 나중에 삭제 예정
     public List<string> TempLLMNpcNames = new List<string>() { "캐리미", "썸밋", "데즐러", "갓데드", "텍스처" };
+    public List<Sprite> FixNpcPortraitList = new List<Sprite>(); // 소환된 NPC 게임오브젝트로 저장
 
     // 고정 NPC와 플레이어가 대화할 때 어떤 NPC와 대화할 수 있는지 ID값으로 넘겨주기
     public int CanTalkStartFixNPC
@@ -66,6 +67,7 @@ public partial class NoneCharacterManager
             count++;
             // 모델 할당
             ResourceManager.Instance.Instantiate("NPC/Normal_NPC/Normal_NPC_" + count, npc.transform.position + Vector3.down, npc.transform);
+            FixNpcPortraitList.Add(ResourceManager.Instance.LoadSprite("Normal_NPC_" + count + "_Image"));
 
             FixNpcs.Add(npc);
         }

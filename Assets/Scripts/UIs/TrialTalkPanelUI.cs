@@ -51,6 +51,7 @@ public class TrialTalkPanelUI : NPCTalkPanelUI
         {
             int idx = i;
             _isClicked.Add(false);
+            GetImage((int)TrialImages.NPCImage1 + i).sprite = LLMConnectManager.Instance.GetNpcPortraitToID(i);
             GetButton((int)Buttons.CheckButton1 + i).onClick.AddListener(() =>
                 {
                     if (_isClicked[idx])

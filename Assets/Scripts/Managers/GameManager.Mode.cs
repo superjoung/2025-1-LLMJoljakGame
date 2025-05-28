@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DefineEnum.GameModeDefine;
+using UnityEngine.SceneManagement;
 
 public partial class GameManager
 {
@@ -80,6 +81,13 @@ public partial class GameManager
                 {
                     CurrentGameMode = GameFlowMode.FreeMoveMode;
                     Days += 1;
+                    StartCoroutine(LLMConnectManager.Instance.SetNPCTurnData(((routes, clues) =>
+                    {
+                        NoneCharacterManager.Instance.MoveSpotSetting(routes);
+                        GameManager.Instance.SetClueData(clues);
+                    })));
+                    if(Days == 4) { SceneManager.LoadScene("TrialScene"); }
+                    
                     _playerMainScreenUI.ChangeDays();
                 }
                 else

@@ -17,7 +17,8 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
     private const string SubmitEvidenceUrl = "http://127.0.0.1:8000/submit_evidence";
 
     private Setup _currentSetup;
-
+    private List<Sprite> _npcPortraitList = new List<Sprite>();
+    
     // --- [게임 설정 받아오기] ---
     public IEnumerator GetGameSetup(Action onFinish)
     {
@@ -41,6 +42,18 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
             foreach (var suspect in _currentSetup.suspects)
             {
                 Debug.Log($"용의자: {suspect.name}, 성별: {suspect.gender}, 나이: {suspect.age_group} 성격: {suspect.personality.behavior}, 감정: {suspect.personality.emotion}");
+            }
+            
+            const int npcCount = 5;
+            Dictionary<string, int> meshNameCount = new();
+            for (int i = 0; i < npcCount; i++)
+            {
+                string prefabName = GetAllSuspects()[i].gender + "_" +
+                                    GetAllSuspects()[i].age_group + "_";
+                meshNameCount.TryAdd(prefabName, 0);
+                meshNameCount[prefabName] += 1;
+                prefabName += meshNameCount[prefabName];
+                _npcPortraitList.Add(ResourceManager.Instance.LoadSprite(prefabName + "_Image"));
             }
         }
         else
@@ -201,7 +214,6 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
             {
                 result[pair.Key] = pair.Value.ToString();
             }
-
             onResponse?.Invoke(result);
         }
         else
@@ -293,5 +305,15 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
                 return suspect;
         }
         return null;
+    }
+    
+    public Sprite GetNpcPortraitToID(int ID)
+    {
+        if (ID < 0 && _npcPortraitList.Count <= ID)
+        {
+            Debug.LogWarning("[Warning] LLMConnectManager - GetNpcPortraitToID 올바른 인수를 넘기지 않았습니다.");
+            return null;
+        }
+        return _npcPortraitList[ID];
     }
 }

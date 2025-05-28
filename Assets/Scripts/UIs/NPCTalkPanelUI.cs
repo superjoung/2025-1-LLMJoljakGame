@@ -12,6 +12,11 @@ public class NPCTalkPanelUI : BaseUI
         NPCTalkText  // NPC 대화창
     }
 
+    private enum Images
+    {
+        NPCImage,
+    }
+
     protected override bool IsSorting => false;
     public override UIName ID => UIName.NPCTalkPanelUI;
 
@@ -27,16 +32,20 @@ public class NPCTalkPanelUI : BaseUI
     public override void Init()
     {
         Bind<TMP_Text>(typeof(Texts));
+        Bind<Image>(typeof(Images));
 
         // 무조건 LLM NPC먼저 동작하도록 설정
         if(NoneCharacterManager.Instance.CanTalkNpcCount > 0)
         {
             GetText((int)Texts.NPCNameText).text = NoneCharacterManager.Instance.GetNpcNameToID(NoneCharacterManager.Instance.CurrentTalkNpcID);
+            GetImage((int)Images.NPCImage).sprite = LLMConnectManager.Instance.GetNpcPortraitToID(NoneCharacterManager.Instance.CurrentTalkNpcID);
         }
         // 고정 NPC에서 스크립트 실행 시 else 실행
         else
         {
             GetText((int)Texts.NPCNameText).text = NoneCharacterManager.Instance.GetFixNpcNameToID(NoneCharacterManager.Instance.CurrentTalkNpcID);
+            GetImage((int)Images.NPCImage).sprite = NoneCharacterManager.Instance.GetFixNpcPortraitToID(NoneCharacterManager.Instance.CurrentTalkNpcID);
+
         }
         _targetText = GetText((int)Texts.NPCTalkText);
     }

@@ -1,53 +1,29 @@
 {
-  "village": "15세기 유럽 마을. 쓰라린 느낌이 느껴지는 어두운 숲으로 둘러싸인 마을. 사람들은 무서움에 질린 표정을 지으며 마을 일상을 이어가고 있다.",
-  "event": "숲 속에서 갑자기 피어나는 괴이한 소리와 함께 마을 주민들이 죽음에 이르는 이상한 질병에 걸린 사례가 발생했다.",
+  "village": "고요한 숲에 둘러싸인 작은 마을, 주민들이 모여 기도하는 성당과 중앙 광장, 그리고 생활용품을 파는 상점들이 조용한 생활을 이루고 있다.",
+  "event": "한 달 전, 마을의 우물이 진홍빛으로 변했다. 마을 사람들은 공포에 빠져 그것을 마녀의 저주로 추측하였다.",
   "suspects": [
     {
-      "name": "가브리엘",
-      "gender": "male",
+      "name": "헬가",
+      "gender": "female",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
         "emotion": "rational"
       },
-      "occupation": "목수",
-      "statement": "나는 숲 속에서 이상한 여자를 본 적이 없다. 내가 아는 사람들은 다 괴짜가 아니야.",
+      "occupation": "약초상",
+      "statement": "늙은 여인 헬가는 이성적인 성격을 가진 고요한 약초상이다. 그녀가 주변 숲에서 약초를 캐는 동안에만 우물이 붉게 변했다는 소문이 귓속말처럼 퍼지고 있다.",
       "is_witch": false
     },
     {
-      "name": "엠마",
+      "name": "엘리자베트",
       "gender": "female",
-      "age_group": "young",
+      "age_group": "old",
       "personality": {
         "behavior": "extroverted",
         "emotion": "psychopathic"
       },
-      "occupation": "허술러",
-      "statement": "나는 무고한 여자야. 이상한 일들은 나와 상관없어.",
-      "is_witch": true
-    },
-    {
-      "name": "로렌초",
-      "gender": "male",
-      "age_group": "old",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "농부",
-      "statement": "나는 숲을 거의 가본 적이 없어. 그저 나의 일상을 살고 있을 뿐이야.",
-      "is_witch": false
-    },
-    {
-      "name": "베라",
-      "gender": "female",
-      "age_group": "young",
-      "personality": {
-        "behavior": "extroverted",
-        "emotion": "emotional"
-      },
-      "occupation": "세탁부",
-      "statement": "좀 무서운 일들이 일어나고 있어. 내가 무슨 관련이 있겠어?",
+      "occupation": "감정인",
+      "statement": "엘리자베트는 사이코패스적인 성격을 가진 노년의 감정인이다. 그녀는 최근에 신비로운 사건들이 발생하기 전, 마을 사람들에게 어둠의 시간이 올 것을 경고하였다.",
       "is_witch": false
     },
     {
@@ -56,10 +32,34 @@
       "age_group": "young",
       "personality": {
         "behavior": "extroverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "대장장이",
+      "statement": "하인리히는 젊은 대장장이로 밝은 성격에 사이코패스 경향이 있다. 그는 불의 힘에 대한 이상한 집착을 보이는데, 이는 일부 마을 사람들에게 불안감을 준다.",
+      "is_witch": false
+    },
+    {
+      "name": "마리아",
+      "gender": "female",
+      "age_group": "young",
+      "personality": {
+        "behavior": "introverted",
         "emotion": "emotional"
       },
-      "occupation": "주방 보조",
-      "statement": "나는 모든 사람들이 행복하길 바랄 뿐. 마을에 무시무시한 것이 있다는 건 처음 들어봤어.",
+      "occupation": "솜직공",
+      "statement": "마리아는 젊고 내성적인 솜직공으로, 감성적인 성격을 가지고 있다. 어린 시절 그녀가 꿈에서 이야기한 우물의 아름다운 붉은 빛이 현실이 된 것이 불안한 마을 사람들에게 의문을 던진다.",
+      "is_witch": true
+    },
+    {
+      "name": "르네",
+      "gender": "male",
+      "age_group": "old",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "rational"
+      },
+      "occupation": "목수",
+      "statement": "르네는 이성적인 성격을 가진 노년의 목수이다. 그는 최근에 목재를 주문한 교회의 십자가를 만드는 일에 어떤 이유에서인지 꺼려하는 모습을 보였다.",
       "is_witch": false
     }
   ]
