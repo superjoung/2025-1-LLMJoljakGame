@@ -40,7 +40,7 @@ public class LLMConnectManager : Singleton<LLMConnectManager>
 
             foreach (var suspect in _currentSetup.suspects)
             {
-                Debug.Log($"용의자: {suspect.name}, 성격: {suspect.personality.behavior}, 감정: {suspect.personality.emotion}");
+                Debug.Log($"용의자: {suspect.name}, 성별: {suspect.gender}, 나이: {suspect.age_group} 성격: {suspect.personality.behavior}, 감정: {suspect.personality.emotion}");
             }
         }
         else
