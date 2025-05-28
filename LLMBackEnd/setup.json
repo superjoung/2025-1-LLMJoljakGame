@@ -1,65 +1,65 @@
 {
-  "village": "15세기 유럽 마을의 분위기는 어두운 숲과 산이 둘러싸인 곳에 자리하고 있으며, 두려움에 떨게 하는 신성한 교회와 작은 집들이 모여 함께 살고 있는 것처럼 보입니다. 이 곳에서는 마녀사냥으로 인한 두려움이 굳어져 있습니다.",
-  "event": "마을에는 최근에 시루를 타고 불을 지르는 이상한 사건이 발생하였습니다. 주민들은 누가 이를 일으켰는지 알아내야 합니다.",
+  "village": "15세기 유럽 마을. 쓰라린 느낌이 느껴지는 어두운 숲으로 둘러싸인 마을. 사람들은 무서움에 질린 표정을 지으며 마을 일상을 이어가고 있다.",
+  "event": "숲 속에서 갑자기 피어나는 괴이한 소리와 함께 마을 주민들이 죽음에 이르는 이상한 질병에 걸린 사례가 발생했다.",
   "suspects": [
     {
-      "name": "알비온",
+      "name": "가브리엘",
       "gender": "male",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
         "emotion": "rational"
       },
-      "occupation": "성직자",
-      "statement": "마녀는 이 마을에 있다. 그리고 그녀의 잔인한 악령이 모든 것을 파괴하고 있다.",
+      "occupation": "목수",
+      "statement": "나는 숲 속에서 이상한 여자를 본 적이 없다. 내가 아는 사람들은 다 괴짜가 아니야.",
       "is_witch": false
     },
     {
-      "name": "마데릭",
+      "name": "엠마",
+      "gender": "female",
+      "age_group": "young",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "허술러",
+      "statement": "나는 무고한 여자야. 이상한 일들은 나와 상관없어.",
+      "is_witch": true
+    },
+    {
+      "name": "로렌초",
       "gender": "male",
       "age_group": "old",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "rational"
+      },
+      "occupation": "농부",
+      "statement": "나는 숲을 거의 가본 적이 없어. 그저 나의 일상을 살고 있을 뿐이야.",
+      "is_witch": false
+    },
+    {
+      "name": "베라",
+      "gender": "female",
+      "age_group": "young",
       "personality": {
         "behavior": "extroverted",
         "emotion": "emotional"
       },
-      "occupation": "농부",
-      "statement": "저는 이 마을에 평화를 찾아주려고 노력하고 있습니다. 마녀는 절대적으로 없습니다.",
+      "occupation": "세탁부",
+      "statement": "좀 무서운 일들이 일어나고 있어. 내가 무슨 관련이 있겠어?",
       "is_witch": false
     },
     {
-      "name": "카타리나",
-      "gender": "female",
-      "age_group": "young",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "psychopathic"
-      },
-      "occupation": "가정주부",
-      "statement": "저는 모든 것을 알고 있어요. 마녀는 바로 내 옆에 있어요.",
-      "is_witch": false
-    },
-    {
-      "name": "루도비크",
+      "name": "하인리히",
       "gender": "male",
       "age_group": "young",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "rational"
+        "emotion": "emotional"
       },
-      "occupation": "목수",
-      "statement": "마녀는 아마도 숲 속에 숨어 있을 거에요. 제가 찾아볼까요?",
-      "is_witch": true
-    },
-    {
-      "name": "엘리자",
-      "gender": "female",
-      "age_group": "young",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "가사부",
-      "statement": "마녀사냥은 억지로 누군가를 몰아내는 것이 아닙니다. 모든 것은 탐구해야만 합니다.",
+      "occupation": "주방 보조",
+      "statement": "나는 모든 사람들이 행복하길 바랄 뿐. 마을에 무시무시한 것이 있다는 건 처음 들어봤어.",
       "is_witch": false
     }
   ]
