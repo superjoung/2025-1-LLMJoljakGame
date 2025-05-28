@@ -1,25 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using DefineEnum.GameModeDefine;
 using System.Linq;
+using LLM;
+using Unity.VisualScripting;
 
 public partial class GameManager : Singleton<GameManager>
 {
-    public int Days = 1;
+    public int Days
+    {
+        get
+        {
+            return _days;
+        }
+        set
+        {
+            _days = value;
+            EvidenceCount = 2;
+        }
+    }
     public bool IsMorning { get { return Days % 2 == 1; } }
     public ParentPrefabs ParentPrefabs;
 
     // 증거 테이블 데이터
     public List<Dictionary<string, object>> EvidenceDatas = new List<Dictionary<string, object>>();
+    // 증거 테이블 저장
+    public List<Clue> TempClueDatas = new List<Clue>();
 
     // 플레이어 증거 담아두기
     public List<string> EvidenceInventory = new List<string>();
-
+        
     protected PlayerMainScreenUI _playerMainScreenUI;
 
     private bool _isMapOpened = false;
+    private int _days = 1;
 
     private void Awake()
     {
@@ -37,6 +52,58 @@ public partial class GameManager : Singleton<GameManager>
         Init();
         EvidenceInventory.Add("E_1");
         EvidenceInventory.Add("E_3");
+        CreateClues();
+        SetClueInSpot();
+    }
+
+    // 임시 증거 생성부분 삭제될 예정
+    private void CreateClues()
+    {
+        List<string> locations = new List<string>() { "숲", "성당", "광장", "우물", "집" };
+        List<string> ids = new List<string>();
+        for(int i = 0; i < EvidenceDatas.Count; i++)
+        {
+            ids.Add(EvidenceDatas[i]["Evidence_ID"].ToString());
+            //Debug.Log($"[INFO]GameManager(CreateClues) - 증거 {ids[i]}가 등록되었습니다.");
+        }
+
+        TempClueDatas.Add(new Clue());
+        TempClueDatas.Add(new Clue());
+        TempClueDatas.Add(new Clue());
+        
+        // 증거 클래스에 등록
+        foreach(Clue child in TempClueDatas)
+        {
+            child.id = ids[Random.Range(0, ids.Count)];
+            child.location = locations[Random.Range(0, locations.Count)];
+            Debug.Log($"[INFO]GameManager(CreateClues) - 증거 {child.id}가 {child.location}에 배치되었습니다.");
+        }
+    }
+
+    private void SetClueInSpot()
+    {
+        // TempClueDatas에서 단서들 전부 안에다 넣어주기
+        foreach(Clue child in TempClueDatas)
+        {
+            foreach(Transform EvidenceSpot in ParentPrefabs.NpcEvidenceBox.transform)
+            {
+                // 증거를 숨겨야하는 장소와 같다면
+                if (EvidenceSpot.GetComponent<EvidenceSpotAttachData>().Name.Contains(child.location))
+                {
+                    Transform currentSpot = EvidenceSpot.GetChild(0);
+                    if(EvidenceSpot.childCount > 1)
+                    {
+                        currentSpot = EvidenceSpot.GetChild(Random.Range(0, currentSpot.childCount));
+                    }
+
+                    // 랜덤으로 뽑은 자식들 컨텐츠 중 Evidence 증거 cs 붙이기
+                    EvidenceObjectAttachData data = currentSpot.GetChild(Random.Range(0, currentSpot.childCount)).AddComponent<EvidenceObjectAttachData>();
+                    // 증거 아이디 넣어주기
+                    data.EvidenceID = child.id;
+                    data.gameObject.tag = "Evidence";
+                }
+            }
+        }
     }
 
     private void Update()
@@ -83,7 +150,7 @@ public partial class GameManager : Singleton<GameManager>
         }
 
         // 탐색 종료 버튼
-        if (Input.GetKeyDown(KeyCode.R) && CurrentGameMode == GameFlowMode.FreeMoveMode)
+        if (Input.GetKeyDown(KeyCode.R) && (CurrentGameMode == GameFlowMode.FreeMoveMode || CurrentGameMode == GameFlowMode.EvidenceMode))
         {
             // 바로 종료
             Timer = 300;

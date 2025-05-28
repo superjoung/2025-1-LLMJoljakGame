@@ -17,7 +17,8 @@ public enum UIName
     FixNPCSelectButtonUI,     // 고정 NPC 대화 NPC 선택
     MiniMapPopUpUI,           // 미니맵 팝업 UI
     EvidenceMiniMapPopUpUI,   // 증거수집 장소 선택 UI
-    HREvidenceFrame           // 심문시 증거 제출 부분
+    HREvidenceFrame,          // 심문시 증거 제출 부분
+    EVEvidenceFrame,          // 증거수집 단계에서 증거 수집시 상단부 UI
 }
 
 public class UIManager : Singleton<UIManager>
