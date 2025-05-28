@@ -66,9 +66,10 @@ public partial class NoneCharacterManager
         TalkList.Add(npc); // 여러명과 대화할 때를 염두해 수정
         CurrentTalkNpcID = TalkList[0].GetComponent<NPCAttachData>().ID;
 
+        npc.GetComponent<NPCAttachData>().Agent.isStopped = true;
+
         GameObject player = GameObject.FindWithTag("Player");
         npc.transform.LookAt(player.transform.position);
-        npc.GetComponent<NPCAttachData>().Agent.isStopped = true;
 
         // 플레이어가 바라보는 각도 조절
         PlayerLookAtToNpc(npc);

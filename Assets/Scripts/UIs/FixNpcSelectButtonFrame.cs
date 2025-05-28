@@ -33,8 +33,8 @@ public class FixNpcSelectButtonFrame : BaseUI
         Bind<TMP_Text>(typeof(Texts));
         Bind<Button>(typeof(Buttons));
 
-        //GetText((int)Texts.NpcName).text = NoneCharacterManager.Instance.GetNpcNameToID(Id);
-        GetText((int)Texts.NpcName).text = NoneCharacterManager.Instance.TempLLMNpcNames[Id];
+        GetText((int)Texts.NpcName).text = NoneCharacterManager.Instance.GetNpcNameToID(Id);
+        //GetText((int)Texts.NpcName).text = NoneCharacterManager.Instance.TempLLMNpcNames[Id];
 
         _selectButton = GetButton((int)Buttons.SelectButton);
         Debug.Log(_selectButton);
