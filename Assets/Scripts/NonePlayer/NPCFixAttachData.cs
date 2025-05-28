@@ -181,7 +181,6 @@ public class NPCFixAttachData : MonoBehaviour
                         VisibleTargets.Add(target);
                     }
                     // 관측한 LLM NPC 아이디 추출 후 이미 관측한 NPC인지 확인
-                    Debug.Log(target.name);
                     int targetID = int.Parse(target.name.Split('_')[1]);
                     if(!NoneCharacterManager.Instance.ObservationCompleted(Id, targetID))
                     {
@@ -195,7 +194,6 @@ public class NPCFixAttachData : MonoBehaviour
                     {
                         SeeNpcIDs.Add(targetID);
                     }
-                    print("raycast hit!");
                     Debug.DrawRay(transform.position, dirToTarget * 10f, Color.red, 5f);
                 }
             }
