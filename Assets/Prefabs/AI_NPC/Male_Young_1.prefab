@@ -72,9 +72,9 @@ GameObject:
   m_Component:
   - component: {fileID: 580323123536252232}
   - component: {fileID: 6840286252264003378}
-  - component: {fileID: 6687448119781534791}
+  - component: {fileID: -7883918200106992471}
   m_Layer: 0
-  m_Name: Male_Middle 2
+  m_Name: Male_Young_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6687448119781534791
+--- !u!114 &-7883918200106992471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Male_Young_Mat
+  m_Name: Female_Young_Mat_2
   m_Shader: {fileID: 4800000, guid: 5fdb92501eac48d4a87329098a14e790, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -59,7 +59,7 @@ Material:
     - _CEL3POWER: 0.15
     - _CEL3SIZE: 0.8
     - _EYESSMOOTHNESS: 0.7
-    - _HAIRSMOOTHNESS: 0.16
+    - _HAIRSMOOTHNESS: 0.191
     - _LEATHER1SMOOTHNESS: 0.515
     - _LEATHER2SMOOTHNESS: 0.506
     - _LEATHER3SMOOTHNESS: 0.3
@@ -78,7 +78,7 @@ Material:
     - _OCCLUSION: 0.5
     - _OTHERSMOOTHNESS: 0.3
     - _SCLERASMOOTHNESS: 0.463
-    - _SKINSMOOTHNESS: 0.294
+    - _SKINSMOOTHNESS: 0.159
     - _SmoothnessOn: 1
     - __dirty: 0
     m_Colors:
@@ -91,7 +91,7 @@ Material:
     - _CLOTH2COLOR1: {r: 1, g: 0, b: 0, a: 0}
     - _CLOTH3COLOR: {r: 0.3490566, g: 0.106353186, b: 0, a: 0}
     - _CLOTH3COLOR1: {r: 0.3962264, g: 0.3391397, b: 0.2710039, a: 0}
-    - _CLOTH4COLOR: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 0}
+    - _CLOTH4COLOR: {r: 0.2924528, g: 0.12674052, b: 0.097668186, a: 0}
     - _CLOTH4COLOR1: {r: 0.2011392, g: 0.3773585, b: 0.3739074, a: 0}
     - _COATOFARMSCOLOR: {r: 1, g: 0, b: 0, a: 0}
     - _EYESCOLOR: {r: 0.003935064, g: 0.009433985, b: 0.0017354974, a: 1}
@@ -100,7 +100,7 @@ Material:
     - _FEATHERS1COLOR1: {r: 0.7735849, g: 0.492613, b: 0.492613, a: 0}
     - _FEATHERS2COLOR: {r: 1, g: 0, b: 0, a: 0}
     - _FEATHERS2COLOR1: {r: 0.6792453, g: 0, b: 0, a: 0}
-    - _HAIRCOLOR: {r: 0.18867922, g: 0.025809899, b: 0.025809899, a: 0}
+    - _HAIRCOLOR: {r: 0.0754717, g: 0.030900678, b: 0.030900678, a: 0}
     - _HAIRCOLOR1: {r: 1, g: 0, b: 0, a: 0}
     - _LEATHER1COLOR: {r: 0.3018868, g: 0.032959573, b: 0, a: 1}
     - _LEATHER1COLOR1: {r: 0.4811321, g: 0.2041155, b: 0.08851016, a: 1}
@@ -124,6 +124,6 @@ Material:
     - _OTHERCOLOR1: {r: 0.5188679, g: 0.4637216, b: 0.3206212, a: 0}
     - _SCLERACOLOR: {r: 0.9056604, g: 0.8159487, b: 0.8159487, a: 0}
     - _SCLERACOLOR1: {r: 0.9056604, g: 0.8159487, b: 0.8159487, a: 0}
-    - _SKINCOLOR: {r: 0.5566038, g: 0.43320578, b: 0.43320578, a: 1}
+    - _SKINCOLOR: {r: 0.4528302, g: 0.24845462, b: 0.20249198, a: 1}
     - _SKINCOLOR1: {r: 2.02193, g: 1.0081, b: 0.6199315, a: 0}
   m_BuildTextureStacks: []
