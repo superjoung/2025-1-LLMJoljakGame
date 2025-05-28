@@ -71,6 +71,16 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
         return FixNpcs[ID];
     }
 
+    public Sprite GetFixNpcPortraitToID(int ID)
+    {
+        if (ID < 0 && TalkList.Count <= ID)
+        {
+            Debug.LogWarning("[Warning] NoneCharacterManager - GetNpcPortraitToID 올바른 인수를 넘기지 않았습니다.");
+            return null;
+        }
+        return FixNpcPortraitList[ID];
+    }
+
     public string GetNpcNameToID(int ID)
     {
         // TEMP : LLM API ID 값으로 전달해서 캐릭터 이름 받아오기
@@ -95,7 +105,7 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     public void NpcSpawn()
     {
         List<int> spawnList = new List<int>();
-        Dictionary<string, int> MeshNameCount = new();
+        Dictionary<string, int> meshNameCount = new();
         for (int i = 0; i < _npcCount; i++)
         {   
             // NPC 위치 조정
@@ -111,15 +121,14 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
             Transform spawnPos = GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.GetChild(spawnInt);
             GameObject npc = ResourceManager.Instance.Instantiate(NPC_PREFABS_PATH, spawnPos.position, GameManager.Instance.ParentPrefabs.NpcBox.transform);
 
-            string MeshPrefabPath = "NPC/AI_NPC/";
-            MeshPrefabPath += LLMConnectManager.Instance.GetSuspectByName(GetNpcNameToID(i)).gender + "_";
-            MeshPrefabPath += LLMConnectManager.Instance.GetSuspectByName(GetNpcNameToID(i)).age_group + "_";
+            string meshPrefabPath = "NPC/AI_NPC/";
+            string prefabName = LLMConnectManager.Instance.GetSuspectByName(GetNpcNameToID(i)).gender + "_" +
+                                LLMConnectManager.Instance.GetSuspectByName(GetNpcNameToID(i)).age_group + "_";
             
-            MeshNameCount.TryAdd(MeshPrefabPath, 0);
-            MeshNameCount[MeshPrefabPath] += 1;
-            MeshPrefabPath += (MeshNameCount[MeshPrefabPath]);
-            ResourceManager.Instance.Instantiate(MeshPrefabPath, npc.transform.position + Vector3.down, npc.transform);
-            
+            meshNameCount.TryAdd(prefabName, 0);
+            meshNameCount[prefabName] += 1;
+            prefabName += meshNameCount[prefabName];
+            ResourceManager.Instance.Instantiate(meshPrefabPath + prefabName, npc.transform.position + Vector3.down, npc.transform);
             npc.name = "NPC_" + i; // id 연결 이후 _스플릿 후 ID만 가져올 예정
             npc.GetComponent<NPCAttachData>().ID = i; // id 연결
             // NPC 오브젝트 리스트 추가

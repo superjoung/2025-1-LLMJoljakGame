@@ -26754,6 +26754,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 8097438013031278729, guid: 56fc6c4642bf3f94b97b0cc1ae928c38, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8174088847874997262, guid: 56fc6c4642bf3f94b97b0cc1ae928c38, type: 3}
       propertyPath: m_Name
       value: ChiefName

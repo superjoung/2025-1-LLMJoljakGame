@@ -27,9 +27,14 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
     {
         CheckButton // 확인 버튼
     }
-    private enum Images
+    private enum ChiefImages
     {
-        Loading
+        Loading,
+        NPCImage1,
+        NPCImage2,
+        NPCImage3,
+        NPCImage4,
+        NPCImage5,
     }
     private bool _isVillageTextOn = true;
     
@@ -37,7 +42,7 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
     {
         Bind<TMP_Text>(typeof(ChiefTexts));
         Bind<Button>(typeof(Buttons));
-        Bind<Image>(typeof(Images));
+        Bind<Image>(typeof(ChiefImages));
         
         GetButton((int)Buttons.CheckButton).gameObject.BindEvent(OnClickCheckButton);
         GetText((int)ChiefTexts.ChiefName).text = "촌장";
@@ -64,6 +69,7 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
             for (int i = 0; i < 5; i++)
             {
                 Suspect suspect = LLMConnectManager.Instance.GetAllSuspects()[i];
+                GetImage((int)ChiefImages.NPCImage1 + i).sprite = LLMConnectManager.Instance.GetNpcPortraitToID(i);
                 GetText((int)ChiefTexts.NPCNameText1 + i).text = suspect.name;
                 string talkText = "직업: " + suspect.occupation + "\n" + '"' + suspect.statement + '"';
                 GetText((int)ChiefTexts.NPCTalkText1 + i).text = talkText;
@@ -79,7 +85,7 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
 
     public void FinishLoading()
     {
-        GetImage((int)Images.Loading).gameObject.SetActive(false);
+        GetImage((int)ChiefImages.Loading).gameObject.SetActive(false);
         GetButton((int)Buttons.CheckButton).gameObject.SetActive(true);
         GetText((int)ChiefTexts.ChiefName).transform.parent.gameObject.SetActive(true);   
     }
