@@ -4,6 +4,7 @@ using LLM;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ChiefTalkPanelUI : NPCTalkPanelUI
 {
@@ -26,12 +27,17 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
     {
         CheckButton // 확인 버튼
     }
+    private enum Images
+    {
+        Loading
+    }
     private bool _isVillageTextOn = true;
     
     public override void Init()
     {
         Bind<TMP_Text>(typeof(ChiefTexts));
         Bind<Button>(typeof(Buttons));
+        Bind<Image>(typeof(Images));
         
         GetButton((int)Buttons.CheckButton).gameObject.BindEvent(OnClickCheckButton);
         GetText((int)ChiefTexts.ChiefName).text = "촌장";
@@ -43,6 +49,8 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
             GetText((int)ChiefTexts.NPCTalkText1 + i).text = "<UNK>";
         }
         GetText((int)ChiefTexts.NPCNameText1).transform.parent.parent.gameObject.SetActive(false);
+        GetButton((int)Buttons.CheckButton).gameObject.SetActive(false);
+        GetText((int)ChiefTexts.ChiefName).transform.parent.gameObject.SetActive(false);
     }
 
     private void OnClickCheckButton(UnityEngine.EventSystems.PointerEventData data)
@@ -65,6 +73,14 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
         else
         {
             // 씬 넘어가기
+            SceneManager.LoadScene("MainScene");
         }
+    }
+
+    public void FinishLoading()
+    {
+        GetImage((int)Images.Loading).gameObject.SetActive(false);
+        GetButton((int)Buttons.CheckButton).gameObject.SetActive(true);
+        GetText((int)ChiefTexts.ChiefName).transform.parent.gameObject.SetActive(true);   
     }
 }
