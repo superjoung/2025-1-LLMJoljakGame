@@ -66,6 +66,24 @@ def plan_full_game_data() -> dict:
         print(route_response)
         return {}
 
+     # 3-1. 루트 정보를 DB에 저장 (NPC별 방문 장소)
+    for npc_name, locations in npc_routes.items():
+        for idx, location in enumerate(locations):
+            memory_text = f"나는 {idx+1}번째에 {location}에 갔다."
+            collection.add(
+                documents=[f"{npc_name}: {memory_text}"],
+                metadatas=[
+                    {
+                        "npc": npc_name,
+                        "type": "route",
+                        "order": idx + 1,
+                        "location": location
+                    }
+                ],
+                ids=[str(uuid.uuid4())]
+            )
+            print(f"[Memory 저장 - 경로] {npc_name}: {memory_text}"
+            
     # 4. 증거 생성
     clue_input = clue_prompt.format(
         witch_name=witch_name,
