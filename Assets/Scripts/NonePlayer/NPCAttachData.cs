@@ -30,6 +30,7 @@ public class NPCAttachData : MonoBehaviour
                 return;
             }
             PopUpTalkUI.ShowText(value);
+            _animator.SetTrigger("Talk");
             _talkText = value;
         }
     }
@@ -103,12 +104,15 @@ public class NPCAttachData : MonoBehaviour
     private Transform _currentDestination = null;
     #endregion
 
+    private Animator _animator;
+    
     private void Start()
     {
         ID = int.Parse(gameObject.name.Split("_")[1]);
         _popUpUI = UIManager.Instance.ShowNPCUI<NPCInteractionPopUpUI>(UIPos);
         _popUpUI.NpcID = ID;
         UINeck.gameObject.SetActive(false);
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void OnEnable()
@@ -145,6 +149,7 @@ public class NPCAttachData : MonoBehaviour
                 CanMove = true;
             }
         }
+        _animator.SetBool("IsWalking", (Agent.hasPath && !Agent.isStopped));
     }
 
     private void OnTriggerEnter(Collider other)
