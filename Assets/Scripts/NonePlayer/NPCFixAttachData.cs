@@ -59,6 +59,7 @@ public class NPCFixAttachData : MonoBehaviour
             }
             PopUpTalkUI.ShowText(value);
             _talkText = value;
+            _animator.SetTrigger("Talk");
         }
     }
 
@@ -70,12 +71,13 @@ public class NPCFixAttachData : MonoBehaviour
     private int _moveCount = 1; // 리스트 인덱스
     private bool _moveFlag = true; // 어느 방향으로 이동할지 결정
     private Transform _currentDestination = null;
-
+    private Animator _animator;
+    
     private void Start()
     {
         // 에이전트 등록
         Agent = GetComponent<NavMeshAgent>();
-
+        _animator = GetComponentInChildren<Animator>();
         // 해당 id를 가진 NPC가 어떤 경로로 이동해야하는지 리스트에 추가
         foreach (Transform child in GameManager.Instance.ParentPrefabs.FixNpcMovePoint.transform.GetChild(Id))
         {
@@ -123,6 +125,8 @@ public class NPCFixAttachData : MonoBehaviour
         {
             _popUpUI.gameObject.SetActive(true);
         }
+        
+        _animator.SetBool("IsWalking", (Agent.hasPath && !Agent.isStopped));
     }
 
     private void AroundMove()
