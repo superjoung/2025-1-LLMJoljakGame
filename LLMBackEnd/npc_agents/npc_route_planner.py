@@ -82,7 +82,7 @@ def plan_full_game_data() -> dict:
                 ],
                 ids=[str(uuid.uuid4())]
             )
-            print(f"[Memory 저장 - 경로] {npc_name}: {memory_text}"
+            print(f"[Memory 저장 - 경로] {npc_name}: {memory_text}")
             
     # 4. 증거 생성
     clue_input = clue_prompt.format(

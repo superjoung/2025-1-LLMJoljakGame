@@ -10,7 +10,6 @@ namespace ChiefScene
         
         public void Awake()
         {
-            StartCoroutine(LLMConnectManager.Instance.GetGameSetup(LoadChiefStatement));
             _chiefTalkPanelUI = gameObject.GetComponentInChildren<ChiefTalkPanelUI>();
         }
 
@@ -23,17 +22,6 @@ namespace ChiefScene
         {
             if(FindObjectOfType<GameManager>()) GameManager.Instance.DestroySelf();
             if(FindObjectOfType<NoneCharacterManager>()) NoneCharacterManager.Instance.DestroySelf();
-        }
-
-        private void LoadChiefStatement()
-        {
-            StartCoroutine(LLMConnectManager.Instance.GetChiefStatement(SetChiefDialogue));
-        }
-
-        private void SetChiefDialogue(string statement)
-        {
-            _chiefTalkPanelUI.FinishLoading();
-            _chiefTalkPanelUI.ShowText(statement);
         }
     }
 }

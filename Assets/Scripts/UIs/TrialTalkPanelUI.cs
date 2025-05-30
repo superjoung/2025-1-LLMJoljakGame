@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TrialTalkPanelUI : NPCTalkPanelUI
@@ -34,6 +35,8 @@ public class TrialTalkPanelUI : NPCTalkPanelUI
         CheckButton4,
         CheckButton5,
         LastCheckButton,
+        RestartButton,
+        QuitButton,
     }
 
     private List<string> _lastStatements = new();
@@ -84,7 +87,15 @@ public class TrialTalkPanelUI : NPCTalkPanelUI
                 }
             );
         }
-        
+
+        GetButton((int)Buttons.RestartButton).onClick.AddListener(() => { SceneManager.LoadScene(0); });
+        GetButton((int)Buttons.QuitButton).onClick.AddListener(() =>
+        {
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        });
         GetButton((int)Buttons.LastCheckButton).gameObject.SetActive(false);
         GetButton((int)Buttons.CheckButton1).transform.parent.parent.gameObject.SetActive(false);
         GetText((int)TrialTexts.LastStatementText).transform.parent.gameObject.SetActive(false);

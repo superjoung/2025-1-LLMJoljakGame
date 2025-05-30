@@ -1,41 +1,29 @@
 {
-  "village": "고요한 숲에 둘러싸인 작은 마을, 주민들이 모여 기도하는 성당과 중앙 광장, 그리고 생활용품을 파는 상점들이 조용한 생활을 이루고 있다.",
-  "event": "한 달 전, 마을의 우물이 진홍빛으로 변했다. 마을 사람들은 공포에 빠져 그것을 마녀의 저주로 추측하였다.",
+  "village": "15세기 유럽의 조용한 농촌 마을이다. 안개로 둘러싸인 숲과 중심에는 성당이 위치해 있으며, 집들이 광장 주변을 이루고 있고, 소소한 상점들이 마을문에 몰려있다.",
+  "event": "한 달 전, 어두운 밤, 성당에서 들려오는 놀라운 큰 소리와 함께 성당의 십자가가 불탔다. 이 이후로는 불길한 사건들이 잦아져 마을 사람들이 두려움을 느끼고 있다.",
   "suspects": [
     {
-      "name": "헬가",
-      "gender": "female",
+      "name": "알레산드로",
+      "gender": "male",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
         "emotion": "rational"
       },
-      "occupation": "약초상",
-      "statement": "늙은 여인 헬가는 이성적인 성격을 가진 고요한 약초상이다. 그녀가 주변 숲에서 약초를 캐는 동안에만 우물이 붉게 변했다는 소문이 귓속말처럼 퍼지고 있다.",
+      "occupation": "성당의 수사",
+      "statement": "알레산드로는 노령의 내성적이면서 이성적인 성당의 수사이다. 그는 십자가가 타기 전, 이상한 빛을 보았다는 말을 했다.",
       "is_witch": false
     },
     {
-      "name": "엘리자베트",
-      "gender": "female",
+      "name": "로렌조",
+      "gender": "male",
       "age_group": "old",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "psychopathic"
+        "emotion": "emotional"
       },
-      "occupation": "감정인",
-      "statement": "엘리자베트는 사이코패스적인 성격을 가진 노년의 감정인이다. 그녀는 최근에 신비로운 사건들이 발생하기 전, 마을 사람들에게 어둠의 시간이 올 것을 경고하였다.",
-      "is_witch": false
-    },
-    {
-      "name": "하인리히",
-      "gender": "male",
-      "age_group": "young",
-      "personality": {
-        "behavior": "extroverted",
-        "emotion": "psychopathic"
-      },
-      "occupation": "대장장이",
-      "statement": "하인리히는 젊은 대장장이로 밝은 성격에 사이코패스 경향이 있다. 그는 불의 힘에 대한 이상한 집착을 보이는데, 이는 일부 마을 사람들에게 불안감을 준다.",
+      "occupation": "농부",
+      "statement": "로렌조는 노령의 외향적이며 감성적인 농부이다. 그는 별이 떨어진 그날, 어떤 이가 주황빛을 띄었다는 말을 했다.",
       "is_witch": false
     },
     {
@@ -43,23 +31,35 @@
       "gender": "female",
       "age_group": "young",
       "personality": {
-        "behavior": "introverted",
+        "behavior": "extroverted",
         "emotion": "emotional"
       },
-      "occupation": "솜직공",
-      "statement": "마리아는 젊고 내성적인 솜직공으로, 감성적인 성격을 가지고 있다. 어린 시절 그녀가 꿈에서 이야기한 우물의 아름다운 붉은 빛이 현실이 된 것이 불안한 마을 사람들에게 의문을 던진다.",
+      "occupation": "꽃상인",
+      "statement": "마리아는 젊고 외향적이며 감성적인 꽃상인이다. 그녀는 십자가가 탄 날, 특이한 꽃이 자라났다는 얘기를 했다.",
+      "is_witch": false
+    },
+    {
+      "name": "프란체스코",
+      "gender": "male",
+      "age_group": "young",
+      "personality": {
+        "behavior": "introverted",
+        "emotion": "psychopathic"
+      },
+      "occupation": "목수",
+      "statement": "프란체스코는 젊은 내성적인 목수로, 조금 기괴한 성격을 가지고 있다. 그는 최근 일어난 사건들이 일어나기 전, 불행이 덮치리라고 경고하였다.",
       "is_witch": true
     },
     {
-      "name": "르네",
-      "gender": "male",
+      "name": "베아트리체",
+      "gender": "female",
       "age_group": "old",
       "personality": {
         "behavior": "extroverted",
         "emotion": "rational"
       },
-      "occupation": "목수",
-      "statement": "르네는 이성적인 성격을 가진 노년의 목수이다. 그는 최근에 목재를 주문한 교회의 십자가를 만드는 일에 어떤 이유에서인지 꺼려하는 모습을 보였다.",
+      "occupation": "곡물 상인",
+      "statement": "베아트리체는 노년의 외향적인 곡물 상인이며, 이성적인 성격을 가지고 있다. 그녀는 사건이 일어난 기도 모임에서는 부족한 곡물의 비밀을 알고 있다고 말했다.",
       "is_witch": false
     }
   ]

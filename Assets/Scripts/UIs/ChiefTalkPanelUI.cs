@@ -25,7 +25,9 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
     }
     private enum Buttons
     {
-        CheckButton // 확인 버튼
+        CheckButton,
+        StartButton,
+        ExitButton,
     }
     private enum ChiefImages
     {
@@ -35,6 +37,7 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
         NPCImage3,
         NPCImage4,
         NPCImage5,
+        Logo,
     }
     private bool _isVillageTextOn = true;
     
@@ -45,6 +48,19 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
         Bind<Image>(typeof(ChiefImages));
         
         GetButton((int)Buttons.CheckButton).gameObject.BindEvent(OnClickCheckButton);
+        GetButton((int)Buttons.StartButton).onClick.AddListener(() =>
+        {
+            StartCoroutine(LLMConnectManager.Instance.GetGameSetup(LoadChiefStatement));
+            GetImage((int)ChiefImages.Logo).gameObject.SetActive(false);
+            GetImage((int)ChiefImages.Loading).gameObject.SetActive(true);
+        });
+        GetButton((int)Buttons.ExitButton).onClick.AddListener(() =>
+        {
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        });
         GetText((int)ChiefTexts.ChiefName).text = "촌장";
         _targetText = GetText((int)ChiefTexts.ChiefText);
 
@@ -54,10 +70,22 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
             GetText((int)ChiefTexts.NPCTalkText1 + i).text = "<UNK>";
         }
         GetText((int)ChiefTexts.NPCNameText1).transform.parent.parent.gameObject.SetActive(false);
+        GetImage((int)ChiefImages.Loading).gameObject.SetActive(false);
         GetButton((int)Buttons.CheckButton).gameObject.SetActive(false);
         GetText((int)ChiefTexts.ChiefName).transform.parent.gameObject.SetActive(false);
     }
 
+    private void LoadChiefStatement()
+    {
+        StartCoroutine(LLMConnectManager.Instance.GetChiefStatement(SetChiefDialogue));
+    }
+
+    private void SetChiefDialogue(string statement)
+    {
+        FinishLoading();
+        ShowText(statement);
+    }
+    
     private void OnClickCheckButton(UnityEngine.EventSystems.PointerEventData data)
     {
         if (_isVillageTextOn)
