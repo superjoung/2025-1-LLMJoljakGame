@@ -12914,8 +12914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f3ec46e324d0348b9eb5854444cf32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Days: 1
   ParentPrefabs: {fileID: 0}
+  ClueDatas: []
   EvidenceInventory: []
   EvidenceSpotName: House1
   HearingNpcID: -1
@@ -42727,6 +42727,7 @@ MonoBehaviour:
   NpcSpawnBox: {fileID: 608378616}
   FixNpcBox: {fileID: 495509336}
   FixNpcMovePoint: {fileID: 1508196539}
+  NpcEvidenceBox: {fileID: 0}
 --- !u!1001 &1449885095
 PrefabInstance:
   m_ObjectHideFlags: 0
