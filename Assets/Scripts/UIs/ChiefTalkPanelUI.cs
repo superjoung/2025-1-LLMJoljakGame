@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using LLM;
 using UnityEngine;
@@ -46,6 +47,11 @@ public class ChiefTalkPanelUI : NPCTalkPanelUI
         Bind<TMP_Text>(typeof(ChiefTexts));
         Bind<Button>(typeof(Buttons));
         Bind<Image>(typeof(ChiefImages));
+        
+        foreach (Buttons btnEnum in Enum.GetValues(typeof(Buttons)))
+        {
+            GetButton((int)btnEnum).onClick.AddListener(()=>{ SoundManager.Instance.PlaySound2D("SFX_3"); });
+        }
         
         GetButton((int)Buttons.CheckButton).gameObject.BindEvent(OnClickCheckButton);
         GetButton((int)Buttons.StartButton).onClick.AddListener(() =>

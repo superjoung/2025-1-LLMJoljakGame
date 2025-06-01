@@ -27,7 +27,6 @@ public class SoundManager : Singleton<SoundManager>
             clipsDic.Add(clip.name, clip);
         }
         instantiatedSounds = new List<TemporarySoundPlayer>();
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
         OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
@@ -36,9 +35,21 @@ public class SoundManager : Singleton<SoundManager>
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
+    {        
         Debug.Log("Load");
         instantiatedSounds.Clear();
+        switch (scene.name)
+        {
+            case "ChiefScene":
+                Instance.PlaySound2D("ChiefBGM", 0, true, SoundType.BGM);
+                break;
+            case "MainScene":
+                Instance.PlaySound2D("MainBGM", 0, true, SoundType.BGM);
+                break;
+            case "TrialScene":
+                Instance.PlaySound2D("TrialBGM", 0, true, SoundType.BGM);
+                break;
+        }
     }
 
     private AudioClip GetClip(string clipName)

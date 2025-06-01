@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -50,6 +51,12 @@ public class TrialTalkPanelUI : NPCTalkPanelUI
         Bind<Button>(typeof(Buttons));
         Bind<Image>(typeof(TrialImages));
         StartCoroutine(LLMConnectManager.Instance.GetFinalStatements(SetFinalStatements));
+        
+        foreach (Buttons btnEnum in Enum.GetValues(typeof(Buttons)))
+        {
+            GetButton((int)btnEnum).onClick.AddListener(()=>{ SoundManager.Instance.PlaySound2D("SFX_3"); });
+        }
+
         for (int i = 0; i < 5; i++)
         {
             int idx = i;
