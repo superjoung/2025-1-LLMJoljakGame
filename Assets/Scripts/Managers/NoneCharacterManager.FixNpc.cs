@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DefineEnum.SpotNameDefine;
+using static UnityEngine.GraphicsBuffer;
 
 public partial class NoneCharacterManager
 {
@@ -106,6 +107,8 @@ public partial class NoneCharacterManager
         GetFixTalkString(GetTalkStartText(npc.GetComponent<NPCFixAttachData>().StandingSpotName));
 
         npc.transform.LookAt(player.transform.position);
+
+        npc.GetComponent<NPCFixAttachData>().UINeck.localEulerAngles = new Vector3(0, 30f, 0);
 
         // 플레이어가 바라보는 각도 조절
         PlayerLookAtToNpc(npc);

@@ -22,6 +22,7 @@ public partial class GameManager : Singleton<GameManager>
     }
     public bool IsMorning { get { return Days % 2 == 1; } }
     public ParentPrefabs ParentPrefabs;
+    public Transform PlayerSpawnPosition;
 
     // 증거 테이블 데이터
     public List<Dictionary<string, object>> EvidenceDatas = new List<Dictionary<string, object>>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class NPCTalkPanelUI : BaseUI
 {
@@ -23,10 +24,20 @@ public class NPCTalkPanelUI : BaseUI
     private float _textDelay = 0.12f; // 텍스트가 나오는 속도
     private bool _printEnd = false;
     protected TMP_Text _targetText;
+    private List<GameObject> _hideList = new List<GameObject>();
 
     public void Awake()
     {
         Init();
+    }
+
+    public void OnDisable()
+    {
+        foreach (GameObject child in _hideList)
+        {
+            child.gameObject.SetActive(true);
+        }
+        _hideList.Clear();
     }
 
     public override void Init()
@@ -73,5 +84,14 @@ public class NPCTalkPanelUI : BaseUI
         }
         _printEnd = true;
         NoneCharacterManager.Instance.CanPlayerEnterText = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != "TalkRange" && other.tag != "LLMNpc" && other.tag != "FixNpc")
+        {
+            _hideList.Add(other.gameObject);
+            other.gameObject.SetActive(false);
+        }
     }
 }

@@ -78,6 +78,8 @@ public partial class NoneCharacterManager
         GetTalkString("안녕하세요! 심판관님!");
 
         npc.transform.LookAt(player.transform.position);
+        
+        npc.GetComponent<NPCAttachData>().UINeck.localEulerAngles = new Vector3(0, 30f, 0);
 
         // 플레이어가 바라보는 각도 조절
         PlayerLookAtToNpc(npc);
@@ -98,8 +100,10 @@ public partial class NoneCharacterManager
             seePoint = npc.GetComponent<NPCAttachData>().SeePoint;
         }
 
-        player.transform.LookAt(seePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
-        player.GetComponent<PlayerMove>().PlayerHead.transform.LookAt(seePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
+        //player.transform.LookAt(seePoint.position - (new Vector3(0, npc.transform.position.y, 0) - new Vector3(0, player.transform.position.y, 0)));
+        player.transform.LookAt(seePoint.position);
+
+        player.GetComponent<PlayerMove>().PlayerHead.transform.LookAt(seePoint.position);
     }
 
     // ID에 일치하는 NPC에게 대화 문장 넘겨주기
