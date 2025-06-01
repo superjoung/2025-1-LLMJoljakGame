@@ -14,12 +14,13 @@ public class PlayerEvidenceMove : MonoBehaviour
     private TouchUtils.TouchState _touchState = TouchUtils.TouchState.None;
     private Vector2 _touchPos;
     private List<GameObject> _getEvidences = new List<GameObject>();
-
+    private Animator _animator;
     private bool _canFind = false;
 
     private void Awake()
     {
         _agent = transform.GetComponent<NavMeshAgent>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -53,7 +54,9 @@ public class PlayerEvidenceMove : MonoBehaviour
             {
                 UIManager.Instance.ShowPopupUI<GetNotEvidencePopUpUI>();
             }
-        }
+        }        
+        
+        _animator.SetBool("IsWalking", (_agent.hasPath && !_agent.isStopped));
     }
 
     private void OnTriggerEnter(Collider other)
