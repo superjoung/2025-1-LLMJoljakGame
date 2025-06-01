@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         switch (GameManager.Instance.CurrentGameMode)
         {
             case GameFlowMode.FreeMoveMode:
-                _playerMove.CanPlayerAction = true;
+                //_playerMove.CanPlayerAction = true;
                 // LLM NPC 먼저 검사 후 대화 시도
                 if (NoneCharacterManager.Instance.CanTalkNpcCount != 0)
                 {

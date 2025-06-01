@@ -68,6 +68,7 @@ public partial class GameManager
             {
                 // 캐릭터 움직임 멈추기 + 미니맵과 함께 증거 모드 돌입
                 UIManager.Instance.ShowPopupUI<EvidenceMiniMapPopUpUI>();
+                GameObject.FindWithTag("Player").GetComponent<PlayerMove>().CanPlayerAction = false;
                 Timer = 0;
             }
         }
@@ -96,6 +97,7 @@ public partial class GameManager
                 {
                     CurrentGameMode = GameFlowMode.FreeMoveMode;
                     UIManager.Instance.ShowPopupUI<EvidenceMiniMapPopUpUI>();
+                    GameObject.FindWithTag("Player").GetComponent<PlayerMove>().CanPlayerAction = false;
                     Timer = 0;
                 }
             }
@@ -303,6 +305,7 @@ public partial class GameManager
     private void FreeMoveInit()
     {
         FreeMovePlayer.SetActive(true);
+        GameObject.FindWithTag("Player").GetComponent<PlayerMove>().CanPlayerAction = true;
     }
     private void FreeMoveEnd()
     {
