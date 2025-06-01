@@ -217,32 +217,4 @@ public class NPCFixAttachData : MonoBehaviour
             SeeNpcIDs.Remove(npcId);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            CanTalkStart = true;
-            Debug.Log($"{Id} NCP에게 {other.gameObject.name} In.");
-            UINeck.gameObject.SetActive(true);
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            UINeck.LookAt(other.transform.position);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            CanTalkStart = false;
-            Debug.Log($"{Id} NCP에게 {other.gameObject.name} Out.");
-            UINeck.gameObject.SetActive(false);
-        }
-    }
 }

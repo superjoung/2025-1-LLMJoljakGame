@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5436692315251359918}
   m_Layer: 0
   m_Name: NPCTalkText
-  m_TagString: Untagged
+  m_TagString: TalkPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 6619959973609386960}
   m_Layer: 0
   m_Name: TalkBackGround
-  m_TagString: Untagged
+  m_TagString: TalkPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 8583435245810849827}
   m_Layer: 0
   m_Name: NPCImage
-  m_TagString: Untagged
+  m_TagString: TalkPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 3698006865593404559}
   m_Layer: 0
   m_Name: NPCTalkPanelUI
-  m_TagString: Untagged
+  m_TagString: TalkPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -404,7 +404,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1.4, z: 1}
+  m_Size: {x: 2.5, y: 1.4, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3698006865593404559
 Rigidbody:
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 4043547866869067719}
   m_Layer: 0
   m_Name: NPCNameText
-  m_TagString: Untagged
+  m_TagString: TalkPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

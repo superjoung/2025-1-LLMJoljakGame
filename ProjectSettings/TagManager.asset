@@ -10,6 +10,9 @@ TagManager:
   - FixNpc
   - LLMNpc
   - Evidence
+  - TempEvidence
+  - TalkPanel
+  - TalkRange
   layers:
   - Default
   - TransparentFX
