@@ -15,6 +15,8 @@ public class PlayerEvidenceMove : MonoBehaviour
     private Vector2 _touchPos;
     private List<GameObject> _getEvidences = new List<GameObject>();
 
+    private bool _canFind = false;
+
     private void Awake()
     {
         _agent = transform.GetComponent<NavMeshAgent>();
@@ -44,10 +46,10 @@ public class PlayerEvidenceMove : MonoBehaviour
                 UIManager.Instance.ShowPopupUI<GetEvidencePopUpUI>().EvidenceID = data.EvidenceID;
                 Destroy(data);
                 GameManager.Instance.EvidenceInventory.Add(data.EvidenceID);
-                _getEvidences[0].tag = "Untagged";
+                _getEvidences[0].tag = "TempEvidence";
                 _getEvidences.RemoveAt(0);
             }
-            else
+            else if(_canFind)
             {
                 UIManager.Instance.ShowPopupUI<GetNotEvidencePopUpUI>();
             }
@@ -60,6 +62,11 @@ public class PlayerEvidenceMove : MonoBehaviour
         {
             _getEvidences.Add(other.gameObject);
         }
+
+        if(other.tag == "TempEvidence")
+        {
+            _canFind = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -70,6 +77,11 @@ public class PlayerEvidenceMove : MonoBehaviour
             {
                 _getEvidences.Remove(other.gameObject);
             }
+        }
+
+        if (other.tag == "TempEvidence")
+        {
+            _canFind = false;
         }
     }
 }

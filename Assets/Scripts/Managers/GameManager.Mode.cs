@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DefineEnum.GameModeDefine;
 using UnityEngine.SceneManagement;
+using DefineEnum.SpotNameDefine;
 
 public partial class GameManager
 {
@@ -54,6 +55,7 @@ public partial class GameManager
 
     private GameFlowMode _currentGameMode = GameFlowMode.None;
     private int EvidenceCount = 2;
+    private int _currentEvidenceID = -1;
 
     // 각모드에서 계속 업데이트해야하는 부분 적을 예정
     private void ModeUpdate()
@@ -213,13 +215,16 @@ public partial class GameManager
             // Frame : ID_NpcName or SpotName 수정 필요
             string spotName = child.name.Split("_")[1];
 
-            if(spotName == EvidenceSpotName) // 증거수집을 원하는 지역 이름과 같을 경우
+            if (spotName == EvidenceSpotName) // 증거수집을 원하는 지역 이름과 같을 경우
             {
                 _saveEvidenceSpot = child.gameObject;
                 // 각 올바른 변수끼리 연결
                 GameObject player = ResourceManager.Instance.Instantiate("Player/EvidencePlayer", child.GetChild(1).position, null);
                 PlayerEvidenceMove move = player.GetComponent<PlayerEvidenceMove>();
                 child.GetChild(0).gameObject.SetActive(true);
+                child.GetChild(2).gameObject.SetActive(true);
+                ParentPrefabs.NpcEvidenceBox.transform.GetChild(int.Parse(spotName)).GetChild(0).gameObject.SetActive(true);
+
                 move.UseCamera = child.GetChild(0).GetComponent<Camera>();
                 move.ClickPos = child.GetChild(2);
 
@@ -240,7 +245,10 @@ public partial class GameManager
             child.SetActive(true);
         }
         _saveEvidenceSpot.transform.GetChild(0).gameObject.SetActive(false);
+        _saveEvidenceSpot.transform.GetChild(2).gameObject.SetActive(false);
+        ParentPrefabs.NpcEvidenceBox.transform.GetChild(int.Parse(EvidenceSpotName)).GetChild(0).gameObject.SetActive(false);
         EvidenceSpotName = "";
+        FreeMovePlayer.transform.position = PlayerSpawnPosition.position;
     }
     #endregion
 
