@@ -25,7 +25,7 @@ Please generate the full setup for the scenario based on the following constrain
    - name: Generate a diverse set of names that sound like 15th-century European villagers. Write the names using Korean phonetic transcription. Use a large variety of historically plausible names. Do not reuse names or follow fixed examples. Be creative and consistent with the setting. Do not rely on any specific example. Names must vary significantly in every generation. Do not use Korean-style names like "김순자", or poetic names like "하얀눈"    
    - gender: male / female
    - age_group: young / old
-   - personality (behavior: extroverted/introverted, emotion: rational/emotional/psychopathic)
+   - personality (behavior: extroverted/introverted, emotion: timid/suspicious/cheerful/devout/talkative/indifferent/hot-tempered/secretive/depressed/dull-minded/gullible/grumpy/sleepy/pessimistic)
    - occupation (in Korean)
    - statement ( Write two short Korean sentences about this character.
 

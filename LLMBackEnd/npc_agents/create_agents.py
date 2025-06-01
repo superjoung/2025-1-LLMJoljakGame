@@ -25,10 +25,40 @@ BEHAVIOR_DESC = {
     "introverted": "quiet and reserved"
 }
 EMOTION_DESC = {
-    "rational": "logical and calm",
-    "emotional": "sensitive and expressive",
-    "psychopathic": "cold and manipulative"
+     "timid": "Easily frightened and speaks hesitantly, often avoiding direct eye contact.",
+    "suspicious": "Distrustful and defensive, often implying hidden motives in others.",
+    "cheerful": "Lighthearted, friendly, and speaks with a warm, upbeat tone.",
+    "devout": "Deeply religious, often references faith or divine justice when speaking.",
+    "talkative": "Speaks at length and without pause, often digressing or overexplaining.",
+    "indifferent": "Uninterested and flat in tone, responds briefly or lazily.",
+    "hot-tempered": "Easily angered, speaks in sharp or frustrated tones.",
+    "secretive": "Carefully avoids details, speaks cautiously and with vague phrases.",
+    "depressed": "Low energy and gloomy, often pessimistic or resigned in tone.",
+    "dull-minded": "Due to lack of intelligence, they have difficulty understanding speech or situations. Slow to respond, uses simple words or confused logic.",
+    "gullible": "Easily influenced, repeats rumors or believes questionable ideas.",
+    "grumpy": "Annoyed by questions, dismissive, sighs or complains often.",
+    "sleepy": "Speaks slowly and yawns often, loses focus or forgets what was asked.",
+    "pessimistic": "Sees the worst in every situation, often fatalistic or hopeless."
 }
+
+# 성격 → 말투 맵
+TONE_STYLE = {
+    "timid": "존댓말",
+    "suspicious": "반말",
+    "cheerful": "반말",
+    "devout": "존댓말",
+    "talkative": "반말",
+    "indifferent": "반말",
+    "hot-tempered": "반말",
+    "secretive": "존댓말",
+    "depressed": "존댓말",
+    "dull-minded": "반말",
+    "gullible": "반말",
+    "grumpy": "반말",
+    "sleepy": "반말",
+    "pessimistic": "존댓말"
+}
+
 
 def load_template(path: str) -> PromptTemplate:
     with open(path, "r", encoding="utf-8") as f:
@@ -48,7 +78,8 @@ def create_npc_node(npc, template: PromptTemplate):
         truth_or_lie="lying" if is_witch else "truthful",
         truth_or_lie_detail="You are the witch and must lie." if is_witch else "You are innocent and telling the truth.",
         behavior_desc=BEHAVIOR_DESC[behavior],
-        emotion_desc=EMOTION_DESC[emotion]
+        emotion_desc=EMOTION_DESC[emotion],
+        tone_style=TONE_STYLE[emotion]
     )
 
     def node_func(state: GameState) -> GameState:

@@ -7,6 +7,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph
 from npc_agents.create_agents import BEHAVIOR_DESC, EMOTION_DESC
+from npc_agents.create_agents import TONE_STYLE
 from npc_agents.npc_memory import npc_state
 import chromadb
 from chromadb.config import Settings
@@ -274,7 +275,8 @@ def answer_node(state: GameState) -> GameState:
         behavior_desc=BEHAVIOR_DESC[behavior],
         emotion_desc=EMOTION_DESC[emotion],
         gender=gender,
-        age_group=age_group
+        age_group=age_group,
+        tone_style=TONE_STYLE[emotion]
     )
 
     response = llm_respond.invoke(prompt)
