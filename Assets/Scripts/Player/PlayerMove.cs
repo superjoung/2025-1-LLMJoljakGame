@@ -35,17 +35,20 @@ public class PlayerMove : MonoBehaviour
     private float _mouseX = 0f; // 좌우 회전값
     private float _mouseY = 0f; // 위아래 회전값을 담을 변수
     private bool _canPlayerAction;
+    private Animator _animator;
 
     private void Start()
     {
         _characterController = gameObject.GetComponent<CharacterController>();
         CanPlayerAction = true;
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
     {
         if(GameManager.Instance.CurrentGameMode != GameFlowMode.HearingMode)
-            Move();
+            Move();        
+        _animator.SetBool("IsWalking", (_characterController.velocity != Vector3.zero));
     }
 
     private void Move()
