@@ -47,12 +47,6 @@ public class EVEvidenceFrame : BaseUI
         }
 
         // 이벤트 등록
-        GetButton((int)Buttons.SelectButton).gameObject.BindEvent(OnClickEvidenceButton);
         GetText((int)Texts.EvidenceName).text = GameManager.Instance.GetEvidenceDatas(EvidenceID)[1];
-    }
-
-    public void OnClickEvidenceButton(PointerEventData data)
-    {
-        NoneCharacterManager.Instance.SaveEvidenceData = EvidenceID;
     }
 }
