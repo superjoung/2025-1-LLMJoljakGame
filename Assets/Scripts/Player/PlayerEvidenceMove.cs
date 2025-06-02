@@ -55,7 +55,7 @@ public class PlayerEvidenceMove : MonoBehaviour
                 GameManager.Instance.EvidenceInventory.Add(data.EvidenceID);
                 _getEvidences[0].tag = "TempEvidence";
                 _mainScreen.InputEvidenceData(data.EvidenceID);
-                _getEvidences.RemoveAt(0);
+                _getEvidences.Clear();
             }
             else if(_canFind)
             {
