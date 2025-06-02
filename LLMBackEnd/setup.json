@@ -1,6 +1,6 @@
 {
-  "village": "15세기 유럽의 조용한 농촌 마을이다. 안개로 둘러싸인 숲과 중심에는 성당이 위치해 있으며, 집들이 광장 주변을 이루고 있고, 소소한 상점들이 마을문에 몰려있다.",
-  "event": "한 달 전, 어두운 밤, 성당에서 들려오는 놀라운 큰 소리와 함께 성당의 십자가가 불탔다. 이 이후로는 불길한 사건들이 잦아져 마을 사람들이 두려움을 느끼고 있다.",
+  "village": "15세기 유럽의 한 작은 마을. 높은 산성 아래 위치해 있으며, 중심에는 석회로 만들어진 작은 성당이 자리잡고 있다. 숲으로 둘러싸인 이 마을은 고요하고 평화로운 일상을 보내던 중 그림자가 드리운다.",
+  "event": "매일 밤, 성당에서 독특한 피리 소리가 들려왔다. 그 소리를 듣고 나면 아침에 이상한 질병에 걸린 동물들이 마을 곳곳에서 발견되었다. 두려움에 휩싸인 마을 사람들은 누군가를 의심하기 시작했다.",
   "suspects": [
     {
       "name": "알레산드로",
@@ -8,58 +8,58 @@
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
-        "emotion": "rational"
+        "emotion": "suspicious"
       },
-      "occupation": "성당의 수사",
-      "statement": "알레산드로는 노령의 내성적이면서 이성적인 성당의 수사이다. 그는 십자가가 타기 전, 이상한 빛을 보았다는 말을 했다.",
+      "occupation": "재단사",
+      "statement": "냉소적인 성격의 재단사 알레산드로는 평소 마을 사람들과의 접촉을 피한다. 그는 밤마다 성당 근처에서 복잡한 모양의 천 조각들을 발견했다는 말을 퍼뜨렸다.",
       "is_witch": false
     },
     {
-      "name": "로렌조",
+      "name": "루이지",
       "gender": "male",
       "age_group": "old",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "emotional"
+        "emotion": "hot-tempered"
       },
-      "occupation": "농부",
-      "statement": "로렌조는 노령의 외향적이며 감성적인 농부이다. 그는 별이 떨어진 그날, 어떤 이가 주황빛을 띄었다는 말을 했다.",
+      "occupation": "대장장이",
+      "statement": "성질이 더운 노인 대장장이 루이지는 흔히 마을 사람들과 언짢아하는 모습을 보여준다. 그는 동물들이 이상하게 행동하는 것은 마을의 누군가 때문이라고 주장한다.",
       "is_witch": false
     },
     {
-      "name": "마리아",
+      "name": "클라라",
       "gender": "female",
       "age_group": "young",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "emotional"
+        "emotion": "cheerful"
       },
-      "occupation": "꽃상인",
-      "statement": "마리아는 젊고 외향적이며 감성적인 꽃상인이다. 그녀는 십자가가 탄 날, 특이한 꽃이 자라났다는 얘기를 했다.",
-      "is_witch": false
+      "occupation": "가게 주인",
+      "statement": "마을에서 장사를 하는 젊은 여성 클라라는 사람들과 어울리는 것을 좋아한다. 그러나 최근 그녀는 선심쓰며 동물들을 구해주는 일이 늘었다는 소문이 돌고 있다.",
+      "is_witch": true
     },
     {
-      "name": "프란체스코",
+      "name": "피에트로",
       "gender": "male",
       "age_group": "young",
       "personality": {
         "behavior": "introverted",
-        "emotion": "psychopathic"
+        "emotion": "timid"
       },
       "occupation": "목수",
-      "statement": "프란체스코는 젊은 내성적인 목수로, 조금 기괴한 성격을 가지고 있다. 그는 최근 일어난 사건들이 일어나기 전, 불행이 덮치리라고 경고하였다.",
-      "is_witch": true
+      "statement": "조용한 성격의 젊은 목수 피에트로는 말없이 일에 열중한다. 그는 최근 이상한 피리 소리를 듣고 나서부터 자신의 고양이가 사라졌다고 주장한다.",
+      "is_witch": false
     },
     {
-      "name": "베아트리체",
+      "name": "마리아나",
       "gender": "female",
       "age_group": "old",
       "personality": {
-        "behavior": "extroverted",
-        "emotion": "rational"
+        "behavior": "introverted",
+        "emotion": "gullible"
       },
-      "occupation": "곡물 상인",
-      "statement": "베아트리체는 노년의 외향적인 곡물 상인이며, 이성적인 성격을 가지고 있다. 그녀는 사건이 일어난 기도 모임에서는 부족한 곡물의 비밀을 알고 있다고 말했다.",
+      "occupation": "요리사",
+      "statement": "마을 요리사인 노년의 여성 마리아나는 대부분 시간을 주방에서 보낸다. 그녀가 요리하는 음식 중 몇몇은 마냥 이상한 맛이 난다는 소문이 있다.",
       "is_witch": false
     }
   ]

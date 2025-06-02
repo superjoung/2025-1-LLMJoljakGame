@@ -166,4 +166,19 @@ public partial class GameManager : Singleton<GameManager>
             NoneCharacterManager.Instance.NoneCharacterStart();
         }
     }
+
+    public void SetLoadingActive(bool isActive)
+    {
+        if (!isActive)
+        {
+            NoneCharacterManager.Instance.NoneCharacterStart();
+        }
+
+        Time.timeScale = isActive ? 0 : 1;
+        GameObject loadingUI = GameObject.Find("LoadingUI");
+        if (loadingUI)
+        {
+            loadingUI.transform.Find("Loading").gameObject.SetActive(isActive);
+        }
+    }
 }
