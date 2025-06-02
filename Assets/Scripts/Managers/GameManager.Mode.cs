@@ -84,10 +84,12 @@ public partial class GameManager
                 {
                     CurrentGameMode = GameFlowMode.FreeMoveMode;
                     Days += 1;
+                    GameManager.Instance.SetLoadingActive(true);
                     StartCoroutine(LLMConnectManager.Instance.SetNPCTurnData(((routes, clues) =>
                     {
                         NoneCharacterManager.Instance.MoveSpotSetting(routes);
                         GameManager.Instance.SetClueData(clues);
+                        GameManager.Instance.SetLoadingActive(false);
                     })));
                     if(Days == 4) { SceneManager.LoadScene("TrialScene"); }
                     

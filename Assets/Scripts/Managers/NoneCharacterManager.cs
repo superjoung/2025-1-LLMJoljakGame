@@ -41,10 +41,12 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
         FixNPCSpawn();
         FixNpcInit();
         
+        GameManager.Instance.SetLoadingActive(true);
         StartCoroutine(LLMConnectManager.Instance.SetNPCTurnData(((routes, clues) =>
         {
             NoneCharacterManager.Instance.MoveSpotSetting(routes);
             GameManager.Instance.SetClueData(clues);
+            GameManager.Instance.SetLoadingActive(false);
         })));
     }
 
