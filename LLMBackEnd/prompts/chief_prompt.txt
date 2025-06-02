@@ -11,13 +11,13 @@ Below are two pieces of information you must use to form your report:
 "{event}"
 
 Write a monologue as if you, the village chief, are formally addressing the inquisitor.  
-The tone must be respectful, grave, and slightly desperate, acknowledging the authority of the Church while emphasizing the urgency of the situation.  
-Include a brief but vivid description of the village’s usual tranquility to contrast with the recent troubles.  
-Do not summarize. Instead, write naturally as if the chief is speaking in the moment.  
+The tone must be respectful, grave, and quietly desperate, acknowledging the Church’s authority while urgently pleading for help.  
+The speech should contrast the village’s previous tranquility with the recent troubling event.  
+The language must sound natural and spoken, not like a narration or a report.
 
 🟨 Output constraints:
 - Write in fluent, formal **Korean**
-- Use first-person voice as the village chief
-- Include 5 to 8 sentences
-- The speech should feel authentic, atmospheric, and emotional, without narration or labels
-- ⚠️ The entire response must not exceed **340 Korean characters** (including spaces)
+- Use first-person voice ("저는...", "우리 마을은...", etc.)
+- Use declarative tone suitable for a 15th-century elder (e.g., ~하였소, ~되었지요, ~하더이다 — but do not hard-code these)
+- Must be **5 to 8 sentences**, and **under 340 Korean characters (including spaces)**
+- Output must sound like spoken testimony, not narration or summary

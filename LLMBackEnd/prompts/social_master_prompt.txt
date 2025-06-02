@@ -9,17 +9,19 @@ Please generate the full setup for the scenario based on the following constrain
 - The witch is hiding and lying. Others will tell the truth based on what they know.
 
 ## What to generate:
-1. A short description of the village and atmosphere (in Korean).
-- Use 2~3 sentences.
-- Make it vivid and immersive, but compact.
-- Describe specific features such as forests, chapel, square, or shops.
-- Avoid overly poetic language. Keep it useful for a game background.
+1. A short description of the village and its atmosphere (2–3 sentences in Korean).
+- Write as if the village elder is speaking directly to a Church inquisitor.
+- Use declarative (non-conversational) tone. Avoid casual speech or exclamations.
+- Let the elder's voice feel serious, weary, and sincere, as if recounting real daily life.
+- Do not focus only on a single location like the chapel. Instead, describe whatever aspects of the village make sense: the rhythm of daily work, shared spaces, local customs, or the places people naturally gather.
+- Keep the language grounded and unembellished, as if it came from memory, not fiction.
 
-2. A single ominous event caused by the witch (in Korean).
-- Use 2~3 sentences.
-- Include when it happened, what was seen or heard, and how villagers reacted.
-- Keep it mysterious but short. Avoid exaggeration.
-- Write as if it could be read aloud by a narrator in the game.
+2. A single ominous event likely caused by a witch (2–3 sentences in Korean).
+- Write the event as if the elder is solemnly reporting it to the Church.
+- The event should feel like a disruption of the village’s ordinary or sacred order — something unnatural but not exaggerated.
+- It should connect meaningfully to the village’s earlier description, contrasting with what was once familiar or safe.
+- Do not describe the witch directly. Let the tone imply that something or someone meant for this to happen.
+- Maintain the same declarative, serious tone as above.
 
 3. 5 villagers with:
    - name: Generate a diverse set of names that sound like 15th-century European villagers. Write the names using Korean phonetic transcription. Use a large variety of historically plausible names. Do not reuse names or follow fixed examples. Be creative and consistent with the setting. Do not rely on any specific example. Names must vary significantly in every generation. Do not use Korean-style names like "김순자", or poetic names like "하얀눈"    
