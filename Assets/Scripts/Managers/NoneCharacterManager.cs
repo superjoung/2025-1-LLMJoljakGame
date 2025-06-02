@@ -114,17 +114,8 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
         Dictionary<string, int> meshNameCount = new();
         for (int i = 0; i < _npcCount; i++)
         {   
-            // NPC 위치 조정
-            int spawnInt = 0;
-            do
-            {
-                // 임시 테스트 코드
-                //spawnInt = Random.Range(0, 3);
-                spawnInt = Random.Range(0, GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.childCount);
-            } while (spawnList.Contains(spawnInt));
-            spawnList.Add(spawnInt);
             // NPC 소환
-            Transform spawnPos = GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.GetChild(spawnInt);
+            Transform spawnPos = GameManager.Instance.ParentPrefabs.NpcSpawnBox.transform.GetChild(i);
             GameObject npc = ResourceManager.Instance.Instantiate(NPC_PREFABS_PATH, spawnPos.position, GameManager.Instance.ParentPrefabs.NpcBox.transform);
 
             string meshPrefabPath = "NPC/AI_NPC/";
