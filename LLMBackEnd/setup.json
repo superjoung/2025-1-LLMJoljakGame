@@ -1,65 +1,65 @@
 {
-  "village": "15세기 유럽의 한 작은 마을. 높은 산성 아래 위치해 있으며, 중심에는 석회로 만들어진 작은 성당이 자리잡고 있다. 숲으로 둘러싸인 이 마을은 고요하고 평화로운 일상을 보내던 중 그림자가 드리운다.",
-  "event": "매일 밤, 성당에서 독특한 피리 소리가 들려왔다. 그 소리를 듣고 나면 아침에 이상한 질병에 걸린 동물들이 마을 곳곳에서 발견되었다. 두려움에 휩싸인 마을 사람들은 누군가를 의심하기 시작했다.",
+  "village": "제 마을은 작지만 사람들이 밀집해 있으며, 일상은 농사일과 창공에서 열심히 노동하며 흘러갑니다. 중앙 광장에서는 사람들이 모여 이야기를 나누고 상품을 팔며, 종교적인 행사를 진행합니다.",
+  "event": "최근에는 어떤 심술궂은 마법사가 우리 마을에 저주를 던진 것 같습니다. 평범히 살던 소가 갑자기 죽고 충성심 강한 개가 주인을 공격하는 등 이해할 수 없는 일들이 마을 곳곳에서 일어나고 있습니다.",
   "suspects": [
     {
-      "name": "알레산드로",
+      "name": "페터",
       "gender": "male",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
         "emotion": "suspicious"
       },
-      "occupation": "재단사",
-      "statement": "냉소적인 성격의 재단사 알레산드로는 평소 마을 사람들과의 접촉을 피한다. 그는 밤마다 성당 근처에서 복잡한 모양의 천 조각들을 발견했다는 말을 퍼뜨렸다.",
+      "occupation": "대장장이",
+      "statement": "페터는 늙은 대장장이로, 내성적이면서도 의심 많은 성격을 가지고 있습니다. 얼마 전부터 그는 평소에는 자주 찾아가던 이웃들을 피하기 시작했습니다.",
       "is_witch": false
     },
     {
-      "name": "루이지",
+      "name": "다니엘",
       "gender": "male",
       "age_group": "old",
       "personality": {
-        "behavior": "extroverted",
-        "emotion": "hot-tempered"
+        "behavior": "introverted",
+        "emotion": "devout"
       },
-      "occupation": "대장장이",
-      "statement": "성질이 더운 노인 대장장이 루이지는 흔히 마을 사람들과 언짢아하는 모습을 보여준다. 그는 동물들이 이상하게 행동하는 것은 마을의 누군가 때문이라고 주장한다.",
+      "occupation": "마을장",
+      "statement": "다니엘은 마을장으로써 교회에게 헌신적이며 내성적입니다. 하지만 그는 최근 그의 집에서 이상한 소리가 들리기 시작했다고 사람들이 속삭이고 있습니다.",
       "is_witch": false
     },
     {
-      "name": "클라라",
+      "name": "아넬리에",
       "gender": "female",
       "age_group": "young",
       "personality": {
         "behavior": "extroverted",
         "emotion": "cheerful"
       },
-      "occupation": "가게 주인",
-      "statement": "마을에서 장사를 하는 젊은 여성 클라라는 사람들과 어울리는 것을 좋아한다. 그러나 최근 그녀는 선심쓰며 동물들을 구해주는 일이 늘었다는 소문이 돌고 있다.",
-      "is_witch": true
-    },
-    {
-      "name": "피에트로",
-      "gender": "male",
-      "age_group": "young",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "timid"
-      },
-      "occupation": "목수",
-      "statement": "조용한 성격의 젊은 목수 피에트로는 말없이 일에 열중한다. 그는 최근 이상한 피리 소리를 듣고 나서부터 자신의 고양이가 사라졌다고 주장한다.",
+      "occupation": "빵집 주인",
+      "statement": "아넬리에는 젊은 여성이면서도 마을 빵집을 운영하며 활기차게 사람들과 어울립니다. 그러나 최근에는 그녀가 이상한 재료를 찾아다니는 모습이 목격되었다고 합니다.",
       "is_witch": false
     },
     {
-      "name": "마리아나",
+      "name": "알렉",
+      "gender": "male",
+      "age_group": "young",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "hot-tempered"
+      },
+      "occupation": "목수",
+      "statement": "알렉은 젊은 목수로 용감하고 성미가 급한 성격을 가지고 있습니다. 그는 최근 이상한 꿈을 꾸었다며 이야기하면서 사람들에게 공포감을 줍니다.",
+      "is_witch": true
+    },
+    {
+      "name": "마리아",
       "gender": "female",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
-        "emotion": "gullible"
+        "emotion": "grumpy"
       },
-      "occupation": "요리사",
-      "statement": "마을 요리사인 노년의 여성 마리아나는 대부분 시간을 주방에서 보낸다. 그녀가 요리하는 음식 중 몇몇은 마냥 이상한 맛이 난다는 소문이 있다.",
+      "occupation": "뜨개질 사람",
+      "statement": "마리아는 늙은 여성으로 성격이 고집스럽고 매우 불평을 많이 했습니다. 그녀는 최근 이상하게도 소의 죽음에 대해 자신의 뜨개질을 비난하는 사람들을 욕하고 있습니다.",
       "is_witch": false
     }
   ]

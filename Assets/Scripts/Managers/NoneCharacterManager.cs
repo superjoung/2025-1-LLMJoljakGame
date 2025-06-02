@@ -55,6 +55,7 @@ public partial class NoneCharacterManager : Singleton<NoneCharacterManager>
     {
         // LLM으로 이름 & NPC 이동 장소 선정 완료 되고 데이터가 들어왔을 때 실행
         LLMMoveSpotNameSetting();
+        LLMNPCMoveReset();
         LLMNPCMoveStart();
     }
 

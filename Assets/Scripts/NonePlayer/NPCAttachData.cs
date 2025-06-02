@@ -100,7 +100,7 @@ public class NPCAttachData : MonoBehaviour
     private float _targetTime = 5f;
     private bool _canMove = false;
     private bool _isGoal = false;
-    private int _moveCount = 0;
+    public int _moveCount = 0;
     private Transform _currentDestination = null;
     #endregion
 

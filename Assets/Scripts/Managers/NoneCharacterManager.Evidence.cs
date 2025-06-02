@@ -57,6 +57,15 @@ public partial class NoneCharacterManager
         return pos;
     }
 
+    public void LLMNPCMoveReset()
+    {
+        // 모든 LLM 캐릭터 움직임 시작
+        foreach(GameObject child in NpcList)
+        {
+            child.GetComponent<NPCAttachData>()._moveCount = 0;
+        }
+    }
+    
     public void LLMNPCMoveStart()
     {
         // 모든 LLM 캐릭터 움직임 시작

@@ -169,12 +169,11 @@ public partial class GameManager : Singleton<GameManager>
 
     public void SetLoadingActive(bool isActive)
     {
+        Time.timeScale = isActive ? 0 : 1;
         if (!isActive)
         {
             NoneCharacterManager.Instance.NoneCharacterStart();
         }
-
-        Time.timeScale = isActive ? 0 : 1;
         GameObject loadingUI = GameObject.Find("LoadingUI");
         if (loadingUI)
         {

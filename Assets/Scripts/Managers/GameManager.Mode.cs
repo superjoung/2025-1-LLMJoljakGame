@@ -122,10 +122,14 @@ public partial class GameManager
             DestroyImmediate(child);
         }
 
+        if (currentMode == GameFlowMode.EvidenceMode || changeMode == GameFlowMode.EvidenceMode)
+        {
+            Timer = 0;
+        }
+        
         if (_currentGameMode != GameFlowMode.None)
         {
             // 상시 시간 초기화
-            Timer = 0;
             ModeEnd(currentMode);
         }
         ModeInit(changeMode);
