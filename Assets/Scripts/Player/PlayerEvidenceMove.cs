@@ -16,11 +16,17 @@ public class PlayerEvidenceMove : MonoBehaviour
     private List<GameObject> _getEvidences = new List<GameObject>();
     private Animator _animator;
     private bool _canFind = false;
+    private PlayerMainScreenUI _mainScreen;
 
     private void Awake()
     {
         _agent = transform.GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Start()
+    {
+        _mainScreen = GameObject.Find("PlayerMainScreenUI").GetComponent<PlayerMainScreenUI>();
     }
 
     private void Update()
@@ -48,6 +54,7 @@ public class PlayerEvidenceMove : MonoBehaviour
                 Destroy(data);
                 GameManager.Instance.EvidenceInventory.Add(data.EvidenceID);
                 _getEvidences[0].tag = "TempEvidence";
+                _mainScreen.InputEvidenceData(data.EvidenceID);
                 _getEvidences.RemoveAt(0);
             }
             else if(_canFind)
