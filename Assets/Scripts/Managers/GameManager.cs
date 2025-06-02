@@ -52,8 +52,6 @@ public partial class GameManager : Singleton<GameManager>
     private void Start()
     {
         Init();
-        EvidenceInventory.Add("E_1");
-        EvidenceInventory.Add("E_3");
     }
 
     public void SetClueData(List<Clue> clues)
