@@ -1,75 +1,65 @@
 {
-  "village": "15세기 유럽 마을로, 짙은 안개와 추위로 뒤덮인 이 마을은 어둠 속에서 불을 밝히며 살아가는 주민들의 두려움 속에서 오싹한 분위기가 감돌고 있다.",
-  "event": "마을 주변에서 갑자기 사라진 어린 아이들의 신원조차 알 수 없고, 밤마다 이상한 소리와 불꽃이 나타나는 등 유령 같은 사건들이 발생하고 있다.",
+  "village": "15세기 유럽의 한 작은 마을. 높은 산성 아래 위치해 있으며, 중심에는 석회로 만들어진 작은 성당이 자리잡고 있다. 숲으로 둘러싸인 이 마을은 고요하고 평화로운 일상을 보내던 중 그림자가 드리운다.",
+  "event": "매일 밤, 성당에서 독특한 피리 소리가 들려왔다. 그 소리를 듣고 나면 아침에 이상한 질병에 걸린 동물들이 마을 곳곳에서 발견되었다. 두려움에 휩싸인 마을 사람들은 누군가를 의심하기 시작했다.",
   "suspects": [
     {
-      "name": "아놀드",
+      "name": "알레산드로",
+      "gender": "male",
+      "age_group": "old",
       "personality": {
         "behavior": "introverted",
-        "emotion": "rational"
+        "emotion": "suspicious"
       },
-      "occupation": "대장장이",
-      "relationships": [
-        "연못가의 마을 우왕",
-        "트리스탄과 함께 술을 마시던 동료"
-      ],
-      "statement": "저는 밤마다 잠이 들어 바깥을 보지 못했습니다. 그런 일에 연루되어 있을 리 없습니다.",
+      "occupation": "재단사",
+      "statement": "냉소적인 성격의 재단사 알레산드로는 평소 마을 사람들과의 접촉을 피한다. 그는 밤마다 성당 근처에서 복잡한 모양의 천 조각들을 발견했다는 말을 퍼뜨렸다.",
       "is_witch": false
     },
     {
-      "name": "엘리사",
+      "name": "루이지",
+      "gender": "male",
+      "age_group": "old",
       "personality": {
         "behavior": "extroverted",
-        "emotion": "emotional"
+        "emotion": "hot-tempered"
       },
-      "occupation": "신부의 딸",
-      "relationships": [
-        "카타리나와는 친구",
-        "헨리가 마음에 들어하나 상대는 하지 않음"
-      ],
-      "statement": "저희 집에는 저 제외해서 불이든 특별한 일은 없었습니다. 제가 마녀라니요? 믿기지 않네요.",
+      "occupation": "대장장이",
+      "statement": "성질이 더운 노인 대장장이 루이지는 흔히 마을 사람들과 언짢아하는 모습을 보여준다. 그는 동물들이 이상하게 행동하는 것은 마을의 누군가 때문이라고 주장한다.",
+      "is_witch": false
+    },
+    {
+      "name": "클라라",
+      "gender": "female",
+      "age_group": "young",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "cheerful"
+      },
+      "occupation": "가게 주인",
+      "statement": "마을에서 장사를 하는 젊은 여성 클라라는 사람들과 어울리는 것을 좋아한다. 그러나 최근 그녀는 선심쓰며 동물들을 구해주는 일이 늘었다는 소문이 돌고 있다.",
       "is_witch": true
     },
     {
-      "name": "로렌스",
+      "name": "피에트로",
+      "gender": "male",
+      "age_group": "young",
       "personality": {
-        "behavior": "extroverted",
-        "emotion": "rational"
+        "behavior": "introverted",
+        "emotion": "timid"
       },
-      "occupation": "상인",
-      "relationships": [
-        "카타리나와는 이웃",
-        "엘리사가 좋아함"
-      ],
-      "statement": "이상한 일들이 일어나는 것을 눈으로 봤습니다. 하지만 볼 수 없는 것에 대해 어떻게 대답하겠습니까?",
+      "occupation": "목수",
+      "statement": "조용한 성격의 젊은 목수 피에트로는 말없이 일에 열중한다. 그는 최근 이상한 피리 소리를 듣고 나서부터 자신의 고양이가 사라졌다고 주장한다.",
       "is_witch": false
     },
     {
-      "name": "마틴",
+      "name": "마리아나",
+      "gender": "female",
+      "age_group": "old",
       "personality": {
         "behavior": "introverted",
-        "emotion": "emotional"
+        "emotion": "gullible"
       },
-      "occupation": "농부",
-      "relationships": [
-        "하인과만 교류",
-        "신부와는 싸우다"
-      ],
-      "statement": "저희 농장에서는 아무 이상한 일도 벌어지지 않았습니다. 마녀라고요? 하하... 절 농부인데 멍청한 소리군요.",
-      "is_witch": false
-    },
-    {
-      "name": "카타리나",
-      "personality": {
-        "behavior": "introverted",
-        "emotion": "rational"
-      },
-      "occupation": "가정주부",
-      "relationships": [
-        "엘리사와는 친구",
-        "로렌스를 의심함"
-      ],
-      "statement": "그런 일이 있더라도 제 집에서는 아무런 소식이 없습니다. 절대 마녀가 아닙니다.",
+      "occupation": "요리사",
+      "statement": "마을 요리사인 노년의 여성 마리아나는 대부분 시간을 주방에서 보낸다. 그녀가 요리하는 음식 중 몇몇은 마냥 이상한 맛이 난다는 소문이 있다.",
       "is_witch": false
     }
   ]
