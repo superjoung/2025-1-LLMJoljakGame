@@ -37,6 +37,7 @@ public class PlayerMainScreenUI : BaseUI
         HearingEvidencePanelUI,  // 심문 증거 UI 팝업
         HearingContent,          // 심문 증거 넣어두는 부모 오브젝트
         EvidenceModePanelUI,     // 증거 탐색 시 위쪽 상단 증거 UI
+        EvidenceContent,         // 증거 탐색 시 찾기 성공한 이미지 보여주기
         NPCLayer        // 대화 가능 NPC 띄어주기
     }
 
@@ -121,6 +122,14 @@ public class PlayerMainScreenUI : BaseUI
             data.EvidenceID = child;
             GameManager.Instance.DestoryGameobjects.Add(data.gameObject);
         }
+    }
+
+    public void InputEvidenceData(string ID)
+    {
+        EVEvidenceFrame evidenceFrame = UIManager.Instance.MakeSubItem<EVEvidenceFrame>(GetObject((int)GameObjects.EvidenceContent).transform);
+        // 파괴 오브젝트 추가
+        evidenceFrame.EvidenceID = ID;
+        GameManager.Instance.DestoryGameobjects.Add(evidenceFrame.gameObject);
     }
 
     public void ShowFixChatUI()
