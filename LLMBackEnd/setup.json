@@ -1,65 +1,65 @@
 {
-  "village": "제 마을은 작지만 사람들이 밀집해 있으며, 일상은 농사일과 창공에서 열심히 노동하며 흘러갑니다. 중앙 광장에서는 사람들이 모여 이야기를 나누고 상품을 팔며, 종교적인 행사를 진행합니다.",
-  "event": "최근에는 어떤 심술궂은 마법사가 우리 마을에 저주를 던진 것 같습니다. 평범히 살던 소가 갑자기 죽고 충성심 강한 개가 주인을 공격하는 등 이해할 수 없는 일들이 마을 곳곳에서 일어나고 있습니다.",
+  "village": "우리 마을은 작은 계곡에 자리 잡고 있습니다. 이곳 사람들은 농사와 축산, 그리고 기도로 하루를 보내며, 마을 중심의 성당을 중심으로 모입니다.",
+  "event": "하지만 최근엔 무서운 일이 있었습니다. 성스러운 성당 분수의 물이 갑자기 새피 같이 빨게 변했고, 그 뒤로는 어느 누구도 그 물을 먹지 못하게 되었습니다.",
   "suspects": [
     {
-      "name": "페터",
+      "name": "알레산드로",
       "gender": "male",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
         "emotion": "suspicious"
       },
-      "occupation": "대장장이",
-      "statement": "페터는 늙은 대장장이로, 내성적이면서도 의심 많은 성격을 가지고 있습니다. 얼마 전부터 그는 평소에는 자주 찾아가던 이웃들을 피하기 시작했습니다.",
+      "occupation": "목수",
+      "statement": "검은 머리의 알레산드로는 외향적이지 않으며 항상 의심스러운 눈초리로 사람들을 지켜봅니다. 장작을 쪼개며 입장을 굳히지 않는 그는 처음부터 마을 사람들의 눈에 의심 받아온 사람입니다.",
       "is_witch": false
     },
     {
-      "name": "다니엘",
+      "name": "베르나르",
       "gender": "male",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
-        "emotion": "devout"
+        "emotion": "grumpy"
       },
-      "occupation": "마을장",
-      "statement": "다니엘은 마을장으로써 교회에게 헌신적이며 내성적입니다. 하지만 그는 최근 그의 집에서 이상한 소리가 들리기 시작했다고 사람들이 속삭이고 있습니다.",
-      "is_witch": false
+      "occupation": "대장장이",
+      "statement": "늘 불만을 품는 베르나르는 열심히 일하는 대장장이입니다. 그는 분수의 물이 변한 후로 사람들을 멀리하고, 물을 먹지 않는다는 소문이 돌았습니다.",
+      "is_witch": true
     },
     {
-      "name": "아넬리에",
+      "name": "루시아",
       "gender": "female",
       "age_group": "young",
       "personality": {
         "behavior": "extroverted",
         "emotion": "cheerful"
       },
-      "occupation": "빵집 주인",
-      "statement": "아넬리에는 젊은 여성이면서도 마을 빵집을 운영하며 활기차게 사람들과 어울립니다. 그러나 최근에는 그녀가 이상한 재료를 찾아다니는 모습이 목격되었다고 합니다.",
+      "occupation": "손짓",
+      "statement": "사람들과 마주하는 것을 좋아하는 루시아는 밝고 명랑한 성격의 손짓입니다. 하지만 많은 사람들은 그녀가 항상 웃음을 잃지 않는 이유를 의심합니다.",
       "is_witch": false
-    },
-    {
-      "name": "알렉",
-      "gender": "male",
-      "age_group": "young",
-      "personality": {
-        "behavior": "extroverted",
-        "emotion": "hot-tempered"
-      },
-      "occupation": "목수",
-      "statement": "알렉은 젊은 목수로 용감하고 성미가 급한 성격을 가지고 있습니다. 그는 최근 이상한 꿈을 꾸었다며 이야기하면서 사람들에게 공포감을 줍니다.",
-      "is_witch": true
     },
     {
       "name": "마리아",
       "gender": "female",
-      "age_group": "old",
+      "age_group": "young",
       "personality": {
         "behavior": "introverted",
-        "emotion": "grumpy"
+        "emotion": "devout"
       },
-      "occupation": "뜨개질 사람",
-      "statement": "마리아는 늙은 여성으로 성격이 고집스럽고 매우 불평을 많이 했습니다. 그녀는 최근 이상하게도 소의 죽음에 대해 자신의 뜨개질을 비난하는 사람들을 욕하고 있습니다.",
+      "occupation": "빵집 주인",
+      "statement": "마리아는 고요하고 독실한 빵집 주인입니다. 그녀는 항상 성당에서 빵을 나눠주었지만, 분수의 물이 변한 이후 그녀의 빵은 더 이상 나눠지지 않았습니다.",
+      "is_witch": false
+    },
+    {
+      "name": "프란치스코",
+      "gender": "male",
+      "age_group": "young",
+      "personality": {
+        "behavior": "extroverted",
+        "emotion": "talkative"
+      },
+      "occupation": "목동",
+      "statement": "사람들과 이야기하는 것을 좋아하는 프란치스코는 목동입니다. 그는 최근에 자신의 양 떼가 이질적으로 움직인다고 말하며 사람들에게 불안을 조성했습니다.",
       "is_witch": false
     }
   ]

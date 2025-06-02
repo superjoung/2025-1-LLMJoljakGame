@@ -12,6 +12,7 @@ You will receive 5 NPCs, each described using this format:
 Your job is to:
 1. Assign 3 **distinct** locations to each NPC, labeled A, B, and C.
 2. Choose locations based on the NPC’s behavior-based preference weights below:
+3. **A must not be “집”.** (즉, 첫 번째 방문지는 집이 될 수 없습니다.)
 
 Available locations:
 - 성당
@@ -35,6 +36,13 @@ Weights for introverted:
 - 집: 4
 
 All 3 locations (A, B, C) must be distinct and chosen based on probability from weights.
+
+※ A, B, C에 들어갈 값은 반드시 아래 다섯 가지 중 하나여야 하며, 다른 단어나 오타를 허용하지 않습니다:
+- 성당
+- 숲
+- 우물
+- 광장
+- 집
 
 Return the result in the following JSON format:
 
