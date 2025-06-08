@@ -27,13 +27,12 @@ public partial class GameManager : Singleton<GameManager>
     // 증거 테이블 데이터
     public List<Dictionary<string, object>> EvidenceDatas = new List<Dictionary<string, object>>();
     // 증거 테이블 저장
-    //public List<Clue> TempClueDatas = new List<Clue>();
     public List<Clue> ClueDatas = new List<Clue>();
 
     // 플레이어 증거 담아두기
     public List<string> EvidenceInventory = new List<string>();
         
-    protected PlayerMainScreenUI _playerMainScreenUI;
+    public PlayerMainScreenUI _playerMainScreenUI;
 
     private bool _isMapOpened = false;
     private int _days = 1;

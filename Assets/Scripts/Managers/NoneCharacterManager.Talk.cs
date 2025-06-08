@@ -71,7 +71,7 @@ public partial class NoneCharacterManager
         GameObject player = GameObject.FindWithTag("Player");
 
         // 파괴해야하는 오브젝트에 추가
-        UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
+        //UIManager.Instance.ShowNPCUI<NPCTalkPanelUI>(npc.GetComponent<NPCAttachData>().UIPos);
 
         // TEMP : test입니당
         CanPlayerEnterText = false;

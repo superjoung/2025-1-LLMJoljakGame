@@ -280,10 +280,10 @@ public partial class GameManager
         _inGameHearingRoom = ResourceManager.Instance.Instantiate("HearingRoom", Npc.transform.GetChild(Npc.transform.childCount-1).position, null);
 
         // 파괴 오브젝트 추가
-        foreach (GameObject child in NoneCharacterManager.Instance.TalkList)
-        {
-            DestoryGameobjects.Add(child.GetComponent<NPCAttachData>().PopUpTalkUI.gameObject);
-        }
+        //foreach (GameObject child in NoneCharacterManager.Instance.TalkList)
+        //{
+        //    DestoryGameobjects.Add(child.GetComponent<NPCAttachData>().PopUpTalkUI.gameObject);
+        //}
         _playerMainScreenUI.ShowHearingEvidence();
         _playerMainScreenUI.ShowChatUI();
     }
@@ -324,10 +324,10 @@ public partial class GameManager
     {
         FreeMovePlayer.SetActive(true);
         // 파괴 오브젝트 추가
-        foreach(GameObject child in NoneCharacterManager.Instance.TalkList)
-        {
-            DestoryGameobjects.Add(child.GetComponent<NPCAttachData>().PopUpTalkUI.gameObject);
-        }
+        //foreach(GameObject child in NoneCharacterManager.Instance.TalkList)
+        //{
+        //    DestoryGameobjects.Add(child.GetComponent<NPCAttachData>().PopUpTalkUI.gameObject);
+        //}
         _playerMainScreenUI.ShowChatUI();
     }
     private void TalkModeEnd()
@@ -342,7 +342,7 @@ public partial class GameManager
     {
         FreeMovePlayer.SetActive(true);
         // 파괴 오브젝트 추가
-        DestoryGameobjects.Add(NoneCharacterManager.Instance.GetFixNpcToID(NoneCharacterManager.Instance.CurrentTalkNpcID).GetComponent<NPCFixAttachData>().PopUpTalkUI.gameObject);
+        //DestoryGameobjects.Add(NoneCharacterManager.Instance.GetFixNpcToID(NoneCharacterManager.Instance.CurrentTalkNpcID).GetComponent<NPCFixAttachData>().PopUpTalkUI.gameObject);
         _playerMainScreenUI.ShowFixChatUI();
     }
     private void FixTalkModeEnd()
