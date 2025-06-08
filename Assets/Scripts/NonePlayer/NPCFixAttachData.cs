@@ -52,14 +52,14 @@ public class NPCFixAttachData : MonoBehaviour
         }
         set // TalkText 입력시 자동으로 텍스트 화면에 출력
         {
-            if (PopUpTalkUI == null)
+            if(GameManager.Instance._playerMainScreenUI == null)
             {
                 Debug.Log("[WARN] NPCAttachData - TalkText 프로퍼티에 문제가 있습니다.");
                 return;
             }
-            PopUpTalkUI.ShowText(value);
-            _talkText = value;
+            GameManager.Instance._playerMainScreenUI.ShowText(value);
             _animator.SetTrigger("Talk");
+            _talkText = value;
         }
     }
 

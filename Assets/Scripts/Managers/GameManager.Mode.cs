@@ -342,7 +342,7 @@ public partial class GameManager
     {
         FreeMovePlayer.SetActive(true);
         // 파괴 오브젝트 추가
-        DestoryGameobjects.Add(NoneCharacterManager.Instance.GetFixNpcToID(NoneCharacterManager.Instance.CurrentTalkNpcID).GetComponent<NPCFixAttachData>().PopUpTalkUI.gameObject);
+        //DestoryGameobjects.Add(NoneCharacterManager.Instance.GetFixNpcToID(NoneCharacterManager.Instance.CurrentTalkNpcID).GetComponent<NPCFixAttachData>().PopUpTalkUI.gameObject);
         _playerMainScreenUI.ShowFixChatUI();
     }
     private void FixTalkModeEnd()
