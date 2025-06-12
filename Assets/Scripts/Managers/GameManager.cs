@@ -76,12 +76,12 @@ public partial class GameManager : Singleton<GameManager>
         //TempClueDatas.Add(new Clue());
         
         // 증거 클래스에 등록
-        foreach(Clue child in ClueDatas)
+        /*foreach(Clue child in ClueDatas)
         {
             child.id = ids[Random.Range(0, ids.Count)];
             child.location = locations[Random.Range(0, locations.Count)];
             Debug.Log($"[INFO]GameManager(CreateClues) - 증거 {child.id}가 {child.location}에 배치되었습니다.");
-        }
+        }*/
     }
 
     public void SetClueInSpot()

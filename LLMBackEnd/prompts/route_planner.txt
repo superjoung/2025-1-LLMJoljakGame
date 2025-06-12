@@ -44,7 +44,7 @@ All 3 locations (A, B, C) must be distinct and chosen based on probability from 
 - 광장
 - 집
 
-Return the result in the following JSON format:
+Return the result in the following JSON format, where each key is the NPC's actual name (e.g., "아그네스", not "npc1"):
 
 {{
   "npc_routes": {{

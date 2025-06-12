@@ -59,14 +59,29 @@ Now generate clues based on:
 - Witch name: {witch_name}
 - Routes: {routes_json}
 
-Only return a single valid JSON object. Do not add explanations or text before or after the JSON.
+Only return a single valid JSON object. Do not add explanations or extra text.
 
-Return format:
+The result must follow this structure:
+
+Example 1:
 {{
   "clues": [
-    {{ "id": "E_8", "name": "저주받은 인형", "importance": 1, "location": "숲" }},
-    {{ "id": "E_7", "name": "뿌리째 뽑힌 약초 다발", "importance": 2, "location": "성당" }},
-    {{ "id": "E_9", "name": "닭뼈", "importance": 3, "location": "광장" }},
-    {{ "id": "E_13", "name": "탄내가 배인 헝겊", "importance": 3, "location": "우물" }}
+    {{ "id": "E_1", "name": "낡은 마법서", "importance": 1, "location": "광장" }},
+    {{ "id": "E_3", "name": "불길한 목걸이", "importance": 2, "location": "숲" }},
+    {{ "id": "E_4", "name": "검은색 깃털", "importance": 3, "location": "성당" }},
+    {{ "id": "E_6", "name": "빗자루", "importance": 3, "location": "우물" }}
   ]
 }}
+
+Example 2:
+{{
+  "clues": [
+    {{ "id": "E_15", "name": "두개골 모양의 조형물", "importance": 1, "location": "성당" }},
+    {{ "id": "E_2", "name": "고양이 해골", "importance": 2, "location": "우물" }},
+    {{ "id": "E_14", "name": "점술 카드", "importance": 3, "location": "숲" }},
+    {{ "id": "E_12", "name": "녹아 내린 양초", "importance": 3, "location": "광장" }}
+  ]
+}}
+
+⚠️ This is an **example with template brackets (`{{` `}}`) for readability only.**  
+Do **not** reuse these values or this format literally. Generate a new result with real data.

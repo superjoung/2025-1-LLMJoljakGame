@@ -1,9 +1,9 @@
 {
-  "village": "우리 마을은 작은 고요한 산골짜기에 위치해 있습니다. 사람들은 일상적으로 농사일에 충실하며, 행사가 있을 때 교회와 집들 사이에 자리한 시장에서 만나게 됩니다.",
-  "event": "그러나 최근에는 마을의 짐승들이 일시적으로 사람의 목소리를 내서 이야기하는 무시무시한 현상이 일어났습니다. 이런 일은 마을의 평온한 순서를 깨뜨리고, 일상을 어지럽히고 있습니다.",
+  "village": "이 마을은 주로 농사로 생업을 이어가는 조용한 곳입니다. 일년을 돌며 변하지 않는 것이 바로 우리들의 노고와 시장의 풍경입니다. 일 끝에 모여 소식을 나누며 따뜻한 술잔을 기울이는 것이 우리들의 생활입니다.",
+  "event": "하지만 얼마 전부터 마을 사람들이 이상하게 죽어가기 시작했습니다. 눈 뜨고 힘차던 사람들이 아무 이유 없이 잠들지 않고 죽어가는 것입니다. 이는 자연의 질서와는 거리가 먼 일이니 한번 살펴보시길 부탁드립니다.",
   "suspects": [
     {
-      "name": "요한",
+      "name": "헤르만",
       "gender": "male",
       "age_group": "old",
       "personality": {
@@ -11,55 +11,55 @@
         "emotion": "suspicious"
       },
       "occupation": "목수",
-      "statement": "요한은 나이 많은 목수로, 보수적이고 의심 많은 성격을 가지고 있습니다. 그는 신비로운 사건들이 일어나기 시작한 후, 특별히 조용해졌습니다.",
+      "statement": "늘 혼자 있는 헤르만 할아버지는 키가 크고 오래된 목수입니다. 그의 작업장에는 많은 목재와 이상한 기호가 새겨진 조각품이 있습니다.",
       "is_witch": false
     },
     {
-      "name": "페드로",
+      "name": "알파우스",
       "gender": "male",
       "age_group": "old",
       "personality": {
-        "behavior": "introverted",
-        "emotion": "grumpy"
+        "behavior": "extroverted",
+        "emotion": "talkative"
       },
-      "occupation": "농부",
-      "statement": "페드로는 나이 많은 농부로, 내성적이면서도 불평 많은 성격을 가지고 있습니다. 그의 농장의 동물들이 처음으로 사람의 목소리를 내었다고 합니다.",
+      "occupation": "바위 장이",
+      "statement": "알파우스는 말이 많은 노인으로 주로 바위를 캐는 일을 합니다. 그는 종종 부자연스럽게 행복한 표정으로 사람들을 공포에 빠뜨립니다.",
       "is_witch": false
     },
     {
-      "name": "이자벨",
+      "name": "다리아",
       "gender": "female",
       "age_group": "young",
       "personality": {
         "behavior": "extroverted",
         "emotion": "cheerful"
       },
-      "occupation": "이발사",
-      "statement": "이자벨은 젊은 이발사로, 활발하고 쾌활한 성격의 여성입니다. 그러나 그녀는 최근 사건을 이야기하면서 이상하게도 흥분하는 모습을 보였습니다.",
+      "occupation": "약초상",
+      "statement": "다리아는 밝고 활발한 젊은 여성으로 약초를 모으고 팔며 생활합니다. 신비한 병에 시달리는 사람들의 죽음을 예측하는 모습이 종종 눈에 띕니다.",
       "is_witch": true
     },
     {
-      "name": "미카엘",
+      "name": "루키우스",
       "gender": "male",
       "age_group": "young",
       "personality": {
-        "behavior": "extroverted",
-        "emotion": "hot-tempered"
+        "behavior": "introverted",
+        "emotion": "depressed"
       },
-      "occupation": "대장장이",
-      "statement": "미카엘은 젊은 대장장이로, 외향적이면서도 성미가 급한 성격을 가지고 있습니다. 그는 무슨 일이든지 깊이 파헤치려는 경향이 있습니다.",
+      "occupation": "양치기",
+      "statement": "루키우스는 침울한 성격의 어리석은 젊은이로 양을 지킵니다. 일상적인 습관 중에는 가끔 야간에 어디론가 사라지는 것이 있습니다.",
       "is_witch": false
     },
     {
-      "name": "안토니아",
+      "name": "에드위나",
       "gender": "female",
       "age_group": "old",
       "personality": {
         "behavior": "introverted",
-        "emotion": "devout"
+        "emotion": "gullible"
       },
-      "occupation": "빵집 주인",
-      "statement": "안토니아는 나이 많은 빵집 주인으로, 내성적이면서도 독실한 신자입니다. 그녀의 빵은 평소와 달리 최근에는 쓴맛이 난다는 이야기가 있습니다.",
+      "occupation": "집사람",
+      "statement": "에드위나 할머니는 고요하고 성실한 노년의 집사람입니다. 그녀의 집에는 모든 문에 대고 매달린 이상한 심볼들이 있습니다.",
       "is_witch": false
     }
   ]
